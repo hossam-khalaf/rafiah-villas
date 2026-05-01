@@ -1,0 +1,15 @@
+{
+  "Hero": {
+    "title": "رفيعة",
+    "subtitle": "المرحلة الثانية",
+    "description": "فلل محدودة في حي الرفيعة بالرياض",
+    "availabilityLabel": "التوافر الحالي",
+    "viewAvailable": "شاهد الفلل المتاحة",
+    "getBrochure": "اطلب الكتيب والمخططات"
+  },
+  "Stats": {
+    "available": "متاحة",
+    "reserved": "محجوزة",
+    "sold": "مباعة"
+  }
+}

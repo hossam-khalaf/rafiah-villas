@@ -1,0 +1,15 @@
+{
+  "Hero": {
+    "title": "Rafiah",
+    "subtitle": "Phase Two",
+    "description": "Limited villas in Al Rafiah, Riyadh",
+    "availabilityLabel": "Current availability",
+    "viewAvailable": "View Available Villas",
+    "getBrochure": "Get Brochure & Floor Plans"
+  },
+  "Stats": {
+    "available": "Available",
+    "reserved": "Reserved",
+    "sold": "Sold"
+  }
+}
