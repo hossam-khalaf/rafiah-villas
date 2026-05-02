@@ -1,0 +1,22 @@
+{"_id":"villa-c1","_type":"villa","villaCode":"C1","type":"corner","status":"available","area":373.41,"price":6200000,"isFeatured":false,"titleAr":"فيلا زاوية - C1","titleEn":"Corner Villa - C1","displayOrder":1}
+{"_id":"villa-c11","_type":"villa","villaCode":"C11","type":"corner","status":"available","isFeatured":false,"titleAr":"فيلا زاوية - C11","titleEn":"Corner Villa - C11","displayOrder":2}
+{"_id":"villa-d1","_type":"villa","villaCode":"D1","type":"corner","status":"available","isFeatured":false,"titleAr":"فيلا زاوية - D1","titleEn":"Corner Villa - D1","displayOrder":3}
+{"_id":"villa-d11","_type":"villa","villaCode":"D11","type":"corner","status":"available","isFeatured":false,"titleAr":"فيلا زاوية - D11","titleEn":"Corner Villa - D11","displayOrder":4}
+{"_id":"villa-c2","_type":"villa","villaCode":"C2","type":"northFacade","status":"available","area":300,"price":4500000,"isFeatured":false,"titleAr":"فيلا واجهة شمالية - C2","titleEn":"North Facade Villa - C2","displayOrder":5}
+{"_id":"villa-c3","_type":"villa","villaCode":"C3","type":"northFacade","status":"available","isFeatured":false,"titleAr":"فيلا واجهة شمالية - C3","titleEn":"North Facade Villa - C3","displayOrder":6}
+{"_id":"villa-c4","_type":"villa","villaCode":"C4","type":"northFacade","status":"available","isFeatured":false,"titleAr":"فيلا واجهة شمالية - C4","titleEn":"North Facade Villa - C4","displayOrder":7}
+{"_id":"villa-c5","_type":"villa","villaCode":"C5","type":"northFacade","status":"available","isFeatured":false,"titleAr":"فيلا واجهة شمالية - C5","titleEn":"North Facade Villa - C5","displayOrder":8}
+{"_id":"villa-c6","_type":"villa","villaCode":"C6","type":"northFacade","status":"available","isFeatured":false,"titleAr":"فيلا واجهة شمالية - C6","titleEn":"North Facade Villa - C6","displayOrder":9}
+{"_id":"villa-c7","_type":"villa","villaCode":"C7","type":"northFacade","status":"available","isFeatured":false,"titleAr":"فيلا واجهة شمالية - C7","titleEn":"North Facade Villa - C7","displayOrder":10}
+{"_id":"villa-c8","_type":"villa","villaCode":"C8","type":"northFacade","status":"available","isFeatured":false,"titleAr":"فيلا واجهة شمالية - C8","titleEn":"North Facade Villa - C8","displayOrder":11}
+{"_id":"villa-c9","_type":"villa","villaCode":"C9","type":"northFacade","status":"available","isFeatured":false,"titleAr":"فيلا واجهة شمالية - C9","titleEn":"North Facade Villa - C9","displayOrder":12}
+{"_id":"villa-c10","_type":"villa","villaCode":"C10","type":"northFacade","status":"available","isFeatured":false,"titleAr":"فيلا واجهة شمالية - C10","titleEn":"North Facade Villa - C10","displayOrder":13}
+{"_id":"villa-d2","_type":"villa","villaCode":"D2","type":"southFacade","status":"available","area":300,"price":4500000,"isFeatured":false,"titleAr":"فيلا واجهة جنوبية - D2","titleEn":"South Facade Villa - D2","displayOrder":14}
+{"_id":"villa-d3","_type":"villa","villaCode":"D3","type":"southFacade","status":"available","isFeatured":false,"titleAr":"فيلا واجهة جنوبية - D3","titleEn":"South Facade Villa - D3","displayOrder":15}
+{"_id":"villa-d4","_type":"villa","villaCode":"D4","type":"southFacade","status":"available","isFeatured":false,"titleAr":"فيلا واجهة جنوبية - D4","titleEn":"South Facade Villa - D4","displayOrder":16}
+{"_id":"villa-d5","_type":"villa","villaCode":"D5","type":"southFacade","status":"available","isFeatured":false,"titleAr":"فيلا واجهة جنوبية - D5","titleEn":"South Facade Villa - D5","displayOrder":17}
+{"_id":"villa-d6","_type":"villa","villaCode":"D6","type":"southFacade","status":"available","isFeatured":false,"titleAr":"فيلا واجهة جنوبية - D6","titleEn":"South Facade Villa - D6","displayOrder":18}
+{"_id":"villa-d7","_type":"villa","villaCode":"D7","type":"southFacade","status":"available","isFeatured":false,"titleAr":"فيلا واجهة جنوبية - D7","titleEn":"South Facade Villa - D7","displayOrder":19}
+{"_id":"villa-d8","_type":"villa","villaCode":"D8","type":"southFacade","status":"available","isFeatured":false,"titleAr":"فيلا واجهة جنوبية - D8","titleEn":"South Facade Villa - D8","displayOrder":20}
+{"_id":"villa-d9","_type":"villa","villaCode":"D9","type":"southFacade","status":"available","isFeatured":false,"titleAr":"فيلا واجهة جنوبية - D9","titleEn":"South Facade Villa - D9","displayOrder":21}
+{"_id":"villa-d10","_type":"villa","villaCode":"D10","type":"southFacade","status":"available","isFeatured":false,"titleAr":"فيلا واجهة جنوبية - D10","titleEn":"South Facade Villa - D10","displayOrder":22}
