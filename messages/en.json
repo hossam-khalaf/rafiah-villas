@@ -1,15 +1,122 @@
 {
   "Hero": {
-    "title": "Rafiah",
-    "subtitle": "Phase Two",
-    "description": "Limited villas in Al Rafiah, Riyadh",
-    "availabilityLabel": "Current availability",
-    "viewAvailable": "View Available Villas",
-    "getBrochure": "Get Brochure & Floor Plans"
+    "title": "Rafiah Villas",
+    "subtitle": "Phase II — Now Selling Off-Plan",
+    "location": "Al-Rafiah District • Riyadh, Kingdom of Saudi Arabia",
+    "developerIntro": "A unique residential experience developed by Kira Estates",
+    "registerInterest": "Register Your Interest",
+    "viewAvailability": "View Availability",
+    "exclusiveVillas": "Exclusive Villas",
+    "startingArea": "Starting Area",
+    "startingPrice": "Starting Price SAR",
+    "phaseOneSold": "Phase I Sold",
+    "ticker": "Phase II Now Open For Registration • Limited Availability Remaining • "
   },
   "Stats": {
     "available": "Available",
     "reserved": "Reserved",
     "sold": "Sold"
+  },
+  "Location": {
+    "overline": "Location",
+    "title": "Positioned at the Heart of Riyadh",
+    "description": "Rafiah Villas occupies a rare address in the sought-after Al-Rafiah district — minutes from the city's most iconic landmarks, yet removed from its pace.",
+    "mapLabel": "Al-Rafiah District • Riyadh",
+    "landmarksTitle": "Prominent Landmarks",
+    "landmarks": {
+      "viaRiyadh": "Via Riyadh",
+      "diplomaticQuarter": "Diplomatic Quarter",
+      "laysenValley": "Laysen Valley",
+      "diriyah": "Diriyah",
+      "ksu": "King Saud University",
+      "kfsh": "King Faisal Specialist Hospital",
+      "kfmc": "King Fahd Medical City"
+    }
+  },
+  "Collection": {
+    "overline": "The Collection",
+    "title": "22 Meticulously Crafted Villas",
+    "description": "Three distinct villa typologies — each designed to deliver an uncompromising residential experience with private pools, landscaped gardens, and generous living spaces across three floors.",
+    "filters": {
+      "northFacade": "North Facing",
+      "southFacade": "South Facing",
+      "corner": "Corner Villas"
+    },
+    "card": {
+      "villa": "Villa",
+      "currency": "SAR",
+      "registerInterest": "Register Interest"
+    }
+  },
+  "FloorPlans": {
+    "title": "Thoughtfully Designed Living",
+    "subtitle": "Each villa spans three floors, balancing grand hospitality spaces with intimate family retreats. Every room is proportioned for how life is actually lived.",
+    "tabs": {
+      "corner": "Corner Villa",
+      "facade": "Façade Villa"
+    },
+    "floors": {
+      "ground": "Ground Floor",
+      "first": "Floor 1",
+      "second": "Floor 2"
+    },
+    "rooms": {
+      "corner": {
+        "ground": [
+          { "name": "Reception Lounge", "dim": "6 × 7 m" },
+          { "name": "Pool & Outdoor Seating", "dim": "7 × 9 m" },
+          { "name": "Family Living Room", "dim": "6 × 6 m" },
+          { "name": "Dining Room", "dim": "5 × 6 m" },
+          { "name": "Rear Garden", "dim": "2.5 × 14 m" },
+          { "name": "Kitchen", "dim": "2.6 × 6 m" },
+          { "name": "Pantry", "dim": "2.4 × 2.6 m" },
+          { "name": "Storage", "dim": "1.8 × 6 m" },
+          { "name": "Parking & Service Entrance", "dim": "4 × 6 m" },
+          { "name": "Driver's Room", "dim": "2 × 4 m" }
+        ],
+        "first": [
+          { "name": "Master Bedroom Suite", "dim": "6 × 9 m" },
+          { "name": "Balcony", "dim": "1.6 × 4.5 m" },
+          { "name": "Bedroom Suite", "dim": "4.5 × 7.5 m" },
+          { "name": "Family Seating", "dim": "4 × 7 m" },
+          { "name": "Bedroom Suite", "dim": "4 × 6.5 m" },
+          { "name": "Bedroom Suite", "dim": "4 × 8.5 m" }
+        ],
+        "second": [
+          { "name": "Lounge", "dim": "5.5 × 7 m" },
+          { "name": "Terrace", "dim": "5 × 10.5 m" },
+          { "name": "Laundry Room", "dim": "3 × 3.5 m" },
+          { "name": "Maid's Room", "dim": "2.5 × 7 m" }
+        ]
+      },
+      "facade": {
+        "ground": [
+          { "name": "Reception Lounge", "dim": "5.5 × 7 m" },
+          { "name": "Pool & Outdoor Seating", "dim": "4 × 9 m" },
+          { "name": "Family Living Room", "dim": "6 × 6.5 m" },
+          { "name": "Dining Room", "dim": "4 × 6.5 m" },
+          { "name": "Rear Garden", "dim": "2.5 × 10 m" },
+          { "name": "Kitchen", "dim": "2.6 × 5 m" },
+          { "name": "Pantry", "dim": "2.4 × 2.6 m" },
+          { "name": "Storage", "dim": "1.8 × 6 m" },
+          { "name": "Parking & Service Entrance", "dim": "4 × 6 m" },
+          { "name": "Front Garden & Seating", "dim": "4 × 4 m" }
+        ],
+        "first": [
+          { "name": "Master Bedroom Suite", "dim": "5.5 × 9 m" },
+          { "name": "Balcony", "dim": "1.6 × 4 m" },
+          { "name": "Bedroom Suite", "dim": "4 × 7.5 m" },
+          { "name": "Family Seating", "dim": "4 × 5.5 m" },
+          { "name": "Bedroom Suite", "dim": "4 × 5.5 m" },
+          { "name": "Bedroom Suite", "dim": "4 × 8.5 m" }
+        ],
+        "second": [
+          { "name": "Lounge", "dim": "5.5 × 7 m" },
+          { "name": "Terrace", "dim": "5 × 10.5 m" },
+          { "name": "Laundry Room", "dim": "3 × 3.5 m" },
+          { "name": "Maid's Room", "dim": "2.5 × 7 m" }
+        ]
+      }
+    }
   }
 }

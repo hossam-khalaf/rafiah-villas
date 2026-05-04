@@ -6,31 +6,31 @@ const DEFAULT_STATUS: VillaStatus = 'available';
 export const VILLAS: Villa[] = [
   // Corner Villas
   { id: 'C1', type: 'corner', status: DEFAULT_STATUS, plotSize: 373.41, price: 6200000 },
-  { id: 'C11', type: 'corner', status: DEFAULT_STATUS },
-  { id: 'D1', type: 'corner', status: DEFAULT_STATUS },
-  { id: 'D11', type: 'corner', status: DEFAULT_STATUS },
+  { id: 'C11', type: 'corner', status: DEFAULT_STATUS, plotSize: 373.41, price: 6200000 },
+  { id: 'D1', type: 'corner', status: DEFAULT_STATUS, plotSize: 373.41, price: 6200000 },
+  { id: 'D11', type: 'corner', status: DEFAULT_STATUS, plotSize: 373.41, price: 6200000 },
 
   // North-facing Villas
   { id: 'C2', type: 'northFacade', status: DEFAULT_STATUS, plotSize: 300, price: 4500000 },
-  { id: 'C3', type: 'northFacade', status: DEFAULT_STATUS },
-  { id: 'C4', type: 'northFacade', status: DEFAULT_STATUS },
-  { id: 'C5', type: 'northFacade', status: DEFAULT_STATUS },
-  { id: 'C6', type: 'northFacade', status: DEFAULT_STATUS },
-  { id: 'C7', type: 'northFacade', status: DEFAULT_STATUS },
-  { id: 'C8', type: 'northFacade', status: DEFAULT_STATUS },
-  { id: 'C9', type: 'northFacade', status: DEFAULT_STATUS },
-  { id: 'C10', type: 'northFacade', status: DEFAULT_STATUS },
+  { id: 'C3', type: 'northFacade', status: 'sold', plotSize: 300, price: 4500000 },
+  { id: 'C4', type: 'northFacade', status: 'sold', plotSize: 300, price: 4500000 },
+  { id: 'C5', type: 'northFacade', status: DEFAULT_STATUS, plotSize: 300, price: 4500000 },
+  { id: 'C6', type: 'northFacade', status: 'sold', plotSize: 300, price: 4500000 },
+  { id: 'C7', type: 'northFacade', status: DEFAULT_STATUS, plotSize: 300, price: 4500000 },
+  { id: 'C8', type: 'northFacade', status: DEFAULT_STATUS, plotSize: 300, price: 4500000 },
+  { id: 'C9', type: 'northFacade', status: 'sold', plotSize: 300, price: 4500000 },
+  { id: 'C10', type: 'northFacade', status: 'reserved', plotSize: 300, price: 4500000 },
 
   // South-facing Villas
   { id: 'D2', type: 'southFacade', status: DEFAULT_STATUS, plotSize: 300, price: 4500000 },
-  { id: 'D3', type: 'southFacade', status: DEFAULT_STATUS },
-  { id: 'D4', type: 'southFacade', status: DEFAULT_STATUS },
-  { id: 'D5', type: 'southFacade', status: DEFAULT_STATUS },
-  { id: 'D6', type: 'southFacade', status: DEFAULT_STATUS },
-  { id: 'D7', type: 'southFacade', status: DEFAULT_STATUS },
-  { id: 'D8', type: 'southFacade', status: DEFAULT_STATUS },
-  { id: 'D9', type: 'southFacade', status: DEFAULT_STATUS },
-  { id: 'D10', type: 'southFacade', status: DEFAULT_STATUS },
+  { id: 'D3', type: 'southFacade', status: DEFAULT_STATUS, plotSize: 300, price: 4500000 },
+  { id: 'D4', type: 'southFacade', status: DEFAULT_STATUS, plotSize: 300, price: 4500000 },
+  { id: 'D5', type: 'southFacade', status: DEFAULT_STATUS, plotSize: 300, price: 4500000 },
+  { id: 'D6', type: 'southFacade', status: DEFAULT_STATUS, plotSize: 300, price: 4500000 },
+  { id: 'D7', type: 'southFacade', status: DEFAULT_STATUS, plotSize: 300, price: 4500000 },
+  { id: 'D8', type: 'southFacade', status: DEFAULT_STATUS, plotSize: 300, price: 4500000 },
+  { id: 'D9', type: 'southFacade', status: DEFAULT_STATUS, plotSize: 300, price: 4500000 },
+  { id: 'D10', type: 'southFacade', status: DEFAULT_STATUS, plotSize: 300, price: 4500000 },
 ];
 
 export function getVillasByStatus(status: VillaStatus): Villa[] {

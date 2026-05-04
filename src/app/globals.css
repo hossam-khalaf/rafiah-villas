@@ -4,6 +4,24 @@
   --color-brand-royal-green: #012a17;
   --color-brand-black: #050505;
   --color-brand-white: #ffffff;
+  
+  --animate-marquee: marquee 30s linear infinite;
+  
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+  }
+}
+
+@layer utilities {
+  [dir="rtl"] .animate-marquee {
+    animation-name: marquee-rtl;
+  }
+}
+
+@keyframes marquee-rtl {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(100%); }
 }
 
 @layer base {
