@@ -46,7 +46,7 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
   return (
     <div className="w-full">
       {/* Tabs */}
-      <div className="flex flex-wrap gap-0 border border-white/10 max-w-fit mb-12 sm:mb-16 sticky top-0 sm:top-24 z-30 backdrop-blur-md bg-[#0a0a0a]/90 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]">
+      <div className="flex flex-wrap gap-0 border border-white/10 max-w-fit mb-12 sm:mb-16 sticky top-0 sm:top-24 z-30 backdrop-blur-md bg-[#181816]/90 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]">
         {(['northFacade', 'southFacade', 'corner'] as VillaType[]).map((tab) => (
           <button
             key={tab}
@@ -65,15 +65,14 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 min-h-[600px]">
         <AnimatePresence mode="popLayout">
-          {filteredVillas.map((villa) => (
+          {filteredVillas.map((villa, index) => (
             <motion.div
               key={villa.id}
               layout
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.4 }}
-              className="group relative bg-[#262624] border border-white/10 p-6 sm:p-8 hover:border-[#D4B78F]/40 transition-all duration-500 flex flex-col min-h-[300px] overflow-hidden cursor-pointer"
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] } }}
+              exit={{ opacity: 0, scale: 0.95, y: -20, transition: { duration: 0.3 } }}
+              className="group relative bg-[#2e2d2b] border border-white/10 p-6 sm:p-8 hover:border-[#D4B78F]/40 transition-all duration-500 flex flex-col min-h-[300px] overflow-hidden cursor-pointer"
             >
               {/* Top Row: Title & Badge */}
               <div className="flex justify-between items-start mb-8 z-10 relative">

@@ -39,10 +39,10 @@ export default async function HomePage() {
               loop
               muted
               playsInline
-              className="absolute inset-0 w-full h-full object-cover opacity-70"
+              className="absolute inset-0 w-full h-full object-cover opacity-90"
             />
             {/* Dark subtle overlay for readability */}
-            <div className="absolute inset-0 bg-black/40"></div>
+            <div className="absolute inset-0 bg-black/20"></div>
           </HeroImageScale>
         </div>
 

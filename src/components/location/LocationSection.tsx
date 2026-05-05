@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
+import { ScrollStagger, ScrollFadeIn, ScrollScaleIn } from '@/components/motion/ScrollMotion';
 
 const landmarks = [
   { key: 'viaRiyadh', distance: '5.7' },
@@ -18,10 +19,10 @@ export default function LocationSection() {
     <section className="w-full bg-[#FAF9F6] text-black border-t border-black/10">
       <div className="max-w-[1800px] mx-auto">
         {/* Using standard physical grid which natively flips column order in RTL based on dir="rtl" */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[800px]">
+        <ScrollStagger className="grid grid-cols-1 lg:grid-cols-2 min-h-[800px]">
           
           {/* Map Column */}
-          <div className="relative w-full h-[50vh] lg:h-auto min-h-[500px] bg-[#e8e6e1] order-last lg:order-none border-t lg:border-t-0 border-black/10">
+          <ScrollScaleIn className="relative w-full h-[50vh] lg:h-auto min-h-[500px] bg-[#e8e6e1] order-last lg:order-none border-t lg:border-t-0 border-black/10">
             {/* Map Background Image */}
             <Image
               src="/images/rafiah-map.jpg"
@@ -55,50 +56,56 @@ export default function LocationSection() {
             <div className="absolute bottom-8 sm:bottom-12 start-8 sm:start-12 bg-[#012a17] text-white px-6 py-4 shadow-xl border border-black/20">
               <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em]">{t('mapLabel')}</p>
             </div>
-          </div>
+          </ScrollScaleIn>
 
           {/* Content Column */}
           <div className="flex flex-col justify-center px-6 sm:px-12 lg:px-20 xl:px-32 py-16 lg:py-24">
             
             {/* Header Area */}
             <div className="mb-12 sm:mb-16">
-              <div className="inline-flex items-center gap-4 text-[#012a17] uppercase tracking-[0.2em] text-xs sm:text-sm font-bold mb-6">
+              <ScrollFadeIn className="inline-flex items-center gap-4 text-[#012a17] uppercase tracking-[0.2em] text-xs sm:text-sm font-bold mb-6">
                 <span className="w-8 sm:w-12 h-px bg-[#012a17]"></span>
                 {t('overline')}
-              </div>
+              </ScrollFadeIn>
               
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.1] text-black mb-6">
-                {t('title')}
-              </h2>
+              <ScrollFadeIn>
+                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.1] text-black mb-6">
+                  {t('title')}
+                </h2>
+              </ScrollFadeIn>
               
-              <p className="text-sm sm:text-base lg:text-lg text-black/70 font-medium max-w-lg leading-relaxed">
-                {t('description')}
-              </p>
+              <ScrollFadeIn>
+                <p className="text-sm sm:text-base lg:text-lg text-black/70 font-medium max-w-lg leading-relaxed">
+                  {t('description')}
+                </p>
+              </ScrollFadeIn>
             </div>
 
             {/* Landmarks List */}
             <div className="max-w-lg">
-              <h3 className="text-2xl sm:text-3xl font-bold tracking-tighter text-black mb-8 inline-block border-b-2 border-[#012a17] pb-3">
-                {t('landmarksTitle')}
-              </h3>
+              <ScrollFadeIn>
+                <h3 className="text-2xl sm:text-3xl font-bold tracking-tighter text-black mb-8 inline-block border-b-2 border-[#012a17] pb-3">
+                  {t('landmarksTitle')}
+                </h3>
+              </ScrollFadeIn>
 
               <div className="flex flex-col border-t border-black/10">
                 {landmarks.map((landmark) => (
-                  <div key={landmark.key} className="flex justify-between items-center py-4 border-b border-black/10 group hover:bg-black/5 px-2 transition-colors">
+                  <ScrollFadeIn key={landmark.key} className="flex justify-between items-center py-4 border-b border-black/10 group hover:bg-black/5 px-2 transition-colors">
                     <span className="text-sm sm:text-base font-bold text-black/80 group-hover:text-black">
                       {t(`landmarks.${landmark.key}`)}
                     </span>
                     <span className="font-mono text-lg font-light text-[#012a17] tracking-tighter flex items-center gap-2">
                       {landmark.distance} <span className="text-[0.6rem] font-bold uppercase tracking-widest text-black/40">km</span>
                     </span>
-                  </div>
+                  </ScrollFadeIn>
                 ))}
               </div>
             </div>
 
           </div>
 
-        </div>
+        </ScrollStagger>
       </div>
     </section>
   );

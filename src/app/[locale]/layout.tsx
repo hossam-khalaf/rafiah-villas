@@ -2,6 +2,7 @@ import {NextIntlClientProvider} from 'next-intl';
 import {getMessages} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
+import Preloader from '@/components/ui/Preloader';
 import '../globals.css';
 
 export default async function LocaleLayout({
@@ -23,6 +24,7 @@ export default async function LocaleLayout({
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <body>
         <NextIntlClientProvider messages={messages}>
+          <Preloader />
           {children}
         </NextIntlClientProvider>
       </body>

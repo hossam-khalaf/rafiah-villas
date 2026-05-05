@@ -24,7 +24,7 @@ export default function FloorPlansSection() {
   const rooms: Room[] = t.raw(`rooms.${activeVilla}.${activeFloor}`) || [];
 
   return (
-    <section className="bg-[#0f0e0c] w-full py-24 sm:py-32 relative text-white border-t border-white/10">
+    <section className="bg-[#181816] w-full py-24 sm:py-32 relative text-white border-t border-white/10">
       <div className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-16">
         
         {/* Header */}
@@ -132,7 +132,7 @@ export default function FloorPlansSection() {
             </div>
 
             {/* Floor Plan Image Placeholder */}
-            <div className="w-full aspect-square sm:aspect-[4/3] border border-white/10 bg-[#161513] relative overflow-hidden flex items-center justify-center p-8">
+            <div className="w-full aspect-square sm:aspect-[4/3] border border-white/10 bg-[#2e2d2b] relative overflow-hidden flex items-center justify-center p-8">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`${activeVilla}-${activeFloor}-image`}
