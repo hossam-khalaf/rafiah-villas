@@ -5,6 +5,7 @@ import LocationSection from '@/components/location/LocationSection';
 import VillasSection from '@/components/villas/VillasSection';
 import GallerySection from '@/components/gallery/GallerySection';
 import FloorPlansSection from '@/components/floorPlans/FloorPlansSection';
+import WarrantiesSection from '@/components/warranties/WarrantiesSection';
 
 export default async function HomePage() {
   const t = await getTranslations('Hero');
@@ -157,6 +158,9 @@ export default async function HomePage() {
 
       {/* Floor Plans Section */}
       <FloorPlansSection />
+
+      {/* Warranties Section */}
+      <WarrantiesSection />
     </main>
   );
 }

@@ -123,5 +123,24 @@
     "overline": "Experience",
     "title": "A Vision of Refined Living",
     "subtitle": "Discover the architectural elegance and interior harmony that define the Rafiah Villas experience."
+  },
+  "Warranties": {
+    "overline": "Built to Last",
+    "titleLine1": "Backed by",
+    "titleLine2": "Industry-Leading Warranties",
+    "subtitle": "Every system in your Rafiah Villa is guaranteed by the specialists who built it — giving you total confidence in your investment for decades to come.",
+    "items": [
+      { "years": "10", "yearsSuffix": "Years", "category": "Structural Works", "contractor": "Malaz Insurance Co." },
+      { "years": "10", "yearsSuffix": "Years", "category": "Electrical & Installation Works", "contractor": "Naht General Contractors" },
+      { "years": "5", "yearsSuffix": "Years", "category": "HVAC & Air Conditioning", "bonus": "2 Years Free Maintenance", "contractor": "Al-Shaqran Air Conditioning" },
+      { "years": "15", "yearsSuffix": "Years", "category": "Waterproofing & Insulation", "contractor": "Al-Zamil Co." },
+      { "years": "20", "yearsSuffix": "Years", "category": "Plumbing Systems", "contractor": "Naht General Contractors" },
+      { "years": "10", "yearsSuffix": "Years", "category": "Elevators", "bonus": "1 Year Free Maintenance", "contractor": "Fannal Mimar Elevators" },
+      { "years": "2", "yearsSuffix": "Years", "category": "Pool Equipment", "contractor": "Abdullah Bin Talib Pool Equipment Co." },
+      { "years": "2", "yearsSuffix": "Years", "category": "Pool Hydraulics", "contractor": "Al-Masbach Al-Amen Foundation" },
+      { "years": "20", "yearsSuffix": "Years", "category": "Aluminum Works", "contractor": "Al-Habeeb Glass & Aluminum Factory" },
+      { "years": "10", "yearsSuffix": "Years", "category": "Kitchens", "bonus": "2 Years Maintenance", "contractor": "Kafco Kitchens" },
+      { "years": "2", "yearsSuffix": "Years", "category": "Comprehensive Warranty — All Works", "contractor": "Naht General Contractors" }
+    ]
   }
 }
