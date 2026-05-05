@@ -3,6 +3,14 @@
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { motion, AnimatePresence } from 'motion/react';
+import Image from 'next/image';
+
+const getFloorPlanImage = (villa: VillaType, floor: FloorType) => {
+  if (villa === 'facade' && floor === 'ground') return '/images/facade-ground-floor-plan.png';
+  if (villa === 'facade' && floor === 'second') return '/images/facade-second-floor-plan.png';
+  if (villa === 'corner' && floor === 'ground') return '/images/corner-ground-floor plan.webp';
+  return `/images/${villa}-${floor}-floor-plan.webp`;
+};
 
 type VillaType = 'corner' | 'facade';
 type FloorType = 'ground' | 'first' | 'second';
@@ -98,9 +106,14 @@ export default function FloorPlansSection() {
                       key={idx}
                       className="flex justify-between items-center py-4 border-b border-white/5 last:border-0 group hover:border-white/20 transition-colors"
                     >
-                      <span className="text-white/80 font-light text-sm sm:text-base group-hover:text-white transition-colors">
-                        {room.name}
-                      </span>
+                      <div className="flex items-center gap-4">
+                        <span className="font-mono text-xs sm:text-sm text-white/30 group-hover:text-[#D4B78F] transition-colors w-6">
+                          {String(idx + 1).padStart(2, '0')}
+                        </span>
+                        <span className="text-white/80 font-light text-sm sm:text-base group-hover:text-white transition-colors">
+                          {room.name}
+                        </span>
+                      </div>
                       <span className="text-[#D4B78F] font-serif text-sm sm:text-base tracking-widest">
                         {room.dim}
                       </span>
@@ -142,18 +155,16 @@ export default function FloorPlansSection() {
                   transition={{ duration: 0.5 }}
                   className="absolute inset-0 flex flex-col items-center justify-center text-white/20"
                 >
-                  <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="mb-4">
-                    <path d="M3 3h18v18H3z M3 9h18 M9 21V9" />
-                  </svg>
-                  <p className="text-sm uppercase tracking-widest font-light text-center">
-                    {t(`tabs.${activeVilla}`)} <br />
-                    <span className="text-[#D4B78F]/50">{t(`floors.${activeFloor}`)} Plan</span>
-                  </p>
+                  <Image 
+                    src={getFloorPlanImage(activeVilla, activeFloor)}
+                    alt={`${activeVilla} ${activeFloor} floor plan`}
+                    fill
+                    className="object-contain p-4 sm:p-8"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority={true}
+                  />
                 </motion.div>
               </AnimatePresence>
-              
-              {/* Optional: Once actual images are provided, map them here: */}
-              {/* <img src={`/images/floor-plans/${activeVilla}-${activeFloor}.png`} className="object-contain w-full h-full" alt="Floor Plan" /> */}
             </div>
 
           </div>

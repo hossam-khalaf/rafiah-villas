@@ -3,6 +3,7 @@ import { getVillaStatsContent } from '@/lib/content/villas';
 import { HeroStagger, HeroFadeIn, HeroImageScale, HeroButton } from '@/components/hero/RafiahHeroMotion';
 import LocationSection from '@/components/location/LocationSection';
 import VillasSection from '@/components/villas/VillasSection';
+import GallerySection from '@/components/gallery/GallerySection';
 import FloorPlansSection from '@/components/floorPlans/FloorPlansSection';
 
 export default async function HomePage() {
@@ -150,6 +151,9 @@ export default async function HomePage() {
 
       {/* Villas Collection Section */}
       <VillasSection />
+
+      {/* Gallery Section */}
+      <GallerySection />
 
       {/* Floor Plans Section */}
       <FloorPlansSection />
