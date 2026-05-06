@@ -1,0 +1,323 @@
+'use client';
+
+import { useState, useId } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
+import { motion, AnimatePresence } from 'motion/react';
+import { submitLead, type LeadPayload } from '@/lib/leads';
+import LuxuryBackground from '@/components/ui/LuxuryBackground';
+import { ScrollFadeIn } from '@/components/motion/ScrollMotion';
+
+
+// ─── Form input component ─────────────────────────────────────────────────────
+interface FormFieldProps {
+  id: string;
+  label: string;
+  placeholder: string;
+  type?: string;
+  value: string;
+  onChange: (v: string) => void;
+  autoComplete?: string;
+  required?: boolean;
+  disabled?: boolean;
+}
+
+function FormField({
+  id, label, placeholder, type = 'text',
+  value, onChange, autoComplete, required, disabled,
+}: FormFieldProps) {
+  return (
+    <div className="flex flex-col gap-2">
+      <label
+        htmlFor={id}
+        className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/70"
+      >
+        {label}
+      </label>
+      <input
+        id={id}
+        type={type}
+        value={value}
+        onChange={e => onChange(e.target.value)}
+        placeholder={placeholder}
+        autoComplete={autoComplete}
+        required={required}
+        disabled={disabled}
+        className="
+          w-full bg-white/10 border border-white/20 text-white placeholder-white/35
+          px-5 py-4 text-sm font-light
+          focus:outline-none focus:border-[#D4B78F]/80 focus:bg-white/15
+          disabled:opacity-40 disabled:cursor-not-allowed
+          transition-colors duration-200
+        "
+      />
+    </div>
+  );
+}
+
+// ─── Success state ────────────────────────────────────────────────────────────
+function SuccessState({ title, body }: { title: string; body: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="flex flex-col items-center justify-center text-center py-16 gap-6"
+    >
+      {/* Checkmark */}
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 20, delay: 0.1 }}
+        className="w-16 h-16 rounded-full bg-[#012a17] border border-[#D4B78F]/40 flex items-center justify-center"
+      >
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4B78F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      </motion.div>
+
+      <div className="space-y-2">
+        <p className="font-serif text-2xl text-[#D4B78F]">{title}</p>
+        <p className="text-sm text-white/60 font-light max-w-xs leading-relaxed">{body}</p>
+      </div>
+    </motion.div>
+  );
+}
+
+// ─── Main section ─────────────────────────────────────────────────────────────
+export default function RegisterInterestSection() {
+  const t       = useTranslations('RegisterInterest');
+  const locale  = useLocale() as 'ar' | 'en';
+  const uid     = useId();
+
+  const [name,     setName]     = useState('');
+  const [phone,    setPhone]    = useState('');
+  const [status,   setStatus]   = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errMsg,   setErrMsg]   = useState('');
+
+  const isSubmitting = status === 'submitting';
+  const isSuccess    = status === 'success';
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (isSubmitting) return;
+
+    setStatus('submitting');
+    setErrMsg('');
+
+    const payload: LeadPayload = {
+      name:        name.trim(),
+      phone:       phone.trim(),
+      source:      'register_interest_section',
+      locale,
+      submittedAt: new Date().toISOString(),
+      pageUrl:     typeof window !== 'undefined' ? window.location.href : undefined,
+      userAgent:   typeof navigator !== 'undefined' ? navigator.userAgent : undefined,
+    };
+
+    const result = await submitLead(payload);
+
+    if (result.ok) {
+      setStatus('success');
+    } else {
+      setStatus('error');
+      setErrMsg(result.error);
+    }
+  }
+
+  return (
+    <section
+      id="register-interest"
+      className="relative w-full overflow-hidden"
+      style={{ minHeight: '600px' }}
+    >
+      <LuxuryBackground variant="register" />
+
+      {/* Content */}
+      <div className="relative z-10 max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-24 sm:py-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+
+          {/* ── Left column: editorial copy ─────────────────────── */}
+          <ScrollFadeIn className="flex flex-col">
+            {/* Urgency badge */}
+            <div className="inline-flex items-center gap-3 mb-8 max-w-fit">
+              <span className="relative flex h-2 w-2 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D4B78F] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D4B78F]" />
+              </span>
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#D4B78F]/80 border border-[#D4B78F]/25 px-4 py-1.5">
+                {t('urgencyBadge')}
+              </span>
+            </div>
+
+            {/* Overline */}
+            <div className="inline-flex items-center gap-4 text-white/70 uppercase tracking-[0.2em] text-[11px] font-semibold mb-6">
+              <span className="w-8 h-px bg-white/40" />
+              {t('overline')}
+            </div>
+
+            {/* Headline */}
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.08] tracking-tight mb-8">
+              {t('titleLine1')}{' '}
+              <span className="font-serif italic text-[#D4B78F] font-normal">
+                {t('titleLine2')}
+              </span>
+            </h2>
+
+            {/* Body */}
+            <p className="text-sm sm:text-base text-white/75 font-light leading-relaxed max-w-md mb-12">
+              {t('body')}
+            </p>
+
+            {/* Divider */}
+            <div className="w-full h-px bg-white/20 mb-10" />
+
+            {/* Sales hotline */}
+            <div className="mb-8">
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/55 mb-2">
+                {t('hotlineLabel')}
+              </p>
+              <a
+                href={`tel:${t('hotlineNumber').replace(/\s/g, '')}`}
+                className="font-serif text-3xl sm:text-4xl text-[#D4B78F] tracking-tight hover:text-white transition-colors duration-300"
+                dir="ltr"
+              >
+                {t('hotlineNumber')}
+              </a>
+            </div>
+
+            {/* License */}
+            <p className="text-[11px] text-white/45 font-light tracking-wide">
+              {t('licenseLabel')} · {t('licenseNumber')}
+            </p>
+          </ScrollFadeIn>
+
+          {/* ── Right column: form card ─────────────────────────── */}
+          <ScrollFadeIn>
+            <div className="bg-black/20 border border-white/15 backdrop-blur-md p-8 sm:p-10">
+
+              <AnimatePresence mode="wait">
+                {isSuccess ? (
+                  <SuccessState
+                    key="success"
+                    title={t('successTitle')}
+                    body={t('successBody')}
+                  />
+                ) : (
+                  <motion.div key="form" initial={{ opacity: 1 }} exit={{ opacity: 0 }}>
+
+                    {/* Form header */}
+                    <div className="mb-8">
+                      <h3 className="font-serif text-2xl sm:text-3xl text-[#D4B78F] mb-2 tracking-tight">
+                        {t('formTitle')}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-white/60 font-light leading-relaxed">
+                        {t('formSubtitle')}
+                      </p>
+                    </div>
+
+                    {/* Form */}
+                    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
+
+                      <FormField
+                        id={`${uid}-name`}
+                        label={t('nameLabel')}
+                        placeholder={t('namePlaceholder')}
+                        type="text"
+                        value={name}
+                        onChange={setName}
+                        autoComplete="name"
+                        required
+                        disabled={isSubmitting}
+                      />
+
+                      <FormField
+                        id={`${uid}-phone`}
+                        label={t('phoneLabel')}
+                        placeholder={t('phonePlaceholder')}
+                        type="tel"
+                        value={phone}
+                        onChange={setPhone}
+                        autoComplete="tel"
+                        required
+                        disabled={isSubmitting}
+                      />
+
+                      {/* Error message */}
+                      <AnimatePresence>
+                        {status === 'error' && (
+                          <motion.p
+                            key="err"
+                            initial={{ opacity: 0, y: -4 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0 }}
+                            role="alert"
+                            className="text-xs text-red-400 font-medium"
+                          >
+                            {errMsg || 'Something went wrong. Please try again.'}
+                          </motion.p>
+                        )}
+                      </AnimatePresence>
+
+                      {/* Submit button */}
+                      <button
+                        type="submit"
+                        disabled={isSubmitting || !name.trim() || !phone.trim()}
+                        className="
+                          relative w-full bg-[#D4B78F] text-[#060a07] py-4
+                          text-[13px] font-bold uppercase tracking-[0.15em]
+                          hover:bg-white transition-colors duration-300
+                          disabled:opacity-50 disabled:cursor-not-allowed
+                          mt-2
+                        "
+                      >
+                        <AnimatePresence mode="wait" initial={false}>
+                          {isSubmitting ? (
+                            <motion.span
+                              key="loading"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                              className="flex items-center justify-center gap-3"
+                            >
+                              {/* Spinner */}
+                              <svg
+                                className="animate-spin h-4 w-4"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                              >
+                                <circle cx="12" cy="12" r="10" strokeOpacity="0.25" />
+                                <path d="M12 2a10 10 0 0 1 10 10" strokeLinecap="round" />
+                              </svg>
+                              {t('submitting')}
+                            </motion.span>
+                          ) : (
+                            <motion.span
+                              key="idle"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                            >
+                              {t('submitButton')}
+                            </motion.span>
+                          )}
+                        </AnimatePresence>
+                      </button>
+
+                      {/* Privacy note */}
+                      <p className="text-[11px] text-white/45 text-center leading-relaxed mt-1">
+                        {t('privacy')}
+                      </p>
+
+                    </form>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </ScrollFadeIn>
+
+        </div>
+      </div>
+    </section>
+  );
+}

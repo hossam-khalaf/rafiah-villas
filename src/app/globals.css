@@ -1,18 +1,68 @@
 @import "tailwindcss";
 
+/* ─── Font Variables ──────────────────────────────────────────── */
 @theme {
   --color-brand-royal-green: #012a17;
   --color-brand-black: #050505;
   --color-brand-white: #ffffff;
-  
+
+  /* Map next/font CSS variables → Tailwind font-family tokens */
+  --font-family-sans:  var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-family-serif: var(--font-cormorant), ui-serif, Georgia, serif;
+  --font-family-mono:  var(--font-dm-mono), ui-monospace, "Courier New", monospace;
+
+  /* ─── Type Scale ─── */
+  /* Overlines & labels */
+  --font-size-overline: 0.6875rem;   /* 11px */
+  --font-size-caption:  0.75rem;     /* 12px */
+  --font-size-label:    0.8125rem;   /* 13px */
+  /* Body */
+  --font-size-sm:       0.875rem;    /* 14px */
+  --font-size-base:     1rem;        /* 16px */
+  --font-size-lg:       1.125rem;    /* 18px */
+  --font-size-xl:       1.25rem;     /* 20px */
+  /* Headings */
+  --font-size-2xl:      1.5rem;      /* 24px */
+  --font-size-3xl:      1.875rem;    /* 30px */
+  --font-size-4xl:      2.25rem;     /* 36px */
+  --font-size-5xl:      3rem;        /* 48px */
+  --font-size-6xl:      3.75rem;     /* 60px */
+  --font-size-7xl:      4.5rem;      /* 72px */
+  --font-size-8xl:      6rem;        /* 96px */
+
   --animate-marquee: marquee 30s linear infinite;
-  
+
+  /* Luxury background orb animations — used by LuxuryBackground.tsx */
+  --animate-orb-a: orb-drift-a 22s ease-in-out infinite alternate;
+  --animate-orb-b: orb-drift-b 26s ease-in-out infinite alternate;
+  --animate-orb-c: orb-drift-c 19s ease-in-out infinite alternate;
+
   @keyframes marquee {
-    0% { transform: translateX(0%); }
+    0%   { transform: translateX(0%);    }
     100% { transform: translateX(-100%); }
+  }
+
+  @keyframes orb-drift-a {
+    0%   { transform: translate(0,    0)    scale(1);    }
+    33%  { transform: translate(5%,   7%)   scale(1.06); }
+    66%  { transform: translate(-3%,  4%)   scale(0.97); }
+    100% { transform: translate(2%,  -5%)   scale(1.03); }
+  }
+  @keyframes orb-drift-b {
+    0%   { transform: translate(0,    0)    scale(1);    }
+    33%  { transform: translate(-6%,  -5%)  scale(1.09); }
+    66%  { transform: translate(4%,   3%)   scale(0.94); }
+    100% { transform: translate(-2%,  6%)   scale(1.04); }
+  }
+  @keyframes orb-drift-c {
+    0%   { transform: translate(0,    0)    scale(1);    }
+    33%  { transform: translate(3%,  -8%)   scale(1.05); }
+    66%  { transform: translate(-5%,  2%)   scale(0.96); }
+    100% { transform: translate(4%,   5%)   scale(1.02); }
   }
 }
 
+/* ─── RTL Marquee ─────────────────────────────────────────────── */
 @layer utilities {
   [dir="rtl"] .animate-marquee {
     animation-name: marquee-rtl;
@@ -20,10 +70,11 @@
 }
 
 @keyframes marquee-rtl {
-  0% { transform: translateX(0%); }
+  0%   { transform: translateX(0%);   }
   100% { transform: translateX(100%); }
 }
 
+/* ─── Base Styles ─────────────────────────────────────────────── */
 @layer base {
   :root {
     --background: var(--color-brand-white);
@@ -37,9 +88,72 @@
     }
   }
 
+  html {
+    /* Smooth font rendering */
+    -webkit-font-smoothing:  antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
   body {
-    background: var(--background);
-    color: var(--foreground);
-    font-family: Arial, Helvetica, sans-serif;
+    background:  var(--background);
+    color:       var(--foreground);
+    font-family: var(--font-family-sans);
+    font-size:   var(--font-size-base);
+    line-height: 1.6;
+  }
+
+  /* Arabic content always uses Noto Naskh Arabic */
+  :lang(ar),
+  [lang="ar"] body,
+  [dir="rtl"] body {
+    font-family: var(--font-arabic), var(--font-family-sans);
+    line-height: 1.8; /* Arabic needs more leading */
+  }
+
+  /* Heading elements inherit the correct scale */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-sans);
+    line-height: 1.15;
+  }
+
+  /* Serif utility (for decorative headings in Cormorant) */
+  .font-serif,
+  [class*="font-serif"] {
+    font-family: var(--font-family-serif);
+  }
+
+  /* Mono utility */
+  .font-mono,
+  [class*="font-mono"] {
+    font-family: var(--font-family-mono);
   }
 }
+
+/* ─── Arabic-specific overrides ──────────────────────────────── */
+/* When the page is Arabic, headings use Noto Naskh Arabic with slightly
+   adjusted tracking (Arabic doesn't use tracking the same way) */
+@layer utilities {
+  [dir="rtl"] h1,
+  [dir="rtl"] h2,
+  [dir="rtl"] h3,
+  [dir="rtl"] h4 {
+    font-family: var(--font-arabic), var(--font-family-sans);
+    letter-spacing: 0; /* Reset LTR letter-spacing for Arabic */
+    font-weight: 700;
+  }
+
+  /* Stats numbers stay in DM Mono regardless of locale */
+  [dir="rtl"] .font-mono {
+    font-family: var(--font-family-mono);
+    direction: ltr; /* Numbers always LTR */
+    unicode-bidi: embed;
+  }
+
+  /* Overline tracking reset for Arabic */
+  [dir="rtl"] .tracking-\[0\.2em\],
+  [dir="rtl"] .tracking-widest {
+    letter-spacing: 0.05em;
+  }
+}
+

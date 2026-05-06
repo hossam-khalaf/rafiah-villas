@@ -49,21 +49,17 @@ export default function WarrantiesSection() {
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px bg-black/10 border border-black/10">
           {items.map((item, index) => (
-            <motion.div
+            <ScrollFadeIn
               key={index}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.6, delay: (index % 4) * 0.08, ease: [0.22, 1, 0.36, 1] }}
               className="bg-[#FAF9F6] hover:bg-white transition-colors duration-300 p-8 sm:p-10 flex flex-col group"
             >
               {/* Year number */}
               <div className="mb-6">
-                <p className="font-serif text-6xl sm:text-7xl text-[#B5913A] leading-none tracking-tight">
+                <p className="font-serif text-7xl sm:text-8xl text-[#B5913A] leading-none tracking-tight">
                   {item.years}
                 </p>
                 {item.yearsSuffix && (
-                  <p className="text-[0.6rem] font-bold uppercase tracking-[0.25em] text-black/40 mt-1">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 mt-1">
                     {item.yearsSuffix}
                   </p>
                 )}
@@ -73,22 +69,22 @@ export default function WarrantiesSection() {
               <div className="w-8 h-px bg-[#B5913A]/50 mb-6 group-hover:w-16 transition-all duration-500"></div>
 
               {/* Category */}
-              <p className="font-bold text-sm sm:text-base text-black mb-2 leading-snug">
+              <p className="font-bold text-sm sm:text-base lg:text-[15px] text-black mb-2 leading-snug">
                 {item.category}
               </p>
 
               {/* Bonus */}
               {item.bonus && (
-                <p className="text-xs text-[#012a17] font-semibold mb-2 tracking-wide">
+                <p className="text-[11px] sm:text-xs text-[#012a17] font-semibold mb-2 tracking-wide">
                   + {item.bonus}
                 </p>
               )}
 
               {/* Contractor */}
-              <p className="text-xs sm:text-sm text-black/50 mt-auto pt-4 leading-relaxed">
+              <p className="text-xs sm:text-[13px] text-black/50 mt-auto pt-4 leading-relaxed">
                 {item.contractor}
               </p>
-            </motion.div>
+            </ScrollFadeIn>
           ))}
         </div>
 

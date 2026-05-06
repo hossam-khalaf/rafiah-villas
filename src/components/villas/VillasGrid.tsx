@@ -46,7 +46,7 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
   return (
     <div className="w-full">
       {/* Tabs */}
-      <div className="flex flex-wrap gap-0 border border-white/10 max-w-fit mb-12 sm:mb-16 sticky top-0 sm:top-24 z-30 backdrop-blur-md bg-[#181816]/90 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]">
+      <div className="flex flex-wrap gap-0 border border-white/15 max-w-fit mb-12 sm:mb-16 sticky top-0 sm:top-24 z-30 backdrop-blur-md bg-[#012a17]/85 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)]">
         {(['northFacade', 'southFacade', 'corner'] as VillaType[]).map((tab) => (
           <button
             key={tab}
@@ -72,7 +72,8 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] } }}
               exit={{ opacity: 0, scale: 0.95, y: -20, transition: { duration: 0.3 } }}
-              className="group relative bg-[#2e2d2b] border border-white/10 p-6 sm:p-8 hover:border-[#D4B78F]/40 transition-all duration-500 flex flex-col min-h-[300px] overflow-hidden cursor-pointer"
+              viewport={{ once: true, amount: 0.2 }}
+              className="group relative bg-black/30 border border-white/10 p-6 sm:p-8 hover:border-[#D4B78F]/50 hover:bg-black/40 transition-all duration-500 flex flex-col min-h-[300px] overflow-hidden cursor-pointer"
             >
               {/* Top Row: Title & Badge */}
               <div className="flex justify-between items-start mb-8 z-10 relative">
@@ -85,11 +86,20 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
                 </div>
               </div>
 
-              {/* Price */}
+              {/* Price — hidden for sold / reserved */}
               <div className="mb-10 z-10 relative">
-                <p className="font-serif text-4xl sm:text-5xl text-white tracking-tight">
-                  {villa.price ? villa.price.toLocaleString() : 'TBD'} <span className="font-sans text-xs sm:text-sm font-bold tracking-widest uppercase text-white/70 ml-2">{labels.card.currency}</span>
-                </p>
+                {villa.status === 'available' ? (
+                  <p className="font-serif text-4xl sm:text-5xl text-white tracking-tight">
+                    {villa.price ? villa.price.toLocaleString() : 'TBD'}{' '}
+                    <span className="font-sans text-xs sm:text-sm font-bold tracking-widest uppercase text-white/70 ml-2">
+                      {labels.card.currency}
+                    </span>
+                  </p>
+                ) : (
+                  <p className="font-sans text-sm font-medium text-white/30 tracking-widest uppercase select-none">
+                    — —
+                  </p>
+                )}
               </div>
 
               {/* Separator */}

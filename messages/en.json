@@ -142,5 +142,27 @@
       { "years": "10", "yearsSuffix": "Years", "category": "Kitchens", "bonus": "2 Years Maintenance", "contractor": "Kafco Kitchens" },
       { "years": "2", "yearsSuffix": "Years", "category": "Comprehensive Warranty — All Works", "contractor": "Naht General Contractors" }
     ]
+  },
+  "RegisterInterest": {
+    "urgencyBadge": "Limited Units Remaining",
+    "overline": "Register Now",
+    "titleLine1": "Secure Your",
+    "titleLine2": "Rafiah Villa",
+    "body": "Phase I sold out entirely. Phase II is moving fast. Register your interest today and our sales team will reach out within 24 hours.",
+    "hotlineLabel": "Sales Hotline",
+    "hotlineNumber": "920 033 262",
+    "licenseLabel": "Real Estate Development License",
+    "licenseNumber": "#7200762744",
+    "formTitle": "Register Your Interest",
+    "formSubtitle": "Fill in your details and a dedicated sales advisor will contact you to discuss availability and pricing.",
+    "namePlaceholder": "Your full name",
+    "nameLabel": "Full Name",
+    "phonePlaceholder": "+966 5X XXX XXXX",
+    "phoneLabel": "Mobile Number",
+    "submitButton": "Submit Registration",
+    "submitting": "Submitting...",
+    "successTitle": "Request Received!",
+    "successBody": "One of our sales advisors will be in touch with you shortly.",
+    "privacy": "Your information is confidential and will only be used to contact you about Rafiah Villas."
   }
 }

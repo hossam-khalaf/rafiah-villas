@@ -6,6 +6,7 @@ import VillasSection from '@/components/villas/VillasSection';
 import GallerySection from '@/components/gallery/GallerySection';
 import FloorPlansSection from '@/components/floorPlans/FloorPlansSection';
 import WarrantiesSection from '@/components/warranties/WarrantiesSection';
+import RegisterInterestSection from '@/components/registerInterest/RegisterInterestSection';
 
 export default async function HomePage() {
   const t = await getTranslations('Hero');
@@ -55,7 +56,7 @@ export default async function HomePage() {
             
             {/* Subtitle Badge */}
             <HeroFadeIn>
-              <div className="inline-flex items-center justify-center gap-4 text-white/80 uppercase tracking-[0.2em] text-xs sm:text-sm font-medium">
+              <div className="inline-flex items-center justify-center gap-4 text-white/80 uppercase tracking-[0.15em] text-[11px] sm:text-[13px] font-semibold">
                 <span className="w-8 sm:w-12 h-px bg-white/40"></span>
                 {t('subtitle')}
                 <span className="w-8 sm:w-12 h-px bg-white/40"></span>
@@ -64,24 +65,24 @@ export default async function HomePage() {
             
             {/* Title (Single Line) */}
             <HeroFadeIn>
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight text-white px-4">
+              <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.05] text-white px-4">
                 {t('title')}
               </h1>
             </HeroFadeIn>
             
             {/* Location & Subheading */}
             <HeroFadeIn className="flex flex-col items-center gap-3">
-              <p className="text-xs sm:text-sm lg:text-base text-white/70 uppercase tracking-[0.15em] font-medium">
+              <p className="text-[11px] sm:text-[13px] text-white/70 uppercase tracking-[0.15em] font-semibold">
                 {t('location')}
               </p>
-              <p className="text-sm sm:text-base text-white/90 font-medium">
+              <p className="text-sm sm:text-base lg:text-lg text-white/90 font-normal">
                 {t('developerIntro')}
               </p>
             </HeroFadeIn>
 
             {/* CTA */}
             <HeroFadeIn className="pt-2 sm:pt-4">
-              <HeroButton className="bg-[#012a17] border border-[#012a17] text-white px-10 py-4 text-xs sm:text-sm font-bold uppercase tracking-widest hover:bg-white hover:text-[#012a17] transition-colors duration-300 w-full sm:w-auto">
+              <HeroButton className="bg-[#012a17] border border-[#012a17] text-white px-10 py-4 text-[13px] sm:text-sm font-bold uppercase tracking-[0.15em] hover:bg-white hover:text-[#012a17] transition-colors duration-300 w-full sm:w-auto">
                 {t('registerInterest')}
               </HeroButton>
             </HeroFadeIn>
@@ -90,30 +91,30 @@ export default async function HomePage() {
             <HeroFadeIn className="w-full pt-8 sm:pt-12">
               <div className="flex flex-wrap sm:flex-nowrap items-stretch justify-center">
                 
-                <div className="flex flex-col items-center justify-center border-e border-white/20 px-4 sm:px-6 lg:px-10 w-1/2 sm:w-auto border-b sm:border-b-0 pb-4 sm:pb-0">
-                  <p className="font-mono text-3xl lg:text-4xl font-light tracking-tighter text-white mb-1 lg:mb-2 leading-none">{stats.total}</p>
-                  <p className="text-[0.55rem] sm:text-[0.65rem] font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] text-white/60 text-center max-w-[90px]">
+                <div className="flex flex-col items-center justify-center border-e border-white/20 px-5 sm:px-7 lg:px-10 w-1/2 sm:w-auto border-b sm:border-b-0 pb-5 sm:pb-0">
+                  <p className="font-mono text-4xl lg:text-5xl font-light tracking-tighter text-white mb-2 leading-none">{stats.total}</p>
+                  <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.1em] text-white/60 text-center max-w-[100px] leading-tight">
                     {t('exclusiveVillas')}
                   </p>
                 </div>
 
-                <div className="flex flex-col items-center justify-center sm:border-e border-white/20 px-4 sm:px-6 lg:px-10 w-1/2 sm:w-auto border-b sm:border-b-0 pb-4 sm:pb-0">
-                  <p className="font-mono text-3xl lg:text-4xl font-light tracking-tighter text-white mb-1 lg:mb-2 leading-none">300<span className="text-lg lg:text-xl">m²</span></p>
-                  <p className="text-[0.55rem] sm:text-[0.65rem] font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] text-white/60 text-center max-w-[90px]">
+                <div className="flex flex-col items-center justify-center sm:border-e border-white/20 px-5 sm:px-7 lg:px-10 w-1/2 sm:w-auto border-b sm:border-b-0 pb-5 sm:pb-0">
+                  <p className="font-mono text-4xl lg:text-5xl font-light tracking-tighter text-white mb-2 leading-none">300<span className="text-xl lg:text-2xl">m²</span></p>
+                  <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.1em] text-white/60 text-center max-w-[100px] leading-tight">
                     {t('startingArea')}
                   </p>
                 </div>
 
-                <div className="flex flex-col items-center justify-center border-e border-white/20 px-4 sm:px-6 lg:px-10 w-1/2 sm:w-auto pt-4 sm:pt-0">
-                  <p className="font-mono text-3xl lg:text-4xl font-light tracking-tighter text-white mb-1 lg:mb-2 leading-none">4.5<span className="text-lg lg:text-xl">M</span></p>
-                  <p className="text-[0.55rem] sm:text-[0.65rem] font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] text-white/60 text-center max-w-[90px]">
+                <div className="flex flex-col items-center justify-center border-e border-white/20 px-5 sm:px-7 lg:px-10 w-1/2 sm:w-auto pt-5 sm:pt-0">
+                  <p className="font-mono text-4xl lg:text-5xl font-light tracking-tighter text-white mb-2 leading-none">4.5<span className="text-xl lg:text-2xl">M</span></p>
+                  <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.1em] text-white/60 text-center max-w-[100px] leading-tight">
                     {t('startingPrice')}
                   </p>
                 </div>
 
-                <div className="flex flex-col items-center justify-center px-4 sm:px-6 lg:px-10 w-1/2 sm:w-auto pt-4 sm:pt-0 relative">
-                  <p className="font-mono text-3xl lg:text-4xl font-light tracking-tighter text-white mb-1 lg:mb-2 leading-none">100<span className="text-lg lg:text-xl">%</span></p>
-                  <p className="text-[0.55rem] sm:text-[0.65rem] font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] text-white/60 text-center max-w-[90px]">
+                <div className="flex flex-col items-center justify-center px-5 sm:px-7 lg:px-10 w-1/2 sm:w-auto pt-5 sm:pt-0 relative">
+                  <p className="font-mono text-4xl lg:text-5xl font-light tracking-tighter text-white mb-2 leading-none">100<span className="text-xl lg:text-2xl">%</span></p>
+                  <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.1em] text-white/60 text-center max-w-[100px] leading-tight">
                     {t('phaseOneSold')}
                   </p>
                 </div>
@@ -130,14 +131,14 @@ export default async function HomePage() {
           <div className="flex w-full overflow-hidden">
             <div className="animate-marquee whitespace-nowrap flex items-center shrink-0 min-w-full justify-around">
                {[...Array(6)].map((_, i) => (
-                 <p key={i} className="text-xs font-bold uppercase tracking-[0.2em] text-white/90 px-8">
+                 <p key={i} className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-white/90 px-8">
                     {t('ticker')}
                  </p>
                ))}
             </div>
             <div className="animate-marquee whitespace-nowrap flex items-center shrink-0 min-w-full justify-around" aria-hidden="true">
                {[...Array(6)].map((_, i) => (
-                 <p key={i} className="text-xs font-bold uppercase tracking-[0.2em] text-white/90 px-8">
+                 <p key={i} className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-white/90 px-8">
                     {t('ticker')}
                  </p>
                ))}
@@ -161,6 +162,9 @@ export default async function HomePage() {
 
       {/* Warranties Section */}
       <WarrantiesSection />
+
+      {/* Register Interest — Final CTA */}
+      <RegisterInterestSection />
     </main>
   );
 }
