@@ -8,6 +8,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import { motion } from 'motion/react';
 import { ScrollFadeIn, ScrollStagger } from '@/components/motion/ScrollMotion';
+import LuxuryBackground from '@/components/ui/LuxuryBackground';
 
 const galleryImages = [
   '/images/gallery/1.webp',
@@ -42,7 +43,9 @@ export default function GallerySection() {
 
   return (
     <>
-      <section className="w-full bg-[#181816] py-24 sm:py-32 overflow-hidden border-t border-white/10">
+      <section className="relative w-full py-24 sm:py-32 overflow-hidden border-t border-white/10">
+        <LuxuryBackground variant="gallery" />
+        <div className="relative z-10">
         {/* Header */}
         <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 mb-16 sm:mb-24">
           <ScrollStagger>
@@ -78,7 +81,7 @@ export default function GallerySection() {
                 className="relative shrink-0 w-[80vw] sm:w-[60vw] lg:w-[40vw] aspect-[16/10] overflow-hidden group"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.7, delay: Math.min(index * 0.06, 0.4) }}
                 // Open lightbox only on click (Embla prevents this during drag automatically)
                 onClick={() => setLightboxIndex(index)}
@@ -111,6 +114,7 @@ export default function GallerySection() {
             <div className="w-10 h-px bg-white/20"></div>
           </div>
         </div>
+        </div>{/* end relative z-10 */}
       </section>
 
       {/* YARL Lightbox */}

@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { VILLAS } from '@/data/villas';
 import VillasGrid from './VillasGrid';
 import { ScrollStagger, ScrollFadeIn } from '@/components/motion/ScrollMotion';
+import LuxuryBackground from '@/components/ui/LuxuryBackground';
 
 export default async function VillasSection() {
   const t = await getTranslations('Collection');
@@ -27,8 +28,9 @@ export default async function VillasSection() {
   };
 
   return (
-    <section className="w-full bg-[#181816] text-white py-24 sm:py-32">
-      <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+    <section className="relative w-full text-white py-24 sm:py-32 overflow-hidden">
+      <LuxuryBackground variant="villas" />
+      <div className="relative z-10 max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         
         <ScrollStagger className="w-full">
           {/* Header */}

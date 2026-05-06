@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { motion, AnimatePresence } from 'motion/react';
 import Image from 'next/image';
+import LuxuryBackground from '@/components/ui/LuxuryBackground';
+import { ScrollFadeIn } from '@/components/motion/ScrollMotion';
 
 const getFloorPlanImage = (villa: VillaType, floor: FloorType) => {
   if (villa === 'facade' && floor === 'ground') return '/images/facade-ground-floor-plan.png';
@@ -32,28 +34,22 @@ export default function FloorPlansSection() {
   const rooms: Room[] = t.raw(`rooms.${activeVilla}.${activeFloor}`) || [];
 
   return (
-    <section className="bg-[#181816] w-full py-24 sm:py-32 relative text-white border-t border-white/10">
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-16">
+    <section className="relative w-full py-24 sm:py-32 text-white border-t border-white/10 overflow-hidden">
+      <LuxuryBackground variant="floorplans" />
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-16">
         
         {/* Header */}
         <div className="max-w-3xl mb-16 sm:mb-24">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl sm:text-6xl font-serif text-[#D4B78F] mb-6 tracking-tight leading-tight"
-          >
-            {t('title')}
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ delay: 0.1 }}
-            className="text-white/70 text-base sm:text-lg lg:text-xl font-light leading-relaxed max-w-2xl"
-          >
-            {t('subtitle')}
-          </motion.p>
+          <ScrollFadeIn>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif text-[#D4B78F] mb-6 tracking-tight leading-tight">
+              {t('title')}
+            </h2>
+          </ScrollFadeIn>
+          <ScrollFadeIn>
+            <p className="text-white/70 text-sm sm:text-base lg:text-lg font-light leading-relaxed max-w-2xl">
+              {t('subtitle')}
+            </p>
+          </ScrollFadeIn>
         </div>
 
         {/* Villa Type Tabs */}
@@ -62,7 +58,7 @@ export default function FloorPlansSection() {
             <button
               key={type}
               onClick={() => setActiveVilla(type)}
-              className={`pb-4 px-8 text-xs sm:text-sm font-bold uppercase tracking-widest transition-colors relative ${
+              className={`pb-4 px-6 sm:px-8 text-[13px] sm:text-sm font-bold uppercase tracking-[0.12em] transition-colors relative ${
                 activeVilla === type ? 'text-[#D4B78F]' : 'text-white/40 hover:text-white/70'
               }`}
             >
@@ -85,7 +81,7 @@ export default function FloorPlansSection() {
             
             {/* Floor Overline */}
             <div className="flex items-center gap-4 mb-8">
-              <h3 className="text-[#D4B78F] text-xs font-bold uppercase tracking-[0.2em] shrink-0">
+              <h3 className="text-[#D4B78F] text-[11px] font-bold uppercase tracking-[0.18em] shrink-0">
                 {t(`floors.${activeFloor}`)}
               </h3>
               <div className="h-px bg-white/10 w-full" />
@@ -107,14 +103,14 @@ export default function FloorPlansSection() {
                       className="flex justify-between items-center py-4 border-b border-white/5 last:border-0 group hover:border-white/20 transition-colors"
                     >
                       <div className="flex items-center gap-4">
-                        <span className="font-mono text-xs sm:text-sm text-white/30 group-hover:text-[#D4B78F] transition-colors w-6">
+                        <span className="font-mono text-xs text-white/30 group-hover:text-[#D4B78F] transition-colors w-6">
                           {String(idx + 1).padStart(2, '0')}
                         </span>
-                        <span className="text-white/80 font-light text-sm sm:text-base group-hover:text-white transition-colors">
+                        <span className="text-white/80 font-light text-[13px] sm:text-base group-hover:text-white transition-colors">
                           {room.name}
                         </span>
                       </div>
-                      <span className="text-[#D4B78F] font-serif text-sm sm:text-base tracking-widest">
+                      <span className="text-[#D4B78F] font-serif text-sm sm:text-[15px] tracking-wide">
                         {room.dim}
                       </span>
                     </div>
@@ -133,7 +129,7 @@ export default function FloorPlansSection() {
                 <button
                   key={floor}
                   onClick={() => setActiveFloor(floor)}
-                  className={`flex-1 py-4 text-xs sm:text-sm font-bold uppercase tracking-widest transition-all ${
+                  className={`flex-1 py-4 text-[13px] font-semibold uppercase tracking-[0.12em] transition-all ${
                     activeFloor === floor 
                       ? 'bg-[#D4B78F] text-[#0a0a0a]' 
                       : 'bg-transparent text-white/50 hover:bg-white/5 hover:text-white'
@@ -145,7 +141,7 @@ export default function FloorPlansSection() {
             </div>
 
             {/* Floor Plan Image Placeholder */}
-            <div className="w-full aspect-square sm:aspect-[4/3] border border-white/10 bg-[#2e2d2b] relative overflow-hidden flex items-center justify-center p-8">
+            <div className="w-full aspect-square sm:aspect-[4/3] border border-white/10 bg-black/25 relative overflow-hidden flex items-center justify-center p-8">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`${activeVilla}-${activeFloor}-image`}
