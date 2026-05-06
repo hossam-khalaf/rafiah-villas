@@ -3,6 +3,7 @@ import {getMessages} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
 import Preloader from '@/components/ui/Preloader';
+import FloatingButtons from '@/components/ui/FloatingButtons';
 import { Cormorant_Garamond, DM_Sans, DM_Mono, Noto_Naskh_Arabic } from 'next/font/google';
 import '../globals.css';
 
@@ -60,6 +61,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <Preloader />
           {children}
+          <FloatingButtons />
         </NextIntlClientProvider>
       </body>
     </html>

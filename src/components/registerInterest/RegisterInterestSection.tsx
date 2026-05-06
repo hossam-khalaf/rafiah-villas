@@ -3,6 +3,7 @@
 import { useState, useId } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { motion, AnimatePresence } from 'motion/react';
+import Link from 'next/link';
 import { submitLead, type LeadPayload } from '@/lib/leads';
 import LuxuryBackground from '@/components/ui/LuxuryBackground';
 import { ScrollFadeIn } from '@/components/motion/ScrollMotion';
@@ -262,9 +263,9 @@ export default function RegisterInterestSection() {
                         type="submit"
                         disabled={isSubmitting || !name.trim() || !phone.trim()}
                         className="
-                          relative w-full bg-[#D4B78F] text-[#060a07] py-4
+                          relative w-full bg-[#012a17] text-white py-4
                           text-[13px] font-bold uppercase tracking-[0.15em]
-                          hover:bg-white transition-colors duration-300
+                          border border-[#012a17] hover:bg-white hover:text-[#012a17] transition-colors duration-300
                           disabled:opacity-50 disabled:cursor-not-allowed
                           mt-2
                         "
@@ -306,7 +307,13 @@ export default function RegisterInterestSection() {
 
                       {/* Privacy note */}
                       <p className="text-[11px] text-white/45 text-center leading-relaxed mt-1">
-                        {t('privacy')}
+                        {t('privacy')}{' '}
+                        <Link
+                          href={`/${locale}/privacy`}
+                          className="underline underline-offset-2 hover:text-white/70 transition-colors"
+                        >
+                          {locale === 'ar' ? 'سياسة الخصوصية' : 'Privacy Policy'}
+                        </Link>
                       </p>
 
                     </form>
