@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import { ScrollStagger, ScrollFadeIn, ScrollScaleIn } from '@/components/motion/ScrollMotion';
 
@@ -12,8 +12,8 @@ const landmarks = [
   { key: 'kfmc', distance: '6.9' }
 ];
 
-export default function LocationSection() {
-  const t = useTranslations('Location');
+export default async function LocationSection() {
+  const t = await getTranslations('Location');
 
   return (
     <section className="w-full bg-[#FAF9F6] text-black border-t border-black/10">

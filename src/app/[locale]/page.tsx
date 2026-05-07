@@ -82,7 +82,7 @@ export default async function HomePage() {
 
             {/* CTA */}
             <HeroFadeIn className="pt-2 sm:pt-4">
-              <HeroButton className="bg-[#012a17] border border-[#012a17] text-white px-10 py-4 text-[13px] sm:text-sm font-bold uppercase tracking-[0.15em] hover:bg-white hover:text-[#012a17] transition-colors duration-300 w-full sm:w-auto">
+              <HeroButton href="#register-interest" className="bg-[#012a17] border border-[#012a17] text-white px-10 py-4 text-[13px] sm:text-sm font-bold uppercase tracking-[0.15em] hover:bg-white hover:text-[#012a17] transition-colors duration-300 w-full sm:w-auto">
                 {t('registerInterest')}
               </HeroButton>
             </HeroFadeIn>

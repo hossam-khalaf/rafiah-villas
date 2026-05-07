@@ -1,7 +1,6 @@
 'use client';
 
-import { useTranslations, useLocale } from 'next-intl';
-import { motion } from 'motion/react';
+import { useTranslations } from 'next-intl';
 import { ScrollStagger, ScrollFadeIn } from '@/components/motion/ScrollMotion';
 
 interface WarrantyItem {
@@ -14,8 +13,6 @@ interface WarrantyItem {
 
 export default function WarrantiesSection() {
   const t = useTranslations('Warranties');
-  const locale = useLocale();
-  const isRtl = locale === 'ar';
 
   const items: WarrantyItem[] = t.raw('items') as WarrantyItem[];
 

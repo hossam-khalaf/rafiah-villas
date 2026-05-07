@@ -46,7 +46,20 @@ export function HeroFadeIn({ children, className }: { children: ReactNode, class
   );
 }
 
-export function HeroButton({ children, className }: { children: ReactNode, className?: string }) {
+export function HeroButton({ children, className, href }: { children: ReactNode, className?: string, href?: string }) {
+  if (href) {
+    return (
+      <motion.a
+        href={href}
+        whileHover={{ scale: 0.98, opacity: 0.9 }}
+        whileTap={{ scale: 0.96 }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
+        className={className}
+      >
+        {children}
+      </motion.a>
+    );
+  }
   return (
     <motion.button
       whileHover={{ scale: 0.98, opacity: 0.9 }}

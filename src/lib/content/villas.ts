@@ -5,14 +5,22 @@ import {
   availableVillasQuery, 
   featuredVillasQuery 
 } from '@/sanity/lib/queries';
-import type { Villa, VillaStats } from '@/types/villa';
+import type { Villa, VillaStats, VillaType, VillaStatus } from '@/types/villa';
+
+interface SanityVillaRaw {
+  villaCode?: string;
+  type?: VillaType;
+  status?: VillaStatus;
+  area?: number;
+  price?: number;
+}
 
 // Helper to map Sanity document back to our core Villa type
-function mapSanityVilla(sanityDoc: any): Villa {
+function mapSanityVilla(sanityDoc: SanityVillaRaw): Villa {
   return {
     id: sanityDoc.villaCode || '',
-    type: sanityDoc.type || 'corner',
-    status: sanityDoc.status || 'available',
+    type: sanityDoc.type ?? 'corner',
+    status: sanityDoc.status ?? 'available',
     plotSize: sanityDoc.area,
     price: sanityDoc.price,
     // Future optional fields can be safely mapped here
@@ -57,10 +65,10 @@ export async function getFeaturedVillasContent(): Promise<Villa[]> {
 
 export async function getVillaStatsContent(): Promise<VillaStats> {
   try {
-    const sanityVillas = await client.fetch(allVillasQuery);
+    const sanityVillas: SanityVillaRaw[] = await client.fetch(allVillasQuery);
     if (sanityVillas && sanityVillas.length > 0) {
       const stats = { total: 0, available: 0, reserved: 0, sold: 0 } as VillaStats;
-      sanityVillas.forEach((v: any) => {
+      sanityVillas.forEach((v) => {
         stats.total++;
         if (v.status === 'available') stats.available++;
         if (v.status === 'reserved') stats.reserved++;
