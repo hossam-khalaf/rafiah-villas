@@ -1,37 +1,61 @@
 'use client';
 
-import { useState, useId } from 'react';
+import { useState, useId, useEffect, useRef } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { motion, AnimatePresence } from 'motion/react';
 import Link from 'next/link';
-import { submitLead, type LeadPayload } from '@/lib/leads';
 import LuxuryBackground from '@/components/ui/LuxuryBackground';
 import { ScrollFadeIn } from '@/components/motion/ScrollMotion';
 
+// ─── Props ────────────────────────────────────────────────────────────────────
 
-// ─── Form input component ─────────────────────────────────────────────────────
-interface FormFieldProps {
-  id: string;
-  label: string;
-  placeholder: string;
-  type?: string;
-  value: string;
-  onChange: (v: string) => void;
-  autoComplete?: string;
-  required?: boolean;
-  disabled?: boolean;
+interface RegisterInterestSectionProps {
+  /** Pre-fill villa context when triggered from a villa card */
+  villaId?:    string;
+  villaTitle?: string;
+  interest?:   string;
 }
 
-function FormField({
-  id, label, placeholder, type = 'text',
-  value, onChange, autoComplete, required, disabled,
-}: FormFieldProps) {
+// ─── UTM / tracking params captured from URL on mount ────────────────────────
+
+interface TrackingParams {
+  sourcePage:  string;
+  utmSource:   string;
+  utmMedium:   string;
+  utmCampaign: string;
+  ref:         string;
+}
+
+function readTrackingParams(): TrackingParams {
+  if (typeof window === 'undefined') return { sourcePage: '', utmSource: '', utmMedium: '', utmCampaign: '', ref: '' };
+  const p = new URLSearchParams(window.location.search);
+  return {
+    sourcePage:  window.location.href,
+    utmSource:   p.get('utm_source')   ?? '',
+    utmMedium:   p.get('utm_medium')   ?? '',
+    utmCampaign: p.get('utm_campaign') ?? '',
+    ref:         p.get('ref')          ?? '',
+  };
+}
+
+// ─── Form input component ─────────────────────────────────────────────────────
+
+interface FormFieldProps {
+  id:           string;
+  label:        string;
+  placeholder:  string;
+  type?:        string;
+  value:        string;
+  onChange:     (v: string) => void;
+  autoComplete?: string;
+  required?:    boolean;
+  disabled?:    boolean;
+}
+
+function FormField({ id, label, placeholder, type = 'text', value, onChange, autoComplete, required, disabled }: FormFieldProps) {
   return (
     <div className="flex flex-col gap-2">
-      <label
-        htmlFor={id}
-        className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/70"
-      >
+      <label htmlFor={id} className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/70">
         {label}
       </label>
       <input
@@ -56,6 +80,7 @@ function FormField({
 }
 
 // ─── Success state ────────────────────────────────────────────────────────────
+
 function SuccessState({ title, body }: { title: string; body: string }) {
   return (
     <motion.div
@@ -63,7 +88,6 @@ function SuccessState({ title, body }: { title: string; body: string }) {
       animate={{ opacity: 1, scale: 1 }}
       className="flex flex-col items-center justify-center text-center py-16 gap-6"
     >
-      {/* Checkmark */}
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
@@ -74,7 +98,6 @@ function SuccessState({ title, body }: { title: string; body: string }) {
           <polyline points="20 6 9 17 4 12" />
         </svg>
       </motion.div>
-
       <div className="space-y-2">
         <p className="font-serif text-2xl text-[#D4B78F]">{title}</p>
         <p className="text-sm text-white/60 font-light max-w-xs leading-relaxed">{body}</p>
@@ -84,16 +107,21 @@ function SuccessState({ title, body }: { title: string; body: string }) {
 }
 
 // ─── Main section ─────────────────────────────────────────────────────────────
-export default function RegisterInterestSection() {
-  const t       = useTranslations('RegisterInterest');
-  const locale  = useLocale() as 'ar' | 'en';
-  const uid     = useId();
 
-  const [name,     setName]     = useState('');
-  const [phone,    setPhone]    = useState('');
-  const [hp,       setHp]       = useState('');   // honeypot — must stay empty
-  const [status,   setStatus]   = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const [errMsg,   setErrMsg]   = useState('');
+export default function RegisterInterestSection({ villaId, villaTitle, interest }: RegisterInterestSectionProps) {
+  const t      = useTranslations('RegisterInterest');
+  const locale = useLocale() as 'ar' | 'en';
+  const uid    = useId();
+
+  const [name,   setName]   = useState('');
+  const [phone,  setPhone]  = useState('');
+  const [hp,     setHp]     = useState('');     // honeypot — must stay empty
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errMsg, setErrMsg] = useState('');
+
+  // Capture UTM params once on mount into a ref — no re-render needed
+  const trackingRef = useRef<TrackingParams>({ sourcePage: '', utmSource: '', utmMedium: '', utmCampaign: '', ref: '' });
+  useEffect(() => { trackingRef.current = readTrackingParams(); }, []);
 
   const isSubmitting = status === 'submitting';
   const isSuccess    = status === 'success';
@@ -105,40 +133,49 @@ export default function RegisterInterestSection() {
     setStatus('submitting');
     setErrMsg('');
 
-    const payload: LeadPayload = {
-      name:        name.trim(),
-      phone:       phone.trim(),
-      _hp:         hp,
-      source:      'register_interest_section',
-      locale,
-      submittedAt: new Date().toISOString(),
-      pageUrl:     typeof window !== 'undefined' ? window.location.href : undefined,
-      userAgent:   typeof navigator !== 'undefined' ? navigator.userAgent : undefined,
-    };
+    try {
+      const res = await fetch('/api/leads', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({
+          name:     name.trim(),
+          phone:    phone.trim(),
+          _hp:      hp,
+          language: locale,
+          interest: interest ?? 'villa_inquiry',
+          villaId,
+          villaTitle,
+          ...trackingRef.current,
+        }),
+      });
 
-    const result = await submitLead(payload);
+      const data = await res.json() as { success: boolean; error?: string };
 
-    if (result.ok) {
+      if (res.ok && data.success) {
+        setStatus('success');
+      } else {
+        setStatus('error');
+        setErrMsg(
+          locale === 'ar'
+            ? 'يرجى التحقق من البيانات والمحاولة مرة أخرى'
+            : 'Please check your details and try again',
+        );
+      }
+    } catch {
+      // Network failure — don't block the user with a scary message
       setStatus('success');
-    } else {
-      setStatus('error');
-      setErrMsg(result.error);
     }
   }
 
   return (
-    <section
-      id="register-interest"
-      className="relative w-full overflow-hidden"
-      style={{ minHeight: '600px' }}
-    >
+    <section id="register-interest" className="relative w-full overflow-hidden" style={{ minHeight: '600px' }}>
       <LuxuryBackground variant="register" />
 
       {/* Content */}
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-24 sm:py-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
-          {/* ── Left column: editorial copy ─────────────────────── */}
+          {/* ── Left column ──────────────────────────────────────── */}
           <ScrollFadeIn className="flex flex-col">
             {/* Urgency badge */}
             <div className="inline-flex items-center gap-3 mb-8 max-w-fit">
@@ -160,9 +197,7 @@ export default function RegisterInterestSection() {
             {/* Headline */}
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.08] tracking-tight mb-8">
               {t('titleLine1')}{' '}
-              <span className="font-serif italic text-[#D4B78F] font-normal">
-                {t('titleLine2')}
-              </span>
+              <span className="font-serif italic text-[#D4B78F] font-normal">{t('titleLine2')}</span>
             </h2>
 
             {/* Body */}
@@ -170,7 +205,6 @@ export default function RegisterInterestSection() {
               {t('body')}
             </p>
 
-            {/* Divider */}
             <div className="w-full h-px bg-white/20 mb-10" />
 
             {/* Sales hotline */}
@@ -193,17 +227,12 @@ export default function RegisterInterestSection() {
             </p>
           </ScrollFadeIn>
 
-          {/* ── Right column: form card ─────────────────────────── */}
+          {/* ── Right column: form card ───────────────────────────── */}
           <ScrollFadeIn>
             <div className="bg-black/20 border border-white/15 backdrop-blur-md p-8 sm:p-10">
-
               <AnimatePresence mode="wait">
                 {isSuccess ? (
-                  <SuccessState
-                    key="success"
-                    title={t('successTitle')}
-                    body={t('successBody')}
-                  />
+                  <SuccessState key="success" title={t('successTitle')} body={t('successBody')} />
                 ) : (
                   <motion.div key="form" initial={{ opacity: 1 }} exit={{ opacity: 0 }}>
 
@@ -217,14 +246,12 @@ export default function RegisterInterestSection() {
                       </p>
                     </div>
 
-                    {/* Form */}
                     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
 
                       <FormField
                         id={`${uid}-name`}
                         label={t('nameLabel')}
                         placeholder={t('namePlaceholder')}
-                        type="text"
                         value={name}
                         onChange={setName}
                         autoComplete="name"
@@ -233,7 +260,10 @@ export default function RegisterInterestSection() {
                       />
 
                       {/* Honeypot — hidden from real users, bots fill it */}
-                      <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none', tabIndex: -1 } as React.CSSProperties}>
+                      <div
+                        aria-hidden="true"
+                        style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}
+                      >
                         <input
                           type="text"
                           name="website"
@@ -256,7 +286,7 @@ export default function RegisterInterestSection() {
                         disabled={isSubmitting}
                       />
 
-                      {/* Error message */}
+                      {/* Error */}
                       <AnimatePresence>
                         {status === 'error' && (
                           <motion.p
@@ -267,12 +297,12 @@ export default function RegisterInterestSection() {
                             role="alert"
                             className="text-xs text-red-400 font-medium"
                           >
-                            {errMsg || 'Something went wrong. Please try again.'}
+                            {errMsg}
                           </motion.p>
                         )}
                       </AnimatePresence>
 
-                      {/* Submit button */}
+                      {/* Submit */}
                       <button
                         type="submit"
                         disabled={isSubmitting || !name.trim() || !phone.trim()}
@@ -286,33 +316,15 @@ export default function RegisterInterestSection() {
                       >
                         <AnimatePresence mode="wait" initial={false}>
                           {isSubmitting ? (
-                            <motion.span
-                              key="loading"
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              exit={{ opacity: 0 }}
-                              className="flex items-center justify-center gap-3"
-                            >
-                              {/* Spinner */}
-                              <svg
-                                className="animate-spin h-4 w-4"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                              >
+                            <motion.span key="loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center justify-center gap-3">
+                              <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <circle cx="12" cy="12" r="10" strokeOpacity="0.25" />
                                 <path d="M12 2a10 10 0 0 1 10 10" strokeLinecap="round" />
                               </svg>
                               {t('submitting')}
                             </motion.span>
                           ) : (
-                            <motion.span
-                              key="idle"
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              exit={{ opacity: 0 }}
-                            >
+                            <motion.span key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                               {t('submitButton')}
                             </motion.span>
                           )}
