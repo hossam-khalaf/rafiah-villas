@@ -91,6 +91,7 @@ export default function RegisterInterestSection() {
 
   const [name,     setName]     = useState('');
   const [phone,    setPhone]    = useState('');
+  const [hp,       setHp]       = useState('');   // honeypot — must stay empty
   const [status,   setStatus]   = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errMsg,   setErrMsg]   = useState('');
 
@@ -107,6 +108,7 @@ export default function RegisterInterestSection() {
     const payload: LeadPayload = {
       name:        name.trim(),
       phone:       phone.trim(),
+      _hp:         hp,
       source:      'register_interest_section',
       locale,
       submittedAt: new Date().toISOString(),
@@ -229,6 +231,18 @@ export default function RegisterInterestSection() {
                         required
                         disabled={isSubmitting}
                       />
+
+                      {/* Honeypot — hidden from real users, bots fill it */}
+                      <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none', tabIndex: -1 } as React.CSSProperties}>
+                        <input
+                          type="text"
+                          name="website"
+                          value={hp}
+                          onChange={e => setHp(e.target.value)}
+                          autoComplete="off"
+                          tabIndex={-1}
+                        />
+                      </div>
 
                       <FormField
                         id={`${uid}-phone`}

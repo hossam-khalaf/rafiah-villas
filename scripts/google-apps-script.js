@@ -11,18 +11,35 @@
  *  7. Execute as: Me
  *  8. Who has access: Anyone
  *  9. Click "Deploy" → copy the Web App URL
- * 10. Paste the URL into your .env.local:
- *     GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/YOUR_ID/exec
+ * 10. Replace SHEETS_URL in src/lib/leads.ts with the new URL
  *
  * SHEET SETUP:
- *  - Make sure Row 1 has these exact headers (in this order):
- *    Name | Phone Number | URL | Date | Browser | Device | Time
+ *  Row 1 must have these exact headers (in this order):
+ *  Name | Phone Number | URL | Date | Browser | Device | Time
  */
+
+// Must match SHEETS_TOKEN in src/lib/leads.ts exactly
+var EXPECTED_TOKEN = 'raf_x9k2m_2026';
 
 function doPost(e) {
   try {
-    var data   = JSON.parse(e.postData.contents);
-    var sheet  = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var data = JSON.parse(e.postData.contents);
+
+    // Token check — reject requests that don't carry the shared secret
+    if (!data._token || data._token !== EXPECTED_TOKEN) {
+      return ContentService
+        .createTextOutput(JSON.stringify({ ok: false, error: 'unauthorized' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // Basic field presence check
+    if (!data.name || !data.phone) {
+      return ContentService
+        .createTextOutput(JSON.stringify({ ok: false, error: 'missing fields' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
 
     sheet.appendRow([
       data.name    || '',
@@ -45,11 +62,12 @@ function doPost(e) {
   }
 }
 
-// Test this function manually from the Apps Script editor to verify the sheet is wired up
+// Run this from the Apps Script editor to test without deploying
 function testPost() {
-  var mockEvent = {
+  var mock = {
     postData: {
       contents: JSON.stringify({
+        _token:  'raf_x9k2m_2026',
         name:    'Test User',
         phone:   '0500000000',
         url:     'https://rafiahvilla.com/',
@@ -60,5 +78,5 @@ function testPost() {
       })
     }
   };
-  Logger.log(doPost(mockEvent).getContent());
+  Logger.log(doPost(mock).getContent());
 }
