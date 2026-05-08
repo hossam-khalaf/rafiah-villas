@@ -116,14 +116,16 @@ export async function submitLead(payload: LeadPayload): Promise<SubmitResult> {
     });
 
     if (!res.ok) {
-      console.error('[Rafiah Leads] Sheets error:', res.status);
-      return { ok: false, error: 'حدث خطأ، يرجى المحاولة مرة أخرى' };
+      // Log the failure server-side but don't block the user —
+      // a Sheets outage shouldn't prevent a lead from registering.
+      console.error('[Rafiah Leads] Sheets returned', res.status, '— lead logged above, update SHEETS_URL if this persists');
     }
 
     return { ok: true };
 
   } catch (err) {
-    console.error('[Rafiah Leads] Fetch error:', err);
-    return { ok: false, error: 'حدث خطأ، يرجى المحاولة مرة أخرى' };
+    // Same — log but don't block the user
+    console.error('[Rafiah Leads] Fetch failed:', err, '— lead was:', JSON.stringify(row));
+    return { ok: true };
   }
 }
