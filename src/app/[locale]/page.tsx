@@ -1,6 +1,7 @@
-import { getTranslations, getLocale } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 import { getVillaStatsContent } from '@/lib/content/villas';
 import { HeroStagger, HeroFadeIn, HeroImageScale, HeroButton } from '@/components/hero/RafiahHeroMotion';
+import LocaleSwitcher from '@/components/ui/LocaleSwitcher';
 import LocationSection from '@/components/location/LocationSection';
 import VillasSection from '@/components/villas/VillasSection';
 import GallerySection from '@/components/gallery/GallerySection';
@@ -8,25 +9,35 @@ import FloorPlansSection from '@/components/floorPlans/FloorPlansSection';
 import WarrantiesSection from '@/components/warranties/WarrantiesSection';
 import RegisterInterestSection from '@/components/registerInterest/RegisterInterestSection';
 
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const isAr = locale === 'ar';
+  return {
+    title: isAr ? 'فلل رفيعة — المرحلة الثانية | حي الرفيعة، الرياض' : 'Rafiah Villas — Phase 2 | Al-Rafiah, Riyadh',
+    description: isAr
+      ? 'اكتشف فلل رفيعة المرحلة الثانية في حي الرفيعة بالرياض. 22 فيلا حصرية، ضمانات تصل إلى 20 سنة، من تطوير كيرا استيتس. سجّل اهتمامك الآن.'
+      : 'Discover Rafiah Villas Phase 2 in Al-Rafiah, Riyadh. 22 exclusive villas with warranties up to 20 years, developed by Kira Estates. Register your interest now.',
+    openGraph: {
+      title: isAr ? 'فلل رفيعة — المرحلة الثانية' : 'Rafiah Villas — Phase 2',
+      description: isAr
+        ? '22 فيلا حصرية في حي الرفيعة، الرياض. ضمانات حتى 20 سنة.'
+        : '22 exclusive villas in Al-Rafiah, Riyadh. Warranties up to 20 years.',
+      locale: isAr ? 'ar_SA' : 'en_US',
+      type: 'website',
+    },
+  };
+}
+
 export default async function HomePage() {
   const t = await getTranslations('Hero');
   const stats = await getVillaStatsContent();
-  const locale = await getLocale();
-  
-  const nextLocale = locale === 'ar' ? 'en' : 'ar';
-  const nextLocaleLabel = locale === 'ar' ? 'EN' : 'عربي';
 
   return (
     <main className="min-h-screen flex flex-col font-sans bg-black selection:bg-[#012a17] selection:text-white">
       
       {/* Header / Language Switcher */}
       <div className="absolute top-0 w-full z-50 p-6 sm:p-10 flex justify-end items-center pointer-events-none">
-        <a 
-          href={`/${nextLocale}`} 
-          className="pointer-events-auto text-white/80 hover:text-white text-xs sm:text-sm font-bold uppercase tracking-widest border border-white/20 px-4 py-2 hover:bg-white/10 transition-colors backdrop-blur-sm"
-        >
-          {nextLocaleLabel}
-        </a>
+        <LocaleSwitcher />
       </div>
       
       {/* Full Screen Video Hero */}

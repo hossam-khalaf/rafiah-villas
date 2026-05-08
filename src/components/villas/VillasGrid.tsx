@@ -38,9 +38,9 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
 
   // Status Colors Mapping
   const statusConfig: Record<VillaStatus, { bg: string, text: string, border: string }> = {
-    available: { bg: 'bg-green-500/10', text: 'text-green-400', border: 'border-green-500/30' },
-    sold: { bg: 'bg-red-500/10', text: 'text-red-400', border: 'border-red-500/30' },
-    reserved: { bg: 'bg-yellow-500/10', text: 'text-yellow-400', border: 'border-yellow-500/30' }
+    available: { bg: 'bg-[#D4B78F]/15', text: 'text-[#D4B78F]',  border: 'border-[#D4B78F]/35' },
+    reserved:  { bg: 'bg-white/8',       text: 'text-white/55',   border: 'border-white/20' },
+    sold:      { bg: 'bg-white/5',        text: 'text-white/30',   border: 'border-white/10' },
   };
 
   return (
@@ -70,7 +70,7 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
               key={villa.id}
               layout
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] } }}
+              animate={{ opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, delay: Math.min(index * 0.06, 0.4), ease: [0.22, 1, 0.36, 1] } }}
               exit={{ opacity: 0, scale: 0.95, y: -20, transition: { duration: 0.3 } }}
               viewport={{ once: true, amount: 0.2 }}
               className="group relative bg-black/30 border border-white/10 p-6 sm:p-8 hover:border-[#D4B78F]/50 hover:bg-black/40 transition-all duration-500 flex flex-col min-h-[300px] overflow-hidden cursor-pointer"
@@ -91,7 +91,7 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
                 {villa.status === 'available' ? (
                   <p className="font-serif text-4xl sm:text-5xl text-white tracking-tight">
                     {villa.price ? villa.price.toLocaleString() : 'TBD'}{' '}
-                    <span className="font-sans text-xs sm:text-sm font-bold tracking-widest uppercase text-white/70 ml-2">
+                    <span className="font-sans text-xs sm:text-sm font-bold tracking-widest uppercase text-white/70 ms-2">
                       {labels.card.currency}
                     </span>
                   </p>

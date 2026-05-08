@@ -49,6 +49,9 @@
     }
   },
   "FloorPlans": {
+    "overline": "Floor Plans",
+    "titleLine1": "Thoughtfully",
+    "titleLine2": "Designed Living",
     "title": "Thoughtfully Designed Living",
     "subtitle": "Each villa spans three floors, balancing grand hospitality spaces with intimate family retreats. Every room is proportioned for how life is actually lived.",
     "tabs": {

@@ -1,3 +1,4 @@
+import type { Viewport } from 'next';
 import {NextIntlClientProvider} from 'next-intl';
 import {getMessages} from 'next-intl/server';
 import {notFound} from 'next/navigation';
@@ -35,6 +36,11 @@ const notoNaskhArabic = Noto_Naskh_Arabic({
   variable: '--font-arabic',
   display: 'swap',
 });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+};
 
 export default async function LocaleLayout({
   children,

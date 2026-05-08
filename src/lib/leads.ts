@@ -1,77 +1,93 @@
-/**
- * Lead Submission Layer — Rafiah Villas
- *
- * This is the single integration point for all lead capture.
- * To connect a CRM / Google Sheets / Zapier webhook:
- *   1. Replace the TODO block in `submitLead()` with your integration.
- *   2. All metadata fields are already collected and available.
- *
- * Supported integrations (not yet wired):
- *   - Google Sheets via Apps Script Web App URL
- *   - HubSpot Forms API
- *   - Salesforce Web-to-Lead
- *   - Zapier / Make webhook
- *   - Any REST endpoint (POST JSON)
- */
+'use server';
 
 export interface LeadPayload {
-  // ── Core contact fields ───────────────────────────────────────
-  name:  string;
-  phone: string;
-
-  // ── Metadata (auto-populated, do not ask user) ────────────────
+  name:        string;
+  phone:       string;
   source:      'register_interest_section';
   locale:      'ar' | 'en';
-  submittedAt: string;   // ISO 8601
-
-  // ── Optional context (passed in when available) ───────────────
-  villaId?:    string;   // e.g. "C3" if triggered from a villa card
-  villaType?:  string;   // e.g. "northFacade"
-  pageUrl?:    string;   // window.location.href at submission time
-  userAgent?:  string;   // navigator.userAgent for device analytics
+  submittedAt: string;
+  villaId?:    string;
+  villaType?:  string;
+  pageUrl?:    string;
+  userAgent?:  string;
 }
 
 export type SubmitResult =
   | { ok: true }
   | { ok: false; error: string };
 
-/**
- * Submit a lead to the configured backend/CRM.
- *
- * Currently logs to console in development.
- * Replace the TODO block with your real integration.
- */
+// ── UA helpers ────────────────────────────────────────────────────────────────
+
+function parseBrowser(ua: string): string {
+  if (/Edg\//.test(ua))                             return 'Edge';
+  if (/Chrome\//.test(ua) && /Safari\//.test(ua))   return 'Chrome';
+  if (/Firefox\//.test(ua))                         return 'Firefox';
+  if (/Safari\//.test(ua))                          return 'Safari';
+  return 'Other';
+}
+
+function parseDevice(ua: string): string {
+  if (/iPhone/.test(ua))              return 'iPhone';
+  if (/iPad/.test(ua))                return 'iPad';
+  if (/Android/.test(ua))             return 'Android';
+  if (/Windows/.test(ua))             return 'Windows';
+  if (/Macintosh|Mac OS X/.test(ua))  return 'Apple';
+  return 'Other';
+}
+
+// Saudi Arabia is UTC+3
+function saudiNow() {
+  const now = new Date();
+  const saudi = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Riyadh' }));
+  const pad = (n: number) => String(n).padStart(2, '0');
+  const date = `${pad(saudi.getDate())}/${pad(saudi.getMonth() + 1)}/${saudi.getFullYear()}`;
+  const time = `${pad(saudi.getHours())}:${pad(saudi.getMinutes())}:${pad(saudi.getSeconds())}`;
+  return { date, time };
+}
+
+// ── Main ──────────────────────────────────────────────────────────────────────
+
 export async function submitLead(payload: LeadPayload): Promise<SubmitResult> {
-  try {
-    // ── TODO: Replace this block with your integration ────────────
-    //
-    // Google Sheets example:
-    //   await fetch(process.env.NEXT_PUBLIC_SHEETS_WEBHOOK_URL!, {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(payload),
-    //   });
-    //
-    // HubSpot example:
-    //   await fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`, {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ fields: [
-    //       { name: 'firstname', value: payload.name },
-    //       { name: 'phone', value: payload.phone },
-    //     ]}),
-    //   });
-    //
-    // ── Development: just log ─────────────────────────────────────
-    console.info('[Rafiah Leads] New submission:', payload);
+  const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
 
-    // Simulate async delay
-    await new Promise(r => setTimeout(r, 800));
+  const ua = payload.userAgent ?? '';
+  const { date, time } = saudiNow();
 
-    return { ok: true };
+  const row = {
+    name:    payload.name,
+    phone:   payload.phone,
+    url:     payload.pageUrl ?? '',
+    date,
+    browser: parseBrowser(ua),
+    device:  parseDevice(ua),
+    time,
+  };
 
-  } catch (err) {
-    console.error('[Rafiah Leads] Submission failed:', err);
-    return { ok: false, error: String(err) };
+  // ── Google Sheets via Apps Script Web App ─────────────────────────────────
+  if (webhookUrl) {
+    try {
+      const res = await fetch(webhookUrl, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(row),
+      });
+
+      if (!res.ok) {
+        const text = await res.text().catch(() => '');
+        console.error('[Rafiah Leads] Sheets error:', res.status, text);
+        return { ok: false, error: 'Sheets request failed' };
+      }
+
+      return { ok: true };
+
+    } catch (err) {
+      console.error('[Rafiah Leads] Fetch error:', err);
+      return { ok: false, error: String(err) };
+    }
   }
+
+  // ── Dev fallback (no webhook configured) ─────────────────────────────────
+  console.info('[Rafiah Leads] No GOOGLE_SHEETS_WEBHOOK_URL set — row would be:', row);
+  await new Promise(r => setTimeout(r, 600));
+  return { ok: true };
 }

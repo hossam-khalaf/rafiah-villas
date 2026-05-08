@@ -10,7 +10,7 @@ import { ScrollFadeIn } from '@/components/motion/ScrollMotion';
 const getFloorPlanImage = (villa: VillaType, floor: FloorType) => {
   if (villa === 'facade' && floor === 'ground') return '/images/facade-ground-floor-plan.png';
   if (villa === 'facade' && floor === 'second') return '/images/facade-second-floor-plan.png';
-  if (villa === 'corner' && floor === 'ground') return '/images/corner-ground-floor plan.webp';
+  if (villa === 'corner' && floor === 'ground') return '/images/corner-ground-floor-plan.webp';
   return `/images/${villa}-${floor}-floor-plan.webp`;
 };
 
@@ -41,12 +41,19 @@ export default function FloorPlansSection() {
         {/* Header */}
         <div className="max-w-3xl mb-16 sm:mb-24">
           <ScrollFadeIn>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif text-[#D4B78F] mb-6 tracking-tight leading-tight">
-              {t('title')}
+            <div className="inline-flex items-center gap-4 text-[#D4B78F] uppercase tracking-[0.2em] text-xs sm:text-sm font-bold mb-8">
+              <span className="w-8 sm:w-12 h-px bg-[#D4B78F]"></span>
+              {t('overline')}
+            </div>
+          </ScrollFadeIn>
+          <ScrollFadeIn>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter leading-tight text-white mb-4">
+              {t('titleLine1')}{' '}
+              <span className="font-serif italic text-[#D4B78F] font-normal">{t('titleLine2')}</span>
             </h2>
           </ScrollFadeIn>
           <ScrollFadeIn>
-            <p className="text-white/70 text-sm sm:text-base lg:text-lg font-light leading-relaxed max-w-2xl">
+            <p className="text-white/60 text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-2xl mt-6">
               {t('subtitle')}
             </p>
           </ScrollFadeIn>
@@ -64,9 +71,9 @@ export default function FloorPlansSection() {
             >
               {t(`tabs.${type}`)}
               {activeVilla === type && (
-                <motion.div 
+                <motion.div
                   layoutId="villaTabIndicator"
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#D4B78F]"
+                  className="absolute bottom-0 inset-x-0 h-0.5 bg-[#D4B78F]"
                 />
               )}
             </button>

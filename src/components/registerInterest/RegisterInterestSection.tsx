@@ -263,9 +263,9 @@ export default function RegisterInterestSection() {
                         type="submit"
                         disabled={isSubmitting || !name.trim() || !phone.trim()}
                         className="
-                          relative w-full bg-[#012a17] text-white py-4
+                          relative w-full bg-[#D4B78F] text-[#050505] py-4
                           text-[13px] font-bold uppercase tracking-[0.15em]
-                          border border-[#012a17] hover:bg-white hover:text-[#012a17] transition-colors duration-300
+                          border border-[#D4B78F] hover:bg-white hover:text-[#012a17] transition-colors duration-300
                           disabled:opacity-50 disabled:cursor-not-allowed
                           mt-2
                         "
