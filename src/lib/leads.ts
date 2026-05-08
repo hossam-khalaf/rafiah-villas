@@ -1,5 +1,12 @@
 'use server';
 
+// ─────────────────────────────────────────────────────────────────────────────
+// PASTE YOUR GOOGLE APPS SCRIPT URL HERE
+// Deploy the script in /scripts/google-apps-script.js as a Web App,
+// then replace the empty string below with the URL you get.
+// ─────────────────────────────────────────────────────────────────────────────
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxAmpvxJWD3JDIlflTJxHWjvERxlvxCBfSoAa4JSJVX8Uo8-nEpNeFmBqcMCbPT4MXL/exec';
+
 export interface LeadPayload {
   name:        string;
   phone:       string;
@@ -37,19 +44,17 @@ function parseDevice(ua: string): string {
 
 // Saudi Arabia is UTC+3
 function saudiNow() {
-  const now = new Date();
+  const now   = new Date();
   const saudi = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Riyadh' }));
-  const pad = (n: number) => String(n).padStart(2, '0');
-  const date = `${pad(saudi.getDate())}/${pad(saudi.getMonth() + 1)}/${saudi.getFullYear()}`;
-  const time = `${pad(saudi.getHours())}:${pad(saudi.getMinutes())}:${pad(saudi.getSeconds())}`;
+  const pad   = (n: number) => String(n).padStart(2, '0');
+  const date  = `${pad(saudi.getDate())}/${pad(saudi.getMonth() + 1)}/${saudi.getFullYear()}`;
+  const time  = `${pad(saudi.getHours())}:${pad(saudi.getMinutes())}:${pad(saudi.getSeconds())}`;
   return { date, time };
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 export async function submitLead(payload: LeadPayload): Promise<SubmitResult> {
-  const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
-
   const ua = payload.userAgent ?? '';
   const { date, time } = saudiNow();
 
@@ -63,31 +68,28 @@ export async function submitLead(payload: LeadPayload): Promise<SubmitResult> {
     time,
   };
 
-  // ── Google Sheets via Apps Script Web App ─────────────────────────────────
-  if (webhookUrl) {
-    try {
-      const res = await fetch(webhookUrl, {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(row),
-      });
-
-      if (!res.ok) {
-        const text = await res.text().catch(() => '');
-        console.error('[Rafiah Leads] Sheets error:', res.status, text);
-        return { ok: false, error: 'Sheets request failed' };
-      }
-
-      return { ok: true };
-
-    } catch (err) {
-      console.error('[Rafiah Leads] Fetch error:', err);
-      return { ok: false, error: String(err) };
-    }
+  if (!SHEETS_URL) {
+    console.info('[Rafiah Leads] No SHEETS_URL — row would be:', row);
+    await new Promise(r => setTimeout(r, 600));
+    return { ok: true };
   }
 
-  // ── Dev fallback (no webhook configured) ─────────────────────────────────
-  console.info('[Rafiah Leads] No GOOGLE_SHEETS_WEBHOOK_URL set — row would be:', row);
-  await new Promise(r => setTimeout(r, 600));
-  return { ok: true };
+  try {
+    const res = await fetch(SHEETS_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(row),
+    });
+
+    if (!res.ok) {
+      console.error('[Rafiah Leads] Sheets error:', res.status, await res.text().catch(() => ''));
+      return { ok: false, error: 'Sheets request failed' };
+    }
+
+    return { ok: true };
+
+  } catch (err) {
+    console.error('[Rafiah Leads] Fetch error:', err);
+    return { ok: false, error: String(err) };
+  }
 }
