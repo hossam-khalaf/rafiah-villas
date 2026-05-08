@@ -118,25 +118,49 @@ async function upsertContact(lead: LeadInput): Promise<string | null> {
 interface HsDeal { id: string }
 
 async function createDeal(lead: LeadInput, contactId: string): Promise<string | null> {
-  const villaLabel = lead.villaTitle ?? lead.villaId ?? 'Unknown Villa';
-  const dealname   = `${lead.name} — ${villaLabel} — Rafiah Villas`;
+  // Step 1: create the deal (no inline associations — unreliable in v3)
+  const dealname = `Rafiah Lead - ${lead.name}`;
 
   const res = await hs<HsDeal>('POST', '/crm/v3/objects/deals', {
     properties: {
       dealname,
-      pipeline:   PIPELINE,
-      dealstage:  STAGE,
+      pipeline:           PIPELINE,
+      dealstage:          STAGE,
       deal_currency_code: 'SAR',
-      ...(lead.villaId ? { description: `Villa: ${lead.villaId}` } : {}),
     },
-    // Associate with contact in a single call
-    associations: [{
-      to: { id: contactId },
-      types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 3 }], // deal → contact
-    }],
   });
 
-  return res.data?.id ?? null;
+  if (!res.ok || !res.data?.id) {
+    console.error(
+      '[HubSpot] deal creation failed',
+      '| status:', res.status,
+      '| pipeline:', PIPELINE,
+      '| stage:', STAGE,
+      '| error:', res.error,
+    );
+    return null;
+  }
+
+  const dealId = res.data.id;
+
+  // Step 2: associate deal → contact via v4 (reliable, separate call)
+  const assocRes = await hs(
+    'PUT',
+    `/crm/v4/objects/deals/${dealId}/associations/contacts/${contactId}`,
+    [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 3 }],
+  );
+
+  if (!assocRes.ok) {
+    console.error(
+      '[HubSpot] deal-contact association failed (deal still created)',
+      '| dealId:', dealId,
+      '| contactId:', contactId,
+      '| status:', assocRes.status,
+    );
+    // Non-fatal — deal exists, just not linked yet
+  }
+
+  return dealId;
 }
 
 // ─── Note ─────────────────────────────────────────────────────────────────────
