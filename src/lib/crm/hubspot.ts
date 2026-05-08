@@ -124,9 +124,8 @@ async function createDeal(lead: LeadInput, contactId: string): Promise<string | 
   const res = await hs<HsDeal>('POST', '/crm/v3/objects/deals', {
     properties: {
       dealname,
-      pipeline:           PIPELINE,
-      dealstage:          STAGE,
-      deal_currency_code: 'SAR',
+      pipeline:  PIPELINE,
+      dealstage: STAGE,
     },
   });
 
