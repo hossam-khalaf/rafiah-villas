@@ -8,7 +8,7 @@ export function HeroImageScale({ children, className }: { children: ReactNode, c
     <motion.div
       initial={{ scale: 1.04 }}
       animate={{ scale: 1 }}
-      transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
       className={className}
     >
       {children}
@@ -37,7 +37,7 @@ export function HeroFadeIn({ children, className }: { children: ReactNode, class
     <motion.div
       variants={{
         hidden: { opacity: 0, y: 15 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
       }}
       className={className}
     >

@@ -91,7 +91,7 @@ function SuccessState({ title, body }: { title: string; body: string }) {
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 20, delay: 0.1 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
         className="w-16 h-16 rounded-full bg-brand-royal-green border border-brand-gold/40 flex items-center justify-center"
       >
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4B78F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

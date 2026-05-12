@@ -82,7 +82,7 @@ export default function GallerySection() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.7, delay: Math.min(index * 0.06, 0.4) }}
+                transition={{ duration: 0.6, delay: Math.min(index * 0.06, 0.4), ease: [0.16, 1, 0.3, 1] }}
                 // Open lightbox only on click (Embla prevents this during drag automatically)
                 onClick={() => setLightboxIndex(index)}
               >

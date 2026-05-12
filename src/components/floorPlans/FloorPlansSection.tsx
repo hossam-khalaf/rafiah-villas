@@ -102,7 +102,7 @@ export default function FloorPlansSection() {
                   initial={{ opacity: 0, x: isRtl ? 20 : -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: isRtl ? -20 : 20 }}
-                  transition={{ duration: 0.4 }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 >
                   {rooms.map((room, idx) => (
                     <div 
@@ -155,7 +155,7 @@ export default function FloorPlansSection() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.5 }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   className="absolute inset-0 flex flex-col items-center justify-center text-white/20"
                 >
                   <Image 

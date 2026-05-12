@@ -21,7 +21,7 @@ export default function FloatingButtons() {
         className="group flex items-center gap-3"
       >
         {/* Tooltip */}
-        <span className="hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/85 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-2 rounded-md pointer-events-none whitespace-nowrap select-none">
+        <span className="hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/85 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-2 pointer-events-none whitespace-nowrap select-none">
           {label360}
         </span>
 
@@ -45,7 +45,7 @@ export default function FloatingButtons() {
         className="group flex items-center gap-3"
       >
         {/* Tooltip */}
-        <span className="hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/85 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-2 rounded-md pointer-events-none whitespace-nowrap select-none">
+        <span className="hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/85 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-2 pointer-events-none whitespace-nowrap select-none">
           {labelWA}
         </span>
 

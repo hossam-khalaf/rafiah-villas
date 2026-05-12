@@ -70,10 +70,10 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
               key={villa.id}
               layout
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, delay: Math.min(index * 0.06, 0.4), ease: [0.22, 1, 0.36, 1] } }}
-              exit={{ opacity: 0, scale: 0.95, y: -20, transition: { duration: 0.3 } }}
+              animate={{ opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, delay: Math.min(index * 0.06, 0.4), ease: [0.16, 1, 0.3, 1] } }}
+              exit={{ opacity: 0, scale: 0.95, y: -20, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } }}
               viewport={{ once: true, amount: 0.2 }}
-              className="group relative bg-white/[0.03] border border-white/10 p-6 sm:p-8 hover:border-brand-gold/50 hover:bg-white/[0.06] transition-all duration-500 flex flex-col min-h-[300px] overflow-hidden cursor-pointer active:scale-[0.98]"
+              className="group relative bg-white/[0.03] border border-white/10 p-6 sm:p-8 hover:border-brand-gold/50 hover:bg-white/[0.06] transition-all duration-500 flex flex-col min-h-[300px] overflow-hidden"
             >
               {/* Top Row: Title & Badge */}
               <div className="flex justify-between items-start mb-8 z-10 relative">
