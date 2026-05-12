@@ -41,15 +41,15 @@ export default function FloorPlansSection() {
         {/* Header */}
         <div className="max-w-3xl mb-16 sm:mb-24">
           <ScrollFadeIn>
-            <div className="inline-flex items-center gap-4 text-[#D4B78F] uppercase tracking-[0.2em] text-xs sm:text-sm font-bold mb-8">
-              <span className="w-8 sm:w-12 h-px bg-[#D4B78F]"></span>
+            <div className="inline-flex items-center gap-4 text-brand-gold uppercase tracking-[0.2em] text-xs sm:text-sm font-bold mb-8">
+              <span className="w-8 sm:w-12 h-px bg-brand-gold"></span>
               {t('overline')}
             </div>
           </ScrollFadeIn>
           <ScrollFadeIn>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter leading-tight text-white mb-4">
               {t('titleLine1')}{' '}
-              <span className="font-serif italic text-[#D4B78F] font-normal">{t('titleLine2')}</span>
+              <span className="font-serif italic text-brand-gold font-normal">{t('titleLine2')}</span>
             </h2>
           </ScrollFadeIn>
           <ScrollFadeIn>
@@ -66,14 +66,14 @@ export default function FloorPlansSection() {
               key={type}
               onClick={() => setActiveVilla(type)}
               className={`pb-4 px-6 sm:px-8 text-[13px] sm:text-sm font-bold uppercase tracking-[0.12em] transition-colors relative ${
-                activeVilla === type ? 'text-[#D4B78F]' : 'text-white/40 hover:text-white/70'
+                activeVilla === type ? 'text-brand-gold' : 'text-white/40 hover:text-white/70'
               }`}
             >
               {t(`tabs.${type}`)}
               {activeVilla === type && (
                 <motion.div
                   layoutId="villaTabIndicator"
-                  className="absolute bottom-0 inset-x-0 h-0.5 bg-[#D4B78F]"
+                  className="absolute bottom-0 inset-x-0 h-0.5 bg-brand-gold"
                 />
               )}
             </button>
@@ -88,7 +88,7 @@ export default function FloorPlansSection() {
             
             {/* Floor Overline */}
             <div className="flex items-center gap-4 mb-8">
-              <h3 className="text-[#D4B78F] text-[11px] font-bold uppercase tracking-[0.18em] shrink-0">
+              <h3 className="text-brand-gold text-[11px] font-bold uppercase tracking-[0.18em] shrink-0">
                 {t(`floors.${activeFloor}`)}
               </h3>
               <div className="h-px bg-white/10 w-full" />
@@ -110,14 +110,14 @@ export default function FloorPlansSection() {
                       className="flex justify-between items-center py-4 border-b border-white/5 last:border-0 group hover:border-white/20 transition-colors"
                     >
                       <div className="flex items-center gap-4">
-                        <span className="font-mono text-xs text-white/30 group-hover:text-[#D4B78F] transition-colors w-6">
+                        <span className="font-mono text-xs text-white/30 group-hover:text-brand-gold transition-colors w-6">
                           {String(idx + 1).padStart(2, '0')}
                         </span>
                         <span className="text-white/80 font-light text-[13px] sm:text-base group-hover:text-white transition-colors">
                           {room.name}
                         </span>
                       </div>
-                      <span className="text-[#D4B78F] font-serif text-sm sm:text-[15px] tracking-wide">
+                      <span className="text-brand-gold font-serif text-sm sm:text-[15px] tracking-wide">
                         {room.dim}
                       </span>
                     </div>
@@ -138,7 +138,7 @@ export default function FloorPlansSection() {
                   onClick={() => setActiveFloor(floor)}
                   className={`flex-1 py-4 text-[13px] font-semibold uppercase tracking-[0.12em] transition-all ${
                     activeFloor === floor 
-                      ? 'bg-[#D4B78F] text-[#0a0a0a]' 
+                      ? 'bg-brand-gold text-[#0a0a0a]' 
                       : 'bg-transparent text-white/50 hover:bg-white/5 hover:text-white'
                   }`}
                 >

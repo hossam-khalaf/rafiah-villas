@@ -70,7 +70,7 @@ function FormField({ id, label, placeholder, type = 'text', value, onChange, aut
         className="
           w-full bg-white/10 border border-white/20 text-white placeholder-white/35
           px-5 py-4 text-sm font-light
-          focus:outline-none focus:border-[#D4B78F]/80 focus:bg-white/15
+          focus:outline-none focus:border-brand-gold/80 focus:bg-white/15
           disabled:opacity-40 disabled:cursor-not-allowed
           transition-colors duration-200
         "
@@ -92,14 +92,14 @@ function SuccessState({ title, body }: { title: string; body: string }) {
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: 'spring', stiffness: 300, damping: 20, delay: 0.1 }}
-        className="w-16 h-16 rounded-full bg-[#012a17] border border-[#D4B78F]/40 flex items-center justify-center"
+        className="w-16 h-16 rounded-full bg-brand-royal-green border border-brand-gold/40 flex items-center justify-center"
       >
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4B78F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="20 6 9 17 4 12" />
         </svg>
       </motion.div>
       <div className="space-y-2">
-        <p className="font-serif text-2xl text-[#D4B78F]">{title}</p>
+        <p className="font-serif text-2xl text-brand-gold">{title}</p>
         <p className="text-sm text-white/60 font-light max-w-xs leading-relaxed">{body}</p>
       </div>
     </motion.div>
@@ -180,10 +180,10 @@ export default function RegisterInterestSection({ villaId, villaTitle, interest 
             {/* Urgency badge */}
             <div className="inline-flex items-center gap-3 mb-8 max-w-fit">
               <span className="relative flex h-2 w-2 shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D4B78F] opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D4B78F]" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-gold" />
               </span>
-              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#D4B78F]/80 border border-[#D4B78F]/25 px-4 py-1.5">
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-gold/80 border border-brand-gold/25 px-4 py-1.5">
                 {t('urgencyBadge')}
               </span>
             </div>
@@ -197,7 +197,7 @@ export default function RegisterInterestSection({ villaId, villaTitle, interest 
             {/* Headline */}
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.08] tracking-tight mb-8">
               {t('titleLine1')}{' '}
-              <span className="font-serif italic text-[#D4B78F] font-normal">{t('titleLine2')}</span>
+              <span className="font-serif italic text-brand-gold font-normal">{t('titleLine2')}</span>
             </h2>
 
             {/* Body */}
@@ -214,7 +214,7 @@ export default function RegisterInterestSection({ villaId, villaTitle, interest 
               </p>
               <a
                 href={`tel:${t('hotlineNumber').replace(/\s/g, '')}`}
-                className="font-serif text-3xl sm:text-4xl text-[#D4B78F] tracking-tight hover:text-white transition-colors duration-300"
+                className="font-serif text-3xl sm:text-4xl text-brand-gold tracking-tight hover:text-white transition-colors duration-300"
                 dir="ltr"
               >
                 {t('hotlineNumber')}
@@ -238,7 +238,7 @@ export default function RegisterInterestSection({ villaId, villaTitle, interest 
 
                     {/* Form header */}
                     <div className="mb-8">
-                      <h3 className="font-serif text-2xl sm:text-3xl text-[#D4B78F] mb-2 tracking-tight">
+                      <h3 className="font-serif text-2xl sm:text-3xl text-brand-gold mb-2 tracking-tight">
                         {t('formTitle')}
                       </h3>
                       <p className="text-xs sm:text-sm text-white/60 font-light leading-relaxed">
@@ -291,8 +291,9 @@ export default function RegisterInterestSection({ villaId, villaTitle, interest 
                         {status === 'error' && (
                           <motion.p
                             key="err"
-                            initial={{ opacity: 0, y: -4 }}
-                            animate={{ opacity: 1, y: 0 }}
+                            initial={{ opacity: 0, y: -4, x: 0 }}
+                            animate={{ opacity: 1, y: 0, x: [-4, 4, -4, 4, 0] }}
+                            transition={{ duration: 0.4, ease: "easeInOut" }}
                             exit={{ opacity: 0 }}
                             role="alert"
                             className="text-xs text-red-400 font-medium"
@@ -305,11 +306,11 @@ export default function RegisterInterestSection({ villaId, villaTitle, interest 
                       {/* Submit */}
                       <button
                         type="submit"
-                        disabled={isSubmitting || !name.trim() || !phone.trim()}
+                        disabled={isSubmitting}
                         className="
-                          relative w-full bg-[#D4B78F] text-[#050505] py-4
+                          relative w-full bg-brand-gold text-brand-black py-4
                           text-[13px] font-bold uppercase tracking-[0.15em]
-                          border border-[#D4B78F] hover:bg-white hover:text-[#012a17] transition-colors duration-300
+                          border border-brand-gold hover:bg-white hover:text-brand-royal-green transition-all duration-300 active:scale-[0.98]
                           disabled:opacity-50 disabled:cursor-not-allowed
                           mt-2
                         "

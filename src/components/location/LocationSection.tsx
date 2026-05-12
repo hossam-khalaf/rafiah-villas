@@ -16,7 +16,7 @@ export default async function LocationSection() {
   const t = await getTranslations('Location');
 
   return (
-    <section className="w-full bg-[#FAF9F6] text-black border-t border-black/10">
+    <section className="w-full bg-brand-offwhite text-black border-t border-black/10">
       <div className="max-w-[1800px] mx-auto">
         {/* Using standard physical grid which natively flips column order in RTL based on dir="rtl" */}
         <ScrollStagger className="grid grid-cols-1 lg:grid-cols-2 min-h-[800px]">
@@ -41,10 +41,10 @@ export default async function LocationSection() {
               aria-label="Open in Google Maps"
             >
               {/* Pulse Animation */}
-              <span className="absolute w-14 h-14 bg-[#012a17] rounded-full opacity-30 animate-ping"></span>
+              <span className="absolute w-14 h-14 bg-brand-royal-green rounded-full opacity-30 animate-ping"></span>
               
               {/* Solid Map Pin */}
-              <span className="relative w-12 h-12 bg-[#012a17] text-white rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300">
+              <span className="relative w-12 h-12 bg-brand-royal-green text-white rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                   <circle cx="12" cy="10" r="3"></circle>
@@ -53,7 +53,7 @@ export default async function LocationSection() {
             </a>
 
             {/* Floating Label Box */}
-            <div className="absolute bottom-8 sm:bottom-12 start-8 sm:start-12 bg-[#012a17] text-white px-6 py-4 shadow-xl border border-black/20">
+            <div className="absolute bottom-8 sm:bottom-12 start-8 sm:start-12 bg-brand-royal-green text-white px-6 py-4 shadow-xl border border-black/20">
               <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em]">{t('mapLabel')}</p>
             </div>
           </ScrollScaleIn>
@@ -63,8 +63,8 @@ export default async function LocationSection() {
             
             {/* Header Area */}
             <div className="mb-12 sm:mb-16">
-              <ScrollFadeIn className="inline-flex items-center gap-4 text-[#012a17] uppercase tracking-[0.2em] text-xs sm:text-sm font-bold mb-6">
-                <span className="w-8 sm:w-12 h-px bg-[#012a17]"></span>
+              <ScrollFadeIn className="inline-flex items-center gap-4 text-brand-royal-green uppercase tracking-[0.2em] text-xs sm:text-sm font-bold mb-6">
+                <span className="w-8 sm:w-12 h-px bg-brand-royal-green"></span>
                 {t('overline')}
               </ScrollFadeIn>
               
@@ -84,7 +84,7 @@ export default async function LocationSection() {
             {/* Landmarks List */}
             <div className="max-w-lg">
               <ScrollFadeIn>
-                <h3 className="text-2xl sm:text-3xl font-bold tracking-tighter text-black mb-8 inline-block border-b-2 border-[#012a17] pb-3">
+                <h3 className="text-2xl sm:text-3xl font-bold tracking-tighter text-black mb-8 inline-block border-b-2 border-brand-royal-green pb-3">
                   {t('landmarksTitle')}
                 </h3>
               </ScrollFadeIn>
@@ -95,7 +95,7 @@ export default async function LocationSection() {
                     <span className="text-sm sm:text-base font-bold text-black/80 group-hover:text-black">
                       {t(`landmarks.${landmark.key}`)}
                     </span>
-                    <span className="font-mono text-lg font-light text-[#012a17] tracking-tighter flex items-center gap-2">
+                    <span className="font-mono text-lg font-light text-brand-royal-green tracking-tighter flex items-center gap-2">
                       {landmark.distance} <span className="text-[0.6rem] font-bold uppercase tracking-widest text-black/40">km</span>
                     </span>
                   </ScrollFadeIn>

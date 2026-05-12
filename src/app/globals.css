@@ -3,8 +3,14 @@
 /* ─── Font Variables ──────────────────────────────────────────── */
 @theme {
   --color-brand-royal-green: #012a17;
-  --color-brand-black: #050505;
-  --color-brand-white: #ffffff;
+  --color-brand-black: #030f09;
+  --color-brand-white: #fcfdfc;
+  --color-brand-gold: #d4b78f;
+  --color-brand-gold-dark: #b5913a;
+  --color-brand-offwhite: #faf9f6;
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Map next/font CSS variables → Tailwind font-family tokens */
   --font-family-sans:  var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;

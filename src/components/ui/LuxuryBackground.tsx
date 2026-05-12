@@ -131,7 +131,7 @@ export default function LuxuryBackground({ variant = 'villas' }: Props) {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
       {/* Royal green base */}
-      <div className="absolute inset-0 bg-[#012a17]" />
+      <div className="absolute inset-0 bg-brand-royal-green" />
 
       {/* Animated orbs */}
       {orbs.map((orb, i) => (

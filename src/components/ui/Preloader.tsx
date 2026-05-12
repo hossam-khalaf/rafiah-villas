@@ -79,10 +79,10 @@ export default function Preloader() {
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className="mb-12 flex flex-col items-center"
           >
-            <h1 className="font-serif text-4xl sm:text-6xl tracking-tighter text-[#D4B78F] mb-4">
+            <h1 className="font-serif text-4xl sm:text-6xl tracking-tighter text-brand-gold mb-4">
               RAFIAH
             </h1>
-            <div className="w-12 h-px bg-[#D4B78F]/50"></div>
+            <div className="w-12 h-px bg-brand-gold/50"></div>
           </motion.div>
 
           {/* Percentage */}
@@ -99,7 +99,7 @@ export default function Preloader() {
           {/* Progress Bar Container */}
           <div className="w-64 sm:w-96 h-px bg-white/20 relative overflow-hidden">
             <motion.div 
-              className="absolute top-0 left-0 bottom-0 bg-[#D4B78F]"
+              className="absolute top-0 left-0 bottom-0 bg-brand-gold"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ ease: "easeOut", duration: 0.3 }}

@@ -1,63 +1,131 @@
-# UI/UX Design Strategy: Rafiah Villas
+---
+name: Rafiah Villas
+description: Premium, availability-first villa finder experience.
+colors:
+  royal-green: "#012a17"
+  gold: "#d4b78f"
+  gold-dark: "#b5913a"
+  neutral-bg: "#fcfdfc"
+  neutral-surface: "#faf9f6"
+  neutral-text: "#030f09"
+typography:
+  display:
+    fontFamily: "var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif"
+    fontWeight: 700
+    lineHeight: 1.15
+  body:
+    fontFamily: "var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif"
+    fontWeight: 400
+    lineHeight: 1.6
+  label:
+    fontFamily: "var(--font-dm-mono), ui-monospace, monospace"
+    fontWeight: 700
+    letterSpacing: "0.2em"
+rounded:
+  none: "0px"
+spacing:
+  sm: "8px"
+  md: "16px"
+  lg: "32px"
+components:
+  button-primary:
+    backgroundColor: "{colors.gold}"
+    textColor: "{colors.neutral-text}"
+    padding: "16px 32px"
+    typography: "{typography.label}"
+  button-primary-hover:
+    backgroundColor: "{colors.neutral-bg}"
+    textColor: "{colors.royal-green}"
+---
 
-This document outlines the product design architecture and UX strategy for Rafiah (رفيعة), developed by Kira Estates. 
-The core objective is to move away from the traditional "brochure website" and instead deliver a **premium, availability-first villa finder** experience.
+# Design System: Rafiah Villas
 
-## 1. The New Experience Model
-Rafiah is not a static landing page; it is a dynamic digital showroom. The experience model is a **Filter-First Discovery Engine**. Users arrive not to read marketing copy, but to immediately engage with live inventory, floor plans, and real-time availability. The interface acts like a high-end application rather than a website.
+## 1. Overview
 
-## 2. The Villa Finder Concept
-- **Availability-First**: The hero section bypasses standard "Welcome" imagery and immediately presents the Finder interface (e.g., "3 Villas Available", "Filter by Plot Size").
-- **Visual Grid**: Villas are displayed in an architectural bento grid or list view with stark, high-contrast imagery, status tags (Available, Reserved, Sold), and primary specs.
-- **Interactive Map/Plot**: A lightweight interactive SVG or HTML masterplan first; WebGL is not allowed in v1. This replaces standard photo galleries.
+**Creative North Star: "The Architectural Gallery"**
 
-## 3. The Lead Magnet Logic
-- **High-Value Gating**: Do not gate pricing or floor plans in v1 unless the client specifically asks. Master plans remain open.
-- **Premium Assets**: Gate the "Immersive VR Walkthrough", "Detailed Architectural Brochure", or "Private VIP Viewing Request" behind a low-friction capture form.
-- **Progressive Disclosure**: Only ask for Phone/Email when the user has engaged with at least 3 villa profiles or requests a specific action.
+This system is built to feel confident, severe, and strictly utilitarian. It rejects the flowery marketing fluff typical of real estate in favor of a brutalist, filter-first digital showroom. The experience is engineered to present data and availability with absolute clarity. The aesthetic relies heavily on high contrast, stark typography, and deliberate negative space, rejecting any generic SaaS styling or auto-playing full-screen marketing videos.
 
-## 4. The Buyer Journey
-1. **Entry**: Immediate exposure to the Finder and Master Plan (No long narrative scrolls).
-2. **Exploration**: Rapid filtering by status, size, or orientation. 
-3. **Deep Dive**: Modal or Slide-over (Sheet) for individual villa details to maintain context without reloading pages.
-4. **Action**: Persistent sticky "Register Interest" CTA tied specifically to the viewed unit.
+**Key Characteristics:**
+- High contrast, severe lines
+- Tactile, snappy motion
+- Absolute clarity and data-first presentation
+- No decorative fluff
 
-## 5. The Visual Design Direction
-- **Aesthetic**: *Editorial Minimalism* meets *Industrial Utility*. Brutally clean lines, generous negative space, and severe typography.
-- **Typography**: A highly distinctive, architectural Sans-Serif pairing (e.g., Geist/Geist Mono or a Swiss modernist font). No system default fallbacks like Arial visually.
-- **Color Palette**: 
-  - **Royal Green (`#012a17`)**: Primary brand identity, used for key interactive elements, solid backgrounds on highlight sections, and strong typographic contrast.
-  - **Black (`#050505`)**: Primary text, deep surface shadows, and borders.
-  - **White (`#ffffff`)**: Dominant background, creating a stark, gallery-like canvas.
+## 2. Colors
 
-## 6. The Mobile UX Rules
-- **Thumb-Zone Navigation**: All primary actions, filters, and CTAs must be anchored to the bottom third of the screen.
-- **Bottom Sheets over Pages**: A mobile bottom sheet is preferred for villa details. Villa details open as swipeable bottom sheets (using Framer Motion) rather than pushing to a new URL, preserving the search state.
-- **Touch Targets**: Absolute minimum `48x48px` for all interactive elements (filters, toggles, close buttons).
-- **Horizontal Scroll**: Use smooth, snapping horizontal scroll rows for image galleries instead of tiny pagination dots.
+The palette is highly restrained, leaning on tinted neutrals with sharp, deliberate accents.
 
-## 7. The Interaction Rules
-- **Snappy Physics**: Use spring physics for interactions. No slow, floaty linear animations. Transitions must complete in 150-300ms.
-- **Hover/Active States**: Hover states (desktop) must be distinct (e.g., image zoom or hard shadow drop). Active/Pressed states (mobile) must provide immediate visual feedback (scale down `0.98`).
-- **Skeleton Loaders**: Use structural skeleton layouts matching the exact dimensions of the content during data fetching from Sanity CMS to prevent Cumulative Layout Shift (CLS).
+### Primary
+- **Royal Green** (#012a17): The dominant brand anchor. Used for deep solid backgrounds on highlight sections and strong typographic contrast.
+- **Sand Gold** (#d4b78f): Primary interactive accent for buttons, borders, and active states.
 
-## 8. The Conversion Rules
-- **Contextual Inquiry**: The inquiry form must always inherit the context. If the user clicks "Inquire" on Villa #04, the form auto-fills "Interested in Villa #04".
-- **Single Primary CTA**: "Request Viewing" or "Register Interest". All other buttons (e.g., Download Brochure) are visually subordinate (outlined or ghost).
-- **Sticky Persistence**: On mobile, the CTA is permanently sticky at the bottom edge above the safe area.
+### Secondary
+- **Dark Gold** (#b5913a): Used exclusively for deeper contrast within gold-themed components (e.g., warranty section accents).
 
-## 9. The CMS/Sanity Content Strategy
-- **Structured Data, Not Rich Text**: Sanity will be modeled as an inventory system, not a blog. 
-  - Schema: `Villa` (ID, Status, Price, Plot Size, BUA, Image Gallery, Floor Plan Ref).
-  - Schema: `Global Settings` (Lead Magnet PDF, Contact Info, Hero Video URL).
-- **Data Fetching Flow**: Build with real static fallback data first, then wire Sanity later. Sanity controls villa inventory/status, but UI must work before Sanity is connected.
-- **Real-Time Illusion**: Content updates in Sanity should immediately reflect as "Status: Reserved" on the frontend using Next.js ISR/On-Demand Revalidation.
+### Neutral
+- **Gallery White** (#fcfdfc): The dominant background, lightly tinted green to avoid harsh pure white.
+- **Deep Slate** (#030f09): Primary text and deep surface shadows.
+- **Off-White Surface** (#faf9f6): Used for secondary cards and subtle background differentiation.
 
-## 10. What NOT to Build
-- **NO** generic full-screen auto-playing video heroes with standard "Discover Luxury" overlay text.
-- **NO** "About Us" blocks or developer history sections interrupting the primary flow. Move "Kira Estates" branding to the footer or an "About" modal.
-- **NO** scroll hijacking or smooth scrolling libraries that break native browser behavior.
-- **NO** generic AI aesthetic (e.g., soft purple gradients, rounded bubbly buttons). Keep corners sharp (0-2px radius) and UI architectural.
+**The Restraint Rule.** The primary gold accent is used sparingly. Its rarity guarantees it draws the eye to critical CTAs.
 
-## 11. Architecture Rules
-- **Server Components**: Use Server Components by default; Client Components only for filters, drawers, forms, and motion.
+## 3. Typography
+
+**Display Font:** DM Sans (with system sans fallback)
+**Body Font:** DM Sans (with system sans fallback)
+**Label/Mono Font:** DM Mono (with system monospace fallback)
+
+**Character:** Highly distinctive and architectural. The pairing relies on stark structural contrast between the geometric sans and the data-heavy monospace.
+
+### Hierarchy
+- **Display** (700, 48-96px, 1.15): Hero section and section titles.
+- **Headline** (700, 24-36px, 1.15): Villa card titles and modal headers.
+- **Body** (400, 16px, 1.6): Paragraph text and descriptions. Max line length capped around 65-75ch.
+- **Label** (700, 11px, 0.2em, uppercase): Used for tags, microcopy, and UI actions.
+
+**The Label Rule.** All system metadata (availability tags, prices, structural dimensions) strictly use the Mono font to emphasize their nature as raw data.
+
+## 4. Elevation
+
+The system uses hybrid flat and layered techniques, maintaining an overall severe aesthetic but introducing deep ambient shadows to lift interactive elements.
+
+### Shadow Vocabulary
+- **Interactive Lift** (`box-shadow: 0 10px 30px -10px rgba(0,0,0,0.6)`): Used to lift sticky elements like the navigation and filter bar above the content plane.
+- **Tactile Depress**: On active/click states, elements physically depress (`scale: 0.98`) rather than dropping shadows.
+
+**The Flat-By-Default Rule.** Surfaces are stark and flat at rest. Depth is strictly reserved for fixed structural components and active interaction feedback.
+
+## 5. Components
+
+Components are tactile and confident, employing zero border radius to maintain architectural severity.
+
+### Buttons
+- **Shape:** Brutal sharp corners (0px radius).
+- **Primary:** Gold background with deep slate text. Generous padding (`16px 32px`).
+- **Hover / Focus:** Reverses to a white background with Royal Green text.
+- **Active State:** Physically depresses by scaling down to `0.98`.
+
+### Cards / Containers
+- **Corner Style:** Sharp 0px radius.
+- **Background:** Deep tinted transparent blacks or solid Royal Green.
+- **Border:** 1px harsh borders (e.g., `border-white/10`).
+- **Interaction:** Hovering reveals a stronger gold border and deepens the background opacity.
+
+### Forms / Inputs
+- **Style:** Severe bounding boxes with transparent or 10% opacity white backgrounds.
+- **Focus:** Solid gold border shift.
+
+## 6. Do's and Don'ts
+
+### Do:
+- **Do** rely heavily on DM Mono for all data points and metadata.
+- **Do** ensure every interactive element depresses (`scale: 0.98`) on active states.
+- **Do** cap body text line length around 65-75 characters.
+
+### Don't:
+- **Don't** use generic full-screen auto-playing video heroes with "Discover Luxury" overlay text.
+- **Don't** use "About Us" blocks or developer history sections that interrupt the primary discovery flow.
+- **Don't** use soft purple gradients or generic AI-style bubbly aesthetics.
+- **Don't** use identical, infinitely repeating card grids without structural variation.
+- **Don't** use glassmorphism as a default decorative treatment.

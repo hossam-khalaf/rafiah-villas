@@ -17,14 +17,14 @@ export default function WarrantiesSection() {
   const items: WarrantyItem[] = t.raw('items') as WarrantyItem[];
 
   return (
-    <section className="w-full bg-[#FAF9F6] text-black border-t border-black/10 py-24 sm:py-32">
+    <section className="w-full bg-brand-offwhite text-black border-t border-black/10 py-24 sm:py-32">
       <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
 
         {/* Header */}
         <ScrollStagger className="mb-16 sm:mb-24">
           <ScrollFadeIn>
-            <div className="inline-flex items-center gap-4 text-[#012a17] uppercase tracking-[0.2em] text-xs sm:text-sm font-bold mb-8">
-              <span className="w-8 sm:w-12 h-px bg-[#012a17]"></span>
+            <div className="inline-flex items-center gap-4 text-brand-royal-green uppercase tracking-[0.2em] text-xs sm:text-sm font-bold mb-8">
+              <span className="w-8 sm:w-12 h-px bg-brand-royal-green"></span>
               {t('overline')}
             </div>
           </ScrollFadeIn>
@@ -32,7 +32,7 @@ export default function WarrantiesSection() {
           <ScrollFadeIn>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter leading-tight text-black mb-4">
               {t('titleLine1')}{' '}
-              <span className="font-serif italic text-[#B5913A] font-normal">{t('titleLine2')}</span>
+              <span className="font-serif italic text-brand-gold-dark font-normal">{t('titleLine2')}</span>
             </h2>
           </ScrollFadeIn>
 
@@ -48,11 +48,11 @@ export default function WarrantiesSection() {
           {items.map((item, index) => (
             <ScrollFadeIn
               key={index}
-              className="bg-[#FAF9F6] hover:bg-white transition-colors duration-300 p-8 sm:p-10 flex flex-col group"
+              className="bg-brand-offwhite hover:bg-white transition-colors duration-300 p-8 sm:p-10 flex flex-col group"
             >
               {/* Year number */}
               <div className="mb-6">
-                <p className="font-serif text-7xl sm:text-8xl text-[#B5913A] leading-none tracking-tight">
+                <p className="font-serif text-7xl sm:text-8xl text-brand-gold-dark leading-none tracking-tight">
                   {item.years}
                 </p>
                 {item.yearsSuffix && (
@@ -63,7 +63,7 @@ export default function WarrantiesSection() {
               </div>
 
               {/* Divider */}
-              <div className="w-8 h-px bg-[#B5913A]/50 mb-6 group-hover:w-16 transition-all duration-500"></div>
+              <div className="w-8 h-px bg-brand-gold-dark/50 mb-6 group-hover:w-16 transition-all duration-500"></div>
 
               {/* Category */}
               <p className="font-bold text-sm sm:text-base lg:text-[15px] text-black mb-2 leading-snug">
@@ -72,7 +72,7 @@ export default function WarrantiesSection() {
 
               {/* Bonus */}
               {item.bonus && (
-                <p className="text-[11px] sm:text-xs text-[#012a17] font-semibold mb-2 tracking-wide">
+                <p className="text-[11px] sm:text-xs text-brand-royal-green font-semibold mb-2 tracking-wide">
                   + {item.bonus}
                 </p>
               )}

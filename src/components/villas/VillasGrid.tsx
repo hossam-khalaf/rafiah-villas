@@ -38,7 +38,7 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
 
   // Status Colors Mapping
   const statusConfig: Record<VillaStatus, { bg: string, text: string, border: string }> = {
-    available: { bg: 'bg-[#D4B78F]/15', text: 'text-[#D4B78F]',  border: 'border-[#D4B78F]/35' },
+    available: { bg: 'bg-brand-gold/15', text: 'text-brand-gold',  border: 'border-brand-gold/35' },
     reserved:  { bg: 'bg-white/8',       text: 'text-white/55',   border: 'border-white/20' },
     sold:      { bg: 'bg-white/5',        text: 'text-white/30',   border: 'border-white/10' },
   };
@@ -46,14 +46,14 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
   return (
     <div className="w-full">
       {/* Tabs */}
-      <div className="flex flex-wrap gap-0 border border-white/15 max-w-fit mb-12 sm:mb-16 sticky top-0 sm:top-24 z-30 backdrop-blur-md bg-[#012a17]/85 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)]">
+      <div className="flex flex-wrap gap-0 border border-white/15 max-w-fit mb-12 sm:mb-16 sticky top-0 sm:top-24 z-30 backdrop-blur-md bg-brand-royal-green/85 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)]">
         {(['northFacade', 'southFacade', 'corner'] as VillaType[]).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
             className={`px-6 py-4 text-xs sm:text-sm font-bold uppercase tracking-widest transition-colors ${
               activeTab === tab 
-                ? 'bg-[#D4B78F] text-black' 
+                ? 'bg-brand-gold text-black' 
                 : 'bg-transparent text-white/60 hover:text-white hover:bg-white/5 border-s border-white/10 first:border-s-0'
             }`}
           >
@@ -73,7 +73,7 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
               animate={{ opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, delay: Math.min(index * 0.06, 0.4), ease: [0.22, 1, 0.36, 1] } }}
               exit={{ opacity: 0, scale: 0.95, y: -20, transition: { duration: 0.3 } }}
               viewport={{ once: true, amount: 0.2 }}
-              className="group relative bg-black/30 border border-white/10 p-6 sm:p-8 hover:border-[#D4B78F]/50 hover:bg-black/40 transition-all duration-500 flex flex-col min-h-[300px] overflow-hidden cursor-pointer"
+              className="group relative bg-white/[0.03] border border-white/10 p-6 sm:p-8 hover:border-brand-gold/50 hover:bg-white/[0.06] transition-all duration-500 flex flex-col min-h-[300px] overflow-hidden cursor-pointer active:scale-[0.98]"
             >
               {/* Top Row: Title & Badge */}
               <div className="flex justify-between items-start mb-8 z-10 relative">
@@ -86,40 +86,41 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
                 </div>
               </div>
 
-              {/* Price — hidden for sold / reserved */}
+              {/* Area — Main Stat */}
               <div className="mb-10 z-10 relative">
-                {villa.status === 'available' ? (
-                  <p className="font-serif text-4xl sm:text-5xl text-white tracking-tight">
-                    {villa.price ? villa.price.toLocaleString() : 'TBD'}{' '}
-                    <span className="font-sans text-xs sm:text-sm font-bold tracking-widest uppercase text-white/70 ms-2">
-                      {labels.card.currency}
-                    </span>
-                  </p>
-                ) : (
-                  <p className="font-sans text-sm font-medium text-white/30 tracking-widest uppercase select-none">
-                    — —
-                  </p>
-                )}
+                <p className="font-serif text-4xl sm:text-5xl text-white tracking-tight">
+                  {villa.plotSize || 'TBD'}{' '}
+                  <span className="font-sans text-xs sm:text-sm font-bold tracking-widest uppercase text-white/70 ms-2">
+                    {areaSymbol}²
+                  </span>
+                </p>
               </div>
 
               {/* Separator */}
               <div className="w-full h-px bg-white/5 mb-8 z-10 relative group-hover:bg-white/15 transition-colors"></div>
 
-              {/* Bottom Row: Area & Hover Action */}
+              {/* Bottom Row: Price & Action */}
               <div className="flex justify-between items-center mt-auto z-10 relative">
                 <div className="flex items-center gap-3 text-white/90 group-hover:text-white transition-colors">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M3 21h18M3 21V3l18 18"/>
-                  </svg>
-                  <span className="font-mono text-sm">
-                    {villa.plotSize || 'TBD'} <span className="text-[0.6rem] uppercase tracking-widest">{areaSymbol}<sup>2</sup></span>
-                  </span>
+                  {villa.status === 'available' ? (
+                    <span className="font-mono text-sm sm:text-base tracking-wide">
+                      {villa.price ? villa.price.toLocaleString() : 'TBD'}{' '}
+                      <span className="text-[0.6rem] uppercase tracking-widest text-white/60 ms-1">{labels.card.currency}</span>
+                    </span>
+                  ) : (
+                    <span className="font-sans text-sm font-medium text-white/30 tracking-widest uppercase select-none">
+                      — —
+                    </span>
+                  )}
                 </div>
                 
-                {/* Always Visible CTA, Animated Arrow */}
-                <div className="text-[0.65rem] sm:text-xs font-bold uppercase tracking-[0.15em] text-[#D4B78F] transition-all duration-500 flex items-center gap-2">
+                {/* Button CTA */}
+                <a
+                  href="#register-interest"
+                  className="bg-brand-gold text-brand-black px-4 sm:px-5 py-2.5 text-[0.65rem] sm:text-[10px] font-bold uppercase tracking-[0.15em] transition-all duration-300 hover:bg-white hover:text-brand-royal-green flex items-center gap-2 border border-brand-gold/20"
+                >
                   {labels.card.registerInterest} <span className="transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform duration-300">{arrowIcon}</span>
-                </div>
+                </a>
               </div>
 
               {/* Subtle hover gradient background */}

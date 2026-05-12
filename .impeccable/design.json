@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-12T13:56:52Z",
+  "title": "Design System: Rafiah Villas",
+  "extensions": {
+    "colorMeta": {
+      "royal-green": { "role": "primary", "displayName": "Royal Green", "canonical": "#012a17", "tonalRamp": ["#00130a", "#012a17", "#024024", "#035731", "#046d3e", "#05844b", "#069a58", "#07b165"] },
+      "gold": { "role": "primary", "displayName": "Sand Gold", "canonical": "#d4b78f", "tonalRamp": ["#5f4b2f", "#7a6240", "#957951", "#b09062", "#cbac74", "#d4b78f", "#e1cba5", "#eedebb"] },
+      "neutral-bg": { "role": "neutral", "displayName": "Gallery White", "canonical": "#fcfdfc", "tonalRamp": ["#979897", "#b1b2b1", "#cccccc", "#e6e7e6", "#f2f3f2", "#f7f8f7", "#fcfdfc", "#ffffff"] },
+      "neutral-text": { "role": "neutral", "displayName": "Deep Slate", "canonical": "#030f09", "tonalRamp": ["#010503", "#020a06", "#030f09", "#04140c", "#051a0f", "#061f12", "#072415", "#082918"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headlines and primary section titles." },
+      "label": { "displayName": "Label Mono", "purpose": "All system metadata, availability tags, and prices." }
+    },
+    "shadows": [
+      { "name": "Interactive Lift", "value": "0 10px 30px -10px rgba(0,0,0,0.6)", "purpose": "Used to lift sticky elements like the navigation." }
+    ],
+    "motion": [
+      { "name": "Tactile Depress", "value": "scale(0.98)", "purpose": "Active state for physical buttons." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Tactile and confident call to action.",
+      "html": "<button class=\"ds-btn-primary\">REGISTER INTEREST</button>",
+      "css": ".ds-btn-primary { background: #d4b78f; color: #030f09; padding: 16px 32px; font-family: monospace; font-weight: 700; letter-spacing: 0.2em; border: none; transition: background 0.3s, transform 0.1s; cursor: pointer; } .ds-btn-primary:hover { background: #fcfdfc; color: #012a17; } .ds-btn-primary:active { transform: scale(0.98); }"
+    },
+    {
+      "name": "Villa Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Primary display for inventory with sharp architectural borders.",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-tag\">AVAILABLE</div><h3 class=\"ds-card-title\">VILLA 04</h3><p class=\"ds-card-specs\">1,200 SQM</p></div>",
+      "css": ".ds-card { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); padding: 32px; display: flex; flex-direction: column; gap: 16px; transition: all 0.5s; cursor: pointer; color: white; font-family: sans-serif; } .ds-card:hover { border-color: rgba(212,183,143,0.5); background: rgba(0,0,0,0.4); } .ds-card:active { transform: scale(0.98); } .ds-card-tag { font-family: monospace; font-size: 11px; letter-spacing: 0.2em; color: rgba(255,255,255,0.8); } .ds-card-title { font-size: 24px; font-weight: 700; margin: 0; } .ds-card-specs { font-size: 14px; opacity: 0.7; margin: 0; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Architectural Gallery",
+    "overview": "This system is built to feel confident, severe, and strictly utilitarian. It rejects the flowery marketing fluff typical of real estate in favor of a brutalist, filter-first digital showroom. The experience is engineered to present data and availability with absolute clarity. The aesthetic relies heavily on high contrast, stark typography, and deliberate negative space, rejecting any generic SaaS styling or auto-playing full-screen marketing videos.",
+    "keyCharacteristics": [
+      "High contrast, severe lines",
+      "Tactile, snappy motion",
+      "Absolute clarity and data-first presentation",
+      "No decorative fluff"
+    ],
+    "rules": [
+      { "name": "The Restraint Rule", "body": "The primary gold accent is used sparingly. Its rarity guarantees it draws the eye to critical CTAs.", "section": "colors" },
+      { "name": "The Label Rule", "body": "All system metadata (availability tags, prices, structural dimensions) strictly use the Mono font to emphasize their nature as raw data.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Surfaces are stark and flat at rest. Depth is strictly reserved for fixed structural components and active interaction feedback.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do rely heavily on DM Mono for all data points and metadata.",
+      "Do ensure every interactive element depresses (scale: 0.98) on active states.",
+      "Do cap body text line length around 65-75 characters."
+    ],
+    "donts": [
+      "Don't use generic full-screen auto-playing video heroes with \"Discover Luxury\" overlay text.",
+      "Don't use \"About Us\" blocks or developer history sections that interrupt the primary discovery flow.",
+      "Don't use soft purple gradients or generic AI-style bubbly aesthetics.",
+      "Don't use identical, infinitely repeating card grids without structural variation.",
+      "Don't use glassmorphism as a default decorative treatment."
+    ]
+  }
+}

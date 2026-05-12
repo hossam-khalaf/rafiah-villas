@@ -36,8 +36,8 @@ export default async function VillasSection() {
           {/* Header */}
           <div className="max-w-3xl mb-16 sm:mb-24">
             <ScrollFadeIn>
-              <div className="inline-flex items-center gap-4 text-[#D4B78F] uppercase tracking-[0.2em] text-xs sm:text-sm font-bold mb-8">
-                <span className="w-8 sm:w-12 h-px bg-[#D4B78F]"></span>
+              <div className="inline-flex items-center gap-4 text-brand-gold uppercase tracking-[0.2em] text-xs sm:text-sm font-bold mb-8">
+                <span className="w-8 sm:w-12 h-px bg-brand-gold"></span>
                 {t('overline')}
               </div>
             </ScrollFadeIn>

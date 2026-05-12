@@ -3,14 +3,14 @@
     "title": "Rafiah Villas",
     "subtitle": "Phase II — Now Selling Off-Plan",
     "location": "Al-Rafiah District • Riyadh, Kingdom of Saudi Arabia",
-    "developerIntro": "A unique residential experience developed by Kira Estates",
+    "developerIntro": "Developed and engineered by Kira Estates",
     "registerInterest": "Register Your Interest",
     "viewAvailability": "View Availability",
     "exclusiveVillas": "Exclusive Villas",
     "startingArea": "Starting Area",
     "startingPrice": "Starting Price SAR",
     "phaseOneSold": "Phase I Sold",
-    "ticker": "Phase II Now Open For Registration • Limited Availability Remaining • "
+    "ticker": "Phase II Registration Open • Limited Units Remaining • "
   },
   "Stats": {
     "available": "Available",
@@ -20,7 +20,7 @@
   "Location": {
     "overline": "Location",
     "title": "Positioned at the Heart of Riyadh",
-    "description": "Rafiah Villas occupies a rare address in the sought-after Al-Rafiah district — minutes from the city's most iconic landmarks, yet removed from its pace.",
+    "description": "Located in the Al-Rafiah district. Minutes from Riyadh's defining landmarks, yet entirely private.",
     "mapLabel": "Al-Rafiah District • Riyadh",
     "landmarksTitle": "Prominent Landmarks",
     "landmarks": {
@@ -36,7 +36,7 @@
   "Collection": {
     "overline": "The Collection",
     "title": "22 Meticulously Crafted Villas",
-    "description": "Three distinct villa typologies — each designed to deliver an uncompromising residential experience with private pools, landscaped gardens, and generous living spaces across three floors.",
+    "description": "Three distinct villa typologies. Each features a private pool, structured gardens, and three floors of precision-engineered living space.",
     "filters": {
       "northFacade": "North Facing",
       "southFacade": "South Facing",
@@ -53,7 +53,7 @@
     "titleLine1": "Thoughtfully",
     "titleLine2": "Designed Living",
     "title": "Thoughtfully Designed Living",
-    "subtitle": "Each villa spans three floors, balancing grand hospitality spaces with intimate family retreats. Every room is proportioned for how life is actually lived.",
+    "subtitle": "Three floors of engineered space. Designed for scale in hospitality and absolute privacy in family living.",
     "tabs": {
       "corner": "Corner Villa",
       "facade": "Façade Villa"
@@ -125,13 +125,13 @@
   "Gallery": {
     "overline": "Experience",
     "title": "A Vision of Refined Living",
-    "subtitle": "Discover the architectural elegance and interior harmony that define the Rafiah Villas experience."
+    "subtitle": "Explore the materials, scale, and architectural details of Rafiah Villas."
   },
   "Warranties": {
     "overline": "Built to Last",
     "titleLine1": "Backed by",
     "titleLine2": "Industry-Leading Warranties",
-    "subtitle": "Every system in your Rafiah Villa is guaranteed by the specialists who built it — giving you total confidence in your investment for decades to come.",
+    "subtitle": "Every system is guaranteed by the specialists who installed it. Uncompromising structural standards, backed by exact warranties.",
     "items": [
       { "years": "10", "yearsSuffix": "Years", "category": "Structural Works", "contractor": "Malaz Insurance Co." },
       { "years": "10", "yearsSuffix": "Years", "category": "Electrical & Installation Works", "contractor": "Naht General Contractors" },
@@ -151,13 +151,13 @@
     "overline": "Register Now",
     "titleLine1": "Secure Your",
     "titleLine2": "Rafiah Villa",
-    "body": "Phase I sold out entirely. Phase II is moving fast. Register your interest today and our sales team will reach out within 24 hours.",
+    "body": "Phase I is sold out. Phase II is now available. Register your interest and an advisor will contact you within 24 hours.",
     "hotlineLabel": "Sales Hotline",
     "hotlineNumber": "920 033 262",
     "licenseLabel": "Real Estate Development License",
     "licenseNumber": "#7200762744",
     "formTitle": "Register Your Interest",
-    "formSubtitle": "Fill in your details and a dedicated sales advisor will contact you to discuss availability and pricing.",
+    "formSubtitle": "Enter your details. A sales advisor will contact you regarding current availability and pricing.",
     "namePlaceholder": "Your full name",
     "nameLabel": "Full Name",
     "phonePlaceholder": "+966 5X XXX XXXX",
