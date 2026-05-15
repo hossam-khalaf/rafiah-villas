@@ -2,13 +2,16 @@ import { getTranslations } from 'next-intl/server';
 import { getVillaStatsContent } from '@/lib/content/villas';
 import { HeroStagger, HeroFadeIn, HeroImageScale, HeroButton, HeroStatSpotlight } from '@/components/hero/RafiahHeroMotion';
 import LocaleSwitcher from '@/components/ui/LocaleSwitcher';
-import LocationSection from '@/components/location/LocationSection';
-import VillasSection from '@/components/villas/VillasSection';
-import GallerySection from '@/components/gallery/GallerySection';
-import FloorPlansSection from '@/components/floorPlans/FloorPlansSection';
-import WarrantiesSection from '@/components/warranties/WarrantiesSection';
-import RegisterInterestSection from '@/components/registerInterest/RegisterInterestSection';
 import Footer from '@/components/ui/Footer';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
+
+const LocationSection = dynamic(() => import('@/components/location/LocationSection'));
+const VillasSection = dynamic(() => import('@/components/villas/VillasSection'));
+const GallerySection = dynamic(() => import('@/components/gallery/GallerySection'));
+const FloorPlansSection = dynamic(() => import('@/components/floorPlans/FloorPlansSection'));
+const WarrantiesSection = dynamic(() => import('@/components/warranties/WarrantiesSection'));
+const RegisterInterestSection = dynamic(() => import('@/components/registerInterest/RegisterInterestSection'));
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -47,17 +50,24 @@ export default async function HomePage() {
         {/* Background Video with Motion Scale */}
         <div className="absolute inset-0 z-0 bg-black">
           <HeroImageScale className="w-full h-full relative">
+            <Image 
+              src="/images/rafiah-hero-poster.jpg"
+              alt="Rafiah Villas"
+              fill
+              priority
+              sizes="100vw"
+              className="absolute inset-0 object-cover opacity-90 z-0"
+            />
             <video
               src="/videos/rafiah-hero.mp4"
-              poster="/images/rafiah-hero-poster.jpg"
               autoPlay
               loop
               muted
               playsInline
-              className="absolute inset-0 w-full h-full object-cover opacity-90"
+              className="absolute inset-0 w-full h-full object-cover opacity-90 z-10"
             />
             {/* Dark subtle overlay for readability */}
-            <div className="absolute inset-0 bg-black/20"></div>
+            <div className="absolute inset-0 bg-black/20 z-20"></div>
           </HeroImageScale>
         </div>
 

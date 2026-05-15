@@ -91,7 +91,6 @@ export default function GallerySection() {
                   alt={`Rafiah Villas — Image ${index + 1}`}
                   fill
                   draggable={false}
-                  priority={index === 0}
                   className="object-cover pointer-events-none transition-transform duration-700 group-hover:scale-[1.03]"
                   sizes="(max-width: 768px) 80vw, (max-width: 1024px) 60vw, 40vw"
                 />
