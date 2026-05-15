@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { Villa, VillaType, VillaStatus } from '@/types/villa';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLocale } from 'next-intl';
+import SpotlightCard from '@/components/ui/SpotlightCard';
+import SpotlightButton from '@/components/ui/SpotlightButton';
 
 interface VillasGridProps {
   villas: Villa[];
@@ -39,8 +41,8 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
   // Status Colors Mapping
   const statusConfig: Record<VillaStatus, { bg: string, text: string, border: string }> = {
     available: { bg: 'bg-brand-gold/15', text: 'text-brand-gold',  border: 'border-brand-gold/35' },
-    reserved:  { bg: 'bg-white/8',       text: 'text-white/55',   border: 'border-white/20' },
-    sold:      { bg: 'bg-white/5',        text: 'text-white/30',   border: 'border-white/10' },
+    reserved:  { bg: 'bg-white/8',       text: 'text-white/75',   border: 'border-white/20' },
+    sold:      { bg: 'bg-white/5',        text: 'text-white/50',   border: 'border-white/10' },
   };
 
   return (
@@ -54,7 +56,7 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
             className={`px-6 py-4 text-xs sm:text-sm font-bold uppercase tracking-widest transition-colors ${
               activeTab === tab 
                 ? 'bg-brand-gold text-black' 
-                : 'bg-transparent text-white/60 hover:text-white hover:bg-white/5 border-s border-white/10 first:border-s-0'
+                : 'bg-transparent text-white/75 hover:text-white hover:bg-white/5 border-s border-white/10 first:border-s-0'
             }`}
           >
             {labels.filters[tab]}
@@ -73,7 +75,9 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
               animate={{ opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, delay: Math.min(index * 0.06, 0.4), ease: [0.16, 1, 0.3, 1] } }}
               exit={{ opacity: 0, scale: 0.95, y: -20, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } }}
               viewport={{ once: true, amount: 0.2 }}
-              className="group relative bg-white/[0.03] border border-white/10 p-6 sm:p-8 hover:border-brand-gold/50 hover:bg-white/[0.06] transition-all duration-500 flex flex-col min-h-[300px] overflow-hidden"
+            >
+            <SpotlightCard
+              className="group relative bg-white/[0.03] border border-white/10 p-6 sm:p-8 hover:border-brand-gold/50 hover:bg-white/[0.06] transition-all duration-500 flex flex-col min-h-[300px]"
             >
               {/* Top Row: Title & Badge */}
               <div className="flex justify-between items-start mb-8 z-10 relative">
@@ -105,27 +109,27 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
                   {villa.status === 'available' ? (
                     <span className="font-mono text-sm sm:text-base tracking-wide">
                       {villa.price ? villa.price.toLocaleString() : 'TBD'}{' '}
-                      <span className="text-[0.6rem] uppercase tracking-widest text-white/60 ms-1">{labels.card.currency}</span>
+                      <span className="text-[0.6rem] uppercase tracking-widest text-white/75 ms-1">{labels.card.currency}</span>
                     </span>
                   ) : (
-                    <span className="font-sans text-sm font-medium text-white/30 tracking-widest uppercase select-none">
+                    <span className="font-sans text-sm font-medium text-white/50 tracking-widest uppercase select-none">
                       — —
                     </span>
                   )}
                 </div>
                 
                 {/* Button CTA */}
-                <a
-                  href="#register-interest"
-                  className="bg-brand-gold text-brand-black px-4 sm:px-5 py-2.5 text-[0.65rem] sm:text-[10px] font-bold uppercase tracking-[0.15em] transition-all duration-300 hover:bg-white hover:text-brand-royal-green flex items-center gap-2 border border-brand-gold/20"
-                >
-                  {labels.card.registerInterest} <span className="transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform duration-300">{arrowIcon}</span>
-                </a>
+                <SpotlightButton spotlightColor="oklch(78% 0.12 75 / 0.25)">
+                  <a
+                    href="#register-interest"
+                    className="bg-brand-gold text-brand-black px-4 sm:px-5 py-2.5 text-[0.65rem] sm:text-[10px] font-bold uppercase tracking-[0.15em] transition-all duration-300 hover:bg-white hover:text-brand-royal-green flex items-center gap-2 border border-brand-gold/20"
+                  >
+                    {labels.card.registerInterest} <span className="transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform duration-300">{arrowIcon}</span>
+                  </a>
+                </SpotlightButton>
               </div>
 
-              {/* Subtle hover gradient background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-
+            </SpotlightCard>
             </motion.div>
           ))}
         </AnimatePresence>

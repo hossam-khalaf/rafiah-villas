@@ -167,5 +167,17 @@
     "successTitle": "تم استلام طلبك!",
     "successBody": "سيتواصل معك أحد مستشاري المبيعات في أقرب وقت ممكن.",
     "privacy": "معلوماتك سرية ولن تُستخدم إلا للتواصل معك بشأن فلل رفيعة."
+  },
+  "Footer": {
+    "developer": "المطور العقاري",
+    "developerName": "Kira Estates",
+    "developerNameAr": "كيرا استيتس",
+    "licenseTitle": "رقم الترخيص",
+    "licenseNumber": "7200762744",
+    "regaLabel": "رخصة بيع وتأجير على الخارطة",
+    "regaNumber": "323",
+    "salesTitle": "المبيعات",
+    "salesNumber": "920033262",
+    "copyright": "© {year} رفيعة. جميع الحقوق محفوظة."
   }
 }

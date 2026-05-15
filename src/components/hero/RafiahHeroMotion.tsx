@@ -2,6 +2,8 @@
 
 import { motion } from 'motion/react';
 import { ReactNode } from 'react';
+import SpotlightButton from '@/components/ui/SpotlightButton';
+import SpotlightCard from '@/components/ui/SpotlightCard';
 
 export function HeroImageScale({ children, className }: { children: ReactNode, className?: string }) {
   return (
@@ -49,25 +51,42 @@ export function HeroFadeIn({ children, className }: { children: ReactNode, class
 export function HeroButton({ children, className, href }: { children: ReactNode, className?: string, href?: string }) {
   if (href) {
     return (
-      <motion.a
-        href={href}
+      <SpotlightButton spotlightColor="oklch(90% 0.04 145 / 0.25)" spotlightSize={160}>
+        <motion.a
+          href={href}
+          whileHover={{ scale: 0.98, opacity: 0.9 }}
+          whileTap={{ scale: 0.96 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+          className={className}
+        >
+          {children}
+        </motion.a>
+      </SpotlightButton>
+    );
+  }
+  return (
+    <SpotlightButton spotlightColor="oklch(90% 0.04 145 / 0.25)" spotlightSize={160}>
+      <motion.button
         whileHover={{ scale: 0.98, opacity: 0.9 }}
         whileTap={{ scale: 0.96 }}
         transition={{ duration: 0.2, ease: "easeOut" }}
         className={className}
       >
         {children}
-      </motion.a>
-    );
-  }
+      </motion.button>
+    </SpotlightButton>
+  );
+}
+
+export function HeroStatSpotlight({ children, className }: { children: ReactNode, className?: string }) {
   return (
-    <motion.button
-      whileHover={{ scale: 0.98, opacity: 0.9 }}
-      whileTap={{ scale: 0.96 }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
+    <SpotlightCard
+      spotlightColor="oklch(95% 0.02 75 / 0.25)"
+      spotlightSize={200}
+      borderOnly
       className={className}
     >
       {children}
-    </motion.button>
+    </SpotlightCard>
   );
 }

@@ -49,7 +49,7 @@ export default async function VillasSection() {
             </ScrollFadeIn>
             
             <ScrollFadeIn>
-              <p className="text-sm sm:text-base lg:text-lg text-white/60 font-medium leading-relaxed max-w-2xl">
+              <p className="text-sm sm:text-base lg:text-lg text-white/80 font-medium leading-relaxed max-w-2xl">
                 {t('description')}
               </p>
             </ScrollFadeIn>

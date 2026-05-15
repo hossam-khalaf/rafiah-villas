@@ -167,5 +167,17 @@
     "successTitle": "Request Received!",
     "successBody": "One of our sales advisors will be in touch with you shortly.",
     "privacy": "Your information is confidential and will only be used to contact you about Rafiah Villas."
+  },
+  "Footer": {
+    "developer": "The Developer",
+    "developerName": "Kira Estates",
+    "developerNameAr": "كيرا استيتس",
+    "licenseTitle": "License Number",
+    "licenseNumber": "7200762744",
+    "regaLabel": "Off-Plan Sale & Lease License",
+    "regaNumber": "323",
+    "salesTitle": "Sales",
+    "salesNumber": "920033262",
+    "copyright": "© {year} Rafiah. All rights reserved."
   }
 }

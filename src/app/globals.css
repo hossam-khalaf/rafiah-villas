@@ -172,3 +172,128 @@
   }
 }
 
+/* ─── Spotlight Card ──────────────────────────────────────────── */
+/* Cursor-tracking radial glow on cards and containers.           */
+/* Driven by --spotlight-x / --spotlight-y set from JS.           */
+
+@layer components {
+  .spotlight-card {
+    --spotlight-x: -999px;
+    --spotlight-y: -999px;
+    --spotlight-color: oklch(78% 0.12 75 / 0.30);
+    --spotlight-fill: oklch(78% 0.12 75 / 0.06);
+    --spotlight-size: 350px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spotlight-card--border-only {
+    --spotlight-fill: transparent;
+  }
+
+  /* Border glow — only visible when hovered */
+  .spotlight-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      var(--spotlight-size) circle at var(--spotlight-x) var(--spotlight-y),
+      var(--spotlight-color),
+      transparent 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    /* Mask to border edge — 1px border glow */
+    mask-image: linear-gradient(#000, #000),
+                linear-gradient(#000, #000);
+    mask-size: 100% 100%, calc(100% - 2px) calc(100% - 2px);
+    mask-position: 0 0, 1px 1px;
+    mask-composite: exclude;
+    -webkit-mask-image: linear-gradient(#000, #000),
+                        linear-gradient(#000, #000);
+    -webkit-mask-size: 100% 100%, calc(100% - 2px) calc(100% - 2px);
+    -webkit-mask-position: 0 0, 1px 1px;
+    -webkit-mask-composite: xor;
+  }
+
+  /* Surface glow — subtle fill beneath cursor */
+  .spotlight-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      calc(var(--spotlight-size) * 0.8) circle at var(--spotlight-x) var(--spotlight-y),
+      var(--spotlight-fill),
+      transparent 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  /* Activate on hover (JS toggles the class) */
+  .spotlight-card--active::before,
+  .spotlight-card--active::after {
+    opacity: 1;
+  }
+
+  /* ── Spotlight Button ───────────────────────────────────────── */
+
+  .spotlight-btn {
+    --spotlight-x: -999px;
+    --spotlight-y: -999px;
+    --spotlight-color: oklch(78% 0.12 75 / 0.35);
+    --spotlight-size: 120px;
+    position: relative;
+    display: inline-flex;
+    overflow: hidden;
+  }
+
+  .spotlight-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      var(--spotlight-size) circle at var(--spotlight-x) var(--spotlight-y),
+      var(--spotlight-color),
+      transparent 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .spotlight-btn--active::before {
+    opacity: 1;
+  }
+
+  /* Children must sit above the glow layer */
+  .spotlight-card > *,
+  .spotlight-btn > * {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+/* Disable spotlight entirely for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .spotlight-card::before,
+  .spotlight-card::after,
+  .spotlight-btn::before {
+    display: none;
+  }
+}
+
+/* Disable spotlight on devices without hover (touch screens) */
+@media (hover: none) {
+  .spotlight-card::before,
+  .spotlight-card::after,
+  .spotlight-btn::before {
+    display: none;
+  }
+}
+

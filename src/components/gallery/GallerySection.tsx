@@ -61,7 +61,7 @@ export default function GallerySection() {
               </h2>
             </ScrollFadeIn>
             <ScrollFadeIn>
-              <p className="text-sm sm:text-base lg:text-lg text-white/60 font-medium leading-relaxed max-w-2xl">
+              <p className="text-sm sm:text-base lg:text-lg text-white/80 font-medium leading-relaxed max-w-2xl">
                 {t('subtitle')}
               </p>
             </ScrollFadeIn>
@@ -91,6 +91,7 @@ export default function GallerySection() {
                   alt={`Rafiah Villas — Image ${index + 1}`}
                   fill
                   draggable={false}
+                  priority={index === 0}
                   className="object-cover pointer-events-none transition-transform duration-700 group-hover:scale-[1.03]"
                   sizes="(max-width: 768px) 80vw, (max-width: 1024px) 60vw, 40vw"
                 />
@@ -109,7 +110,7 @@ export default function GallerySection() {
 
         {/* Hint */}
         <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 mt-10 flex justify-end">
-          <div className="flex items-center gap-3 text-white/30 text-[0.6rem] sm:text-xs font-bold uppercase tracking-widest">
+          <div className="flex items-center gap-3 text-white/55 text-[0.6rem] sm:text-xs font-bold uppercase tracking-widest">
             <span>{isRtl ? 'اسحب أو اضغط للمعاينة' : 'Drag or tap to preview'}</span>
             <div className="w-10 h-px bg-white/20"></div>
           </div>

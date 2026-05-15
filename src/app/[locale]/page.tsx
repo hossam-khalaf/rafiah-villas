@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { getVillaStatsContent } from '@/lib/content/villas';
-import { HeroStagger, HeroFadeIn, HeroImageScale, HeroButton } from '@/components/hero/RafiahHeroMotion';
+import { HeroStagger, HeroFadeIn, HeroImageScale, HeroButton, HeroStatSpotlight } from '@/components/hero/RafiahHeroMotion';
 import LocaleSwitcher from '@/components/ui/LocaleSwitcher';
 import LocationSection from '@/components/location/LocationSection';
 import VillasSection from '@/components/villas/VillasSection';
@@ -8,6 +8,7 @@ import GallerySection from '@/components/gallery/GallerySection';
 import FloorPlansSection from '@/components/floorPlans/FloorPlansSection';
 import WarrantiesSection from '@/components/warranties/WarrantiesSection';
 import RegisterInterestSection from '@/components/registerInterest/RegisterInterestSection';
+import Footer from '@/components/ui/Footer';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -102,33 +103,33 @@ export default async function HomePage() {
             <HeroFadeIn className="w-full pt-8 sm:pt-12">
               <div className="flex flex-wrap sm:flex-nowrap items-stretch justify-center">
                 
-                <div className="flex flex-col items-center justify-center border-e border-white/20 px-5 sm:px-7 lg:px-10 w-1/2 sm:w-auto border-b sm:border-b-0 pb-5 sm:pb-0">
+                <HeroStatSpotlight className="flex flex-col items-center justify-center border-e border-white/20 px-5 sm:px-7 lg:px-10 w-1/2 sm:w-auto border-b sm:border-b-0 pb-5 sm:pb-0">
                   <p className="font-mono text-4xl lg:text-5xl font-light tracking-tighter text-white mb-2 leading-none">{stats.total}</p>
-                  <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.1em] text-white/60 text-center max-w-[100px] leading-tight">
+                  <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.1em] text-white/80 text-center max-w-[100px] leading-tight">
                     {t('exclusiveVillas')}
                   </p>
-                </div>
+                </HeroStatSpotlight>
 
-                <div className="flex flex-col items-center justify-center sm:border-e border-white/20 px-5 sm:px-7 lg:px-10 w-1/2 sm:w-auto border-b sm:border-b-0 pb-5 sm:pb-0">
+                <HeroStatSpotlight className="flex flex-col items-center justify-center sm:border-e border-white/20 px-5 sm:px-7 lg:px-10 w-1/2 sm:w-auto border-b sm:border-b-0 pb-5 sm:pb-0">
                   <p className="font-mono text-4xl lg:text-5xl font-light tracking-tighter text-white mb-2 leading-none">300<span className="text-xl lg:text-2xl">m²</span></p>
-                  <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.1em] text-white/60 text-center max-w-[100px] leading-tight">
+                  <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.1em] text-white/80 text-center max-w-[100px] leading-tight">
                     {t('startingArea')}
                   </p>
-                </div>
+                </HeroStatSpotlight>
 
-                <div className="flex flex-col items-center justify-center border-e border-white/20 px-5 sm:px-7 lg:px-10 w-1/2 sm:w-auto pt-5 sm:pt-0">
+                <HeroStatSpotlight className="flex flex-col items-center justify-center border-e border-white/20 px-5 sm:px-7 lg:px-10 w-1/2 sm:w-auto pt-5 sm:pt-0">
                   <p className="font-mono text-4xl lg:text-5xl font-light tracking-tighter text-white mb-2 leading-none">4.5<span className="text-xl lg:text-2xl">M</span></p>
-                  <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.1em] text-white/60 text-center max-w-[100px] leading-tight">
+                  <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.1em] text-white/80 text-center max-w-[100px] leading-tight">
                     {t('startingPrice')}
                   </p>
-                </div>
+                </HeroStatSpotlight>
 
-                <div className="flex flex-col items-center justify-center px-5 sm:px-7 lg:px-10 w-1/2 sm:w-auto pt-5 sm:pt-0 relative">
+                <HeroStatSpotlight className="flex flex-col items-center justify-center px-5 sm:px-7 lg:px-10 w-1/2 sm:w-auto pt-5 sm:pt-0">
                   <p className="font-mono text-4xl lg:text-5xl font-light tracking-tighter text-white mb-2 leading-none">100<span className="text-xl lg:text-2xl">%</span></p>
-                  <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.1em] text-white/60 text-center max-w-[100px] leading-tight">
+                  <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.1em] text-white/80 text-center max-w-[100px] leading-tight">
                     {t('phaseOneSold')}
                   </p>
-                </div>
+                </HeroStatSpotlight>
 
               </div>
             </HeroFadeIn>
@@ -176,6 +177,9 @@ export default async function HomePage() {
 
       {/* Register Interest — Final CTA */}
       <RegisterInterestSection />
+
+      {/* Footer */}
+      <Footer />
     </main>
   );
 }

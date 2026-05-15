@@ -14,6 +14,7 @@ const cormorant = Cormorant_Garamond({
   style: ['normal', 'italic'],
   variable: '--font-cormorant',
   display: 'swap',
+  preload: false,
 });
 
 const dmSans = DM_Sans({
@@ -21,6 +22,7 @@ const dmSans = DM_Sans({
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-dm-sans',
   display: 'swap',
+  preload: false,
 });
 
 const dmMono = DM_Mono({
@@ -28,6 +30,7 @@ const dmMono = DM_Mono({
   weight: ['300', '400', '500'],
   variable: '--font-dm-mono',
   display: 'swap',
+  preload: false,
 });
 
 const notoNaskhArabic = Noto_Naskh_Arabic({
@@ -35,6 +38,7 @@ const notoNaskhArabic = Noto_Naskh_Arabic({
   weight: ['400', '500', '600', '700'],
   variable: '--font-arabic',
   display: 'swap',
+  preload: false,
 });
 
 export const viewport: Viewport = {

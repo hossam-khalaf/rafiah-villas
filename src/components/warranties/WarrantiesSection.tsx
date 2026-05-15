@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { ScrollStagger, ScrollFadeIn } from '@/components/motion/ScrollMotion';
+import SpotlightCard from '@/components/ui/SpotlightCard';
 
 interface WarrantyItem {
   years: string;
@@ -48,7 +49,12 @@ export default function WarrantiesSection() {
           {items.map((item, index) => (
             <ScrollFadeIn
               key={index}
-              className="bg-brand-offwhite hover:bg-white transition-colors duration-300 p-8 sm:p-10 flex flex-col group"
+              className="flex flex-col"
+            >
+            <SpotlightCard
+              spotlightColor="oklch(65% 0.12 75 / 0.35)"
+              spotlightSize={300}
+              className="bg-brand-offwhite hover:bg-white transition-colors duration-300 p-8 sm:p-10 flex flex-col flex-1 group"
             >
               {/* Year number */}
               <div className="mb-6">
@@ -81,6 +87,7 @@ export default function WarrantiesSection() {
               <p className="text-xs sm:text-[13px] text-black/50 mt-auto pt-4 leading-relaxed">
                 {item.contractor}
               </p>
+            </SpotlightCard>
             </ScrollFadeIn>
           ))}
         </div>

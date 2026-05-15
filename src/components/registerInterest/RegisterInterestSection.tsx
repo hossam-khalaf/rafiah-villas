@@ -6,6 +6,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import Link from 'next/link';
 import LuxuryBackground from '@/components/ui/LuxuryBackground';
 import { ScrollFadeIn } from '@/components/motion/ScrollMotion';
+import SpotlightCard from '@/components/ui/SpotlightCard';
+import SpotlightButton from '@/components/ui/SpotlightButton';
 
 // ─── Props ────────────────────────────────────────────────────────────────────
 
@@ -55,7 +57,7 @@ interface FormFieldProps {
 function FormField({ id, label, placeholder, type = 'text', value, onChange, autoComplete, required, disabled }: FormFieldProps) {
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/70">
+      <label htmlFor={id} className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/85">
         {label}
       </label>
       <input
@@ -100,7 +102,7 @@ function SuccessState({ title, body }: { title: string; body: string }) {
       </motion.div>
       <div className="space-y-2">
         <p className="font-serif text-2xl text-brand-gold">{title}</p>
-        <p className="text-sm text-white/60 font-light max-w-xs leading-relaxed">{body}</p>
+        <p className="text-sm text-white/80 font-light max-w-xs leading-relaxed">{body}</p>
       </div>
     </motion.div>
   );
@@ -209,7 +211,7 @@ export default function RegisterInterestSection({ villaId, villaTitle, interest 
 
             {/* Sales hotline */}
             <div className="mb-8">
-              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/55 mb-2">
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/75 mb-2">
                 {t('hotlineLabel')}
               </p>
               <a
@@ -222,14 +224,17 @@ export default function RegisterInterestSection({ villaId, villaTitle, interest 
             </div>
 
             {/* License */}
-            <p className="text-[11px] text-white/45 font-light tracking-wide">
+            <p className="text-[11px] text-white/65 font-light tracking-wide">
               {t('licenseLabel')} · {t('licenseNumber')}
             </p>
           </ScrollFadeIn>
 
           {/* ── Right column: form card ───────────────────────────── */}
           <ScrollFadeIn>
-            <div className="bg-black/20 border border-white/15 backdrop-blur-md p-8 sm:p-10">
+            <SpotlightCard
+              spotlightSize={400}
+              className="bg-black/20 border border-white/15 backdrop-blur-md p-8 sm:p-10"
+            >
               <AnimatePresence mode="wait">
                 {isSuccess ? (
                   <SuccessState key="success" title={t('successTitle')} body={t('successBody')} />
@@ -241,7 +246,7 @@ export default function RegisterInterestSection({ villaId, villaTitle, interest 
                       <h3 className="font-serif text-2xl sm:text-3xl text-brand-gold mb-2 tracking-tight">
                         {t('formTitle')}
                       </h3>
-                      <p className="text-xs sm:text-sm text-white/60 font-light leading-relaxed">
+                      <p className="text-xs sm:text-sm text-white/80 font-light leading-relaxed">
                         {t('formSubtitle')}
                       </p>
                     </div>
@@ -304,17 +309,18 @@ export default function RegisterInterestSection({ villaId, villaTitle, interest 
                       </AnimatePresence>
 
                       {/* Submit */}
-                      <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="
-                          relative w-full bg-brand-gold text-brand-black py-4
-                          text-[13px] font-bold uppercase tracking-[0.15em]
-                          border border-brand-gold hover:bg-white hover:text-brand-royal-green transition-all duration-300 active:scale-[0.98]
-                          disabled:opacity-50 disabled:cursor-not-allowed
-                          mt-2
-                        "
-                      >
+                      <SpotlightButton spotlightColor="oklch(78% 0.12 75 / 0.20)">
+                        <button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="
+                            relative w-full bg-brand-gold text-brand-black py-4
+                            text-[13px] font-bold uppercase tracking-[0.15em]
+                            border border-brand-gold hover:bg-white hover:text-brand-royal-green transition-all duration-300 active:scale-[0.98]
+                            disabled:opacity-50 disabled:cursor-not-allowed
+                            mt-2
+                          "
+                        >
                         <AnimatePresence mode="wait" initial={false}>
                           {isSubmitting ? (
                             <motion.span key="loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center justify-center gap-3">
@@ -331,9 +337,10 @@ export default function RegisterInterestSection({ villaId, villaTitle, interest 
                           )}
                         </AnimatePresence>
                       </button>
+                      </SpotlightButton>
 
                       {/* Privacy note */}
-                      <p className="text-[11px] text-white/45 text-center leading-relaxed mt-1">
+                      <p className="text-[11px] text-white/65 text-center leading-relaxed mt-1">
                         {t('privacy')}{' '}
                         <Link
                           href={`/${locale}/privacy`}
@@ -347,7 +354,7 @@ export default function RegisterInterestSection({ villaId, villaTitle, interest 
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
+            </SpotlightCard>
           </ScrollFadeIn>
 
         </div>

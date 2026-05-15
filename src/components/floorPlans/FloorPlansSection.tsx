@@ -6,6 +6,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import Image from 'next/image';
 import LuxuryBackground from '@/components/ui/LuxuryBackground';
 import { ScrollFadeIn } from '@/components/motion/ScrollMotion';
+import SpotlightCard from '@/components/ui/SpotlightCard';
+import SpotlightButton from '@/components/ui/SpotlightButton';
 
 const getFloorPlanImage = (villa: VillaType, floor: FloorType) => {
   if (villa === 'facade' && floor === 'ground') return '/images/facade-ground-floor-plan.png';
@@ -53,7 +55,7 @@ export default function FloorPlansSection() {
             </h2>
           </ScrollFadeIn>
           <ScrollFadeIn>
-            <p className="text-white/60 text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-2xl mt-6">
+            <p className="text-white/80 text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-2xl mt-6">
               {t('subtitle')}
             </p>
           </ScrollFadeIn>
@@ -66,7 +68,7 @@ export default function FloorPlansSection() {
               key={type}
               onClick={() => setActiveVilla(type)}
               className={`pb-4 px-6 sm:px-8 text-[13px] sm:text-sm font-bold uppercase tracking-[0.12em] transition-colors relative ${
-                activeVilla === type ? 'text-brand-gold' : 'text-white/40 hover:text-white/70'
+                activeVilla === type ? 'text-brand-gold' : 'text-white/60 hover:text-white/90'
               }`}
             >
               {t(`tabs.${type}`)}
@@ -110,7 +112,7 @@ export default function FloorPlansSection() {
                       className="flex justify-between items-center py-4 border-b border-white/5 last:border-0 group hover:border-white/20 transition-colors"
                     >
                       <div className="flex items-center gap-4">
-                        <span className="font-mono text-xs text-white/30 group-hover:text-brand-gold transition-colors w-6">
+                        <span className="font-mono text-xs text-white/50 group-hover:text-brand-gold transition-colors w-6">
                           {String(idx + 1).padStart(2, '0')}
                         </span>
                         <span className="text-white/80 font-light text-[13px] sm:text-base group-hover:text-white transition-colors">
@@ -139,7 +141,7 @@ export default function FloorPlansSection() {
                   className={`flex-1 py-4 text-[13px] font-semibold uppercase tracking-[0.12em] transition-all ${
                     activeFloor === floor 
                       ? 'bg-brand-gold text-[#0a0a0a]' 
-                      : 'bg-transparent text-white/50 hover:bg-white/5 hover:text-white'
+                      : 'bg-transparent text-white/70 hover:bg-white/5 hover:text-white'
                   }`}
                 >
                   {t(`floors.${floor}`)}
@@ -148,7 +150,10 @@ export default function FloorPlansSection() {
             </div>
 
             {/* Floor Plan Image Placeholder */}
-            <div className="w-full aspect-square sm:aspect-[4/3] border border-white/10 bg-black/25 relative overflow-hidden flex items-center justify-center p-8">
+            <SpotlightCard
+              spotlightSize={450}
+              className="w-full aspect-square sm:aspect-[4/3] border border-white/10 bg-black/25 relative flex items-center justify-center p-8"
+            >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`${activeVilla}-${activeFloor}-image`}
@@ -168,7 +173,7 @@ export default function FloorPlansSection() {
                   />
                 </motion.div>
               </AnimatePresence>
-            </div>
+            </SpotlightCard>
 
           </div>
 
