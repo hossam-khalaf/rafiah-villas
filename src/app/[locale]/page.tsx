@@ -56,7 +56,7 @@ export default async function HomePage() {
               fill
               priority
               sizes="100vw"
-              className="absolute inset-0 object-cover opacity-90 z-0"
+              className="absolute inset-0 object-cover z-0"
             />
             <video
               src="/videos/rafiah-hero.mp4"
@@ -64,10 +64,10 @@ export default async function HomePage() {
               loop
               muted
               playsInline
-              className="absolute inset-0 w-full h-full object-cover opacity-90 z-10"
+              className="absolute inset-0 w-full h-full object-cover z-10"
             />
             {/* Dark subtle overlay for readability */}
-            <div className="absolute inset-0 bg-black/20 z-20"></div>
+            <div className="absolute inset-0 bg-black/30 z-20"></div>
           </HeroImageScale>
         </div>
 
