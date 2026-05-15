@@ -74,40 +74,36 @@ export default async function HomePage() {
         {/* Content Overlay - Centered Flow */}
         <div className="relative z-10 w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center h-full text-center mt-16 sm:mt-24">
           
-          <HeroStagger className="max-w-4xl flex flex-col items-center justify-center space-y-6 sm:space-y-8 w-full">
+          <div className="max-w-4xl flex flex-col items-center justify-center space-y-6 sm:space-y-8 w-full">
             
             {/* Subtitle Badge */}
-            <HeroFadeIn>
-              <div className="inline-flex items-center justify-center gap-4 text-white/80 uppercase tracking-[0.15em] text-[11px] sm:text-[13px] font-semibold">
-                <span className="w-8 sm:w-12 h-px bg-white/40"></span>
-                {t('subtitle')}
-                <span className="w-8 sm:w-12 h-px bg-white/40"></span>
-              </div>
-            </HeroFadeIn>
-            
-            {/* Title (Single Line) */}
-            <HeroFadeIn>
-              <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.05] text-white px-4">
-                {t('title')}
-              </h1>
-            </HeroFadeIn>
-            
+            <div className="animate-hero-fade-up delay-100 inline-flex items-center justify-center gap-4 text-white/80 uppercase tracking-[0.15em] text-[11px] sm:text-[13px] font-semibold">
+              <span className="w-8 sm:w-12 h-px bg-white/40"></span>
+              {t('subtitle')}
+              <span className="w-8 sm:w-12 h-px bg-white/40"></span>
+            </div>
+
+            {/* Main Title - LCP Element */}
+            <h1 className="animate-hero-fade-up delay-250 text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.05] text-white px-4">
+              {t('title')}
+            </h1>
+
             {/* Location & Subheading */}
-            <HeroFadeIn className="flex flex-col items-center gap-3">
+            <div className="animate-hero-fade-up delay-400 flex flex-col items-center gap-3">
               <p className="text-[11px] sm:text-[13px] text-white/70 uppercase tracking-[0.15em] font-semibold">
                 {t('location')}
               </p>
               <p className="text-sm sm:text-base lg:text-lg text-white/90 font-normal">
                 {t('developerIntro')}
               </p>
-            </HeroFadeIn>
+            </div>
 
             {/* CTA */}
-            <HeroFadeIn className="pt-2 sm:pt-4">
+            <div className="animate-hero-fade-up delay-400 pt-2 sm:pt-4">
               <HeroButton href="#register-interest" className="bg-[#012a17] border border-[#012a17] text-white px-10 py-4 text-[13px] sm:text-sm font-bold uppercase tracking-[0.15em] hover:bg-white hover:text-[#012a17] transition-colors duration-300 w-full sm:w-auto">
                 {t('registerInterest')}
               </HeroButton>
-            </HeroFadeIn>
+            </div>
 
             {/* Inline Stats Area */}
             <HeroFadeIn className="w-full pt-8 sm:pt-12">
@@ -144,7 +140,7 @@ export default async function HomePage() {
               </div>
             </HeroFadeIn>
             
-          </HeroStagger>
+          </div>
           
         </div>
 

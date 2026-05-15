@@ -29,7 +29,7 @@ export default async function LocationSection() {
               alt={t('mapLabel')}
               fill
               className="object-cover mix-blend-multiply opacity-80"
-              sizes="(max-width: 1024px) 100vw, 50vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
 
             {/* Clickable Map Pin to Google Maps */}
