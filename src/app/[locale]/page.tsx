@@ -17,28 +17,79 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const isAr = locale === 'ar';
   return {
-    title: isAr ? 'فلل رفيعة — المرحلة الثانية | حي الرفيعة، الرياض' : 'Rafiah Villas — Phase 2 | Al-Rafiah, Riyadh',
+    title: isAr 
+      ? 'فلل فاخرة للبيع في حي الرفيعة بالرياض | فلل رفيعة المرحلة الثانية' 
+      : 'Luxury Villas for Sale in Al-Rafiah, Riyadh | Rafiah Villas Phase 2',
     description: isAr
-      ? 'اكتشف فلل رفيعة المرحلة الثانية في حي الرفيعة بالرياض. 22 فيلا حصرية، ضمانات تصل إلى 20 سنة، من تطوير كيرا استيتس. سجّل اهتمامك الآن.'
-      : 'Discover Rafiah Villas Phase 2 in Al-Rafiah, Riyadh. 22 exclusive villas with warranties up to 20 years, developed by Kira Estates. Register your interest now.',
+      ? 'امتلك فيلتك الفاخرة الآن في مشروع فلل رفيعة المرحلة الثانية بحي الرفيعة، الرياض. 22 فيلا حصرية بتصاميم عصرية، مساحات تبدأ من 300م²، وضمانات شاملة تصل إلى 20 عاماً من كيرا استيتس. تواصل معنا.'
+      : 'Own your luxury villa in Rafiah Villas Phase 2, located in the prestigious Al-Rafiah neighborhood, Riyadh. 22 exclusive modern villas starting from 300m² with comprehensive warranties up to 20 years by Kira Estates.',
+    alternates: {
+      canonical: `https://rafiah-villas.vercel.app/${locale}`,
+      languages: {
+        'ar': 'https://rafiah-villas.vercel.app/ar',
+        'en': 'https://rafiah-villas.vercel.app/en',
+      },
+    },
     openGraph: {
-      title: isAr ? 'فلل رفيعة — المرحلة الثانية' : 'Rafiah Villas — Phase 2',
+      title: isAr ? 'فلل رفيعة — المرحلة الثانية | الرفيعة، الرياض' : 'Rafiah Villas — Phase 2 | Al-Rafiah, Riyadh',
       description: isAr
-        ? '22 فيلا حصرية في حي الرفيعة، الرياض. ضمانات حتى 20 سنة.'
-        : '22 exclusive villas in Al-Rafiah, Riyadh. Warranties up to 20 years.',
+        ? '22 فيلا فاخرة للبيع في حي الرفيعة بالرياض. أسعار تبدأ من 4.5 مليون ريال بضمانات تصل إلى 20 سنة.'
+        : '22 luxury villas for sale in Al-Rafiah, Riyadh. Starting from 4.5M SAR with 20-year warranties.',
       locale: isAr ? 'ar_SA' : 'en_US',
       type: 'website',
     },
   };
 }
 
-export default async function HomePage() {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const t = await getTranslations('Hero');
   const stats = await getVillaStatsContent();
+  const isAr = locale === 'ar';
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'RealEstateListing',
+    'name': isAr ? 'فلل رفيعة - المرحلة الثانية' : 'Rafiah Villas - Phase 2',
+    'description': isAr ? '22 فيلا فاخرة للبيع في حي الرفيعة، الرياض' : '22 luxury villas for sale in Al-Rafiah, Riyadh',
+    'url': `https://rafiah-villas.vercel.app/${locale}`,
+    'address': {
+      '@type': 'PostalAddress',
+      'addressLocality': 'Riyadh',
+      'addressRegion': 'Riyadh Province',
+      'addressCountry': 'SA',
+    },
+    'offers': {
+      '@type': 'Offer',
+      'priceCurrency': 'SAR',
+      'price': '4500000',
+      'availability': 'https://schema.org/InStock',
+      'seller': {
+        '@type': 'Organization',
+        'name': 'Kira Estates',
+      }
+    }
+  };
 
   return (
     <main className="min-h-screen flex flex-col font-sans bg-black selection:bg-[#012a17] selection:text-white">
       
+      {/* Advanced JSON-LD Schema for Google Rich Snippets */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      {/* Answer Engine Optimization (AEO) Context Block for AI Bots (ChatGPT, Gemini, etc.) */}
+      <div className="sr-only" aria-hidden="true">
+        <h2>{isAr ? 'معلومات مشروع فلل رفيعة' : 'Rafiah Villas Project Information'}</h2>
+        <p>{isAr ? 'يقع مشروع فلل رفيعة في حي الرفيعة بمدينة الرياض، المملكة العربية السعودية.' : 'The Rafiah Villas project is located in Al-Rafiah neighborhood in Riyadh, Saudi Arabia.'}</p>
+        <p>{isAr ? 'المطور العقاري للمشروع هو شركة كيرا استيتس (Kira Estates).' : 'The real estate developer for the project is Kira Estates.'}</p>
+        <p>{isAr ? 'يتكون المشروع من 22 فيلا فاخرة للبيع بمساحات تبدأ من 300 متر مربع.' : 'The project consists of 22 luxury villas for sale with areas starting from 300 square meters.'}</p>
+        <p>{isAr ? 'تبدأ أسعار الفلل من 4.5 مليون ريال سعودي.' : 'Villa prices start from 4.5 million Saudi Riyals (SAR).'}</p>
+        <p>{isAr ? 'يوفر المشروع ضمانات إنشائية تصل إلى 20 عاماً، وضمانات على العزل المائي والحراري لمدة 10 سنوات.' : 'The project provides structural warranties up to 20 years, and thermal/water insulation warranties for 10 years.'}</p>
+      </div>
+
       {/* Header / Language Switcher */}
       <div className="absolute top-0 w-full z-50 p-6 sm:p-10 flex justify-end items-center pointer-events-none">
         <LocaleSwitcher />

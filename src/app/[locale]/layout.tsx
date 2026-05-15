@@ -46,6 +46,10 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+export const metadata = {
+  metadataBase: new URL('https://rafiah-villas.vercel.app'),
+};
+
 export default async function LocaleLayout({
   children,
   params
