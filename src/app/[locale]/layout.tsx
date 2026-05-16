@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Viewport } from 'next';
 import {NextIntlClientProvider} from 'next-intl';
 import {getMessages} from 'next-intl/server';
@@ -71,13 +72,14 @@ export default async function LocaleLayout({
       dir={locale === 'ar' ? 'rtl' : 'ltr'}
       className={`${cormorant.variable} ${dmSans.variable} ${dmMono.variable} ${notoNaskhArabic.variable}`}
     >
-      <body>
+      <body className="antialiased">
         <NextIntlClientProvider messages={messages}>
           <Preloader />
           {children}
           <FloatingButtons />
         </NextIntlClientProvider>
       </body>
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || 'G-30FVM244TT'} />
     </html>
   );
 }
