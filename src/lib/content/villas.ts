@@ -15,6 +15,18 @@ interface SanityVillaRaw {
   price?: number;
 }
 
+/** Sort weight: available first, booked/sold last */
+const STATUS_WEIGHT: Record<VillaStatus, number> = {
+  available: 1,
+  reserved: 2,
+  booked: 3,
+  sold: 4,
+};
+
+function sortByAvailability(villas: Villa[]): Villa[] {
+  return [...villas].sort((a, b) => STATUS_WEIGHT[a.status] - STATUS_WEIGHT[b.status]);
+}
+
 // Helper to map Sanity document back to our core Villa type
 function mapSanityVilla(sanityDoc: SanityVillaRaw): Villa {
   return {
@@ -31,12 +43,12 @@ export async function getAllVillas(): Promise<Villa[]> {
   try {
     const sanityVillas = await client.fetch(allVillasQuery);
     if (sanityVillas && sanityVillas.length > 0) {
-      return sanityVillas.map(mapSanityVilla);
+      return sortByAvailability(sanityVillas.map(mapSanityVilla));
     }
   } catch (error) {
     console.warn('Failed to fetch villas from Sanity, falling back to static data', error);
   }
-  return VILLAS;
+  return sortByAvailability(VILLAS);
 }
 
 export async function getAvailableVillasContent(): Promise<Villa[]> {
@@ -67,11 +79,12 @@ export async function getVillaStatsContent(): Promise<VillaStats> {
   try {
     const sanityVillas: SanityVillaRaw[] = await client.fetch(allVillasQuery);
     if (sanityVillas && sanityVillas.length > 0) {
-      const stats = { total: 0, available: 0, reserved: 0, sold: 0 } as VillaStats;
+      const stats = { total: 0, available: 0, reserved: 0, booked: 0, sold: 0 } as VillaStats;
       sanityVillas.forEach((v) => {
         stats.total++;
         if (v.status === 'available') stats.available++;
         if (v.status === 'reserved') stats.reserved++;
+        if (v.status === 'booked') stats.booked++;
         if (v.status === 'sold') stats.sold++;
       });
       return stats;

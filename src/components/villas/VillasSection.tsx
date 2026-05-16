@@ -24,6 +24,7 @@ export default async function VillasSection() {
       available: ts('available'),
       sold: ts('sold'),
       reserved: ts('reserved'),
+      booked: ts('booked'),
     }
   };
 

@@ -40,6 +40,7 @@ export const villaType = defineType({
         list: [
           { title: 'Available', value: 'available' },
           { title: 'Reserved', value: 'reserved' },
+          { title: 'Booked', value: 'booked' },
           { title: 'Sold', value: 'sold' },
         ],
       },

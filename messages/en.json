@@ -15,6 +15,7 @@
   "Stats": {
     "available": "Available",
     "reserved": "Reserved",
+    "booked": "Booked",
     "sold": "Sold"
   },
   "Location": {

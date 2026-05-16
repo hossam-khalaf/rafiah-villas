@@ -5,6 +5,7 @@ export const PROJECT_LABELS = {
     status: {
       available: 'متاحة',
       reserved: 'محجوزة',
+      booked: 'محجوزة',
       sold: 'مباعة'
     } as Record<VillaStatus, string>,
     types: {
@@ -17,6 +18,7 @@ export const PROJECT_LABELS = {
     status: {
       available: 'Available',
       reserved: 'Reserved',
+      booked: 'Booked',
       sold: 'Sold'
     } as Record<VillaStatus, string>,
     types: {

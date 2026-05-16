@@ -24,6 +24,7 @@ interface VillasGridProps {
       available: string;
       sold: string;
       reserved: string;
+      booked: string;
     }
   };
 }
@@ -36,12 +37,18 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
   const arrowIcon = isRtl ? '←' : '→';
   const areaSymbol = isRtl ? 'م' : 'm';
 
-  const filteredVillas = villas.filter(v => v.type === activeTab);
+  const filteredVillas = villas
+    .filter(v => v.type === activeTab)
+    .sort((a, b) => {
+      const weight: Record<VillaStatus, number> = { available: 1, reserved: 2, booked: 3, sold: 4 };
+      return weight[a.status] - weight[b.status];
+    });
 
   // Status Colors Mapping
   const statusConfig: Record<VillaStatus, { bg: string, text: string, border: string }> = {
     available: { bg: 'bg-brand-gold/15', text: 'text-brand-gold',  border: 'border-brand-gold/35' },
     reserved:  { bg: 'bg-white/8',       text: 'text-white/75',   border: 'border-white/20' },
+    booked:    { bg: 'bg-white/8',       text: 'text-white/75',   border: 'border-white/20' },
     sold:      { bg: 'bg-white/5',        text: 'text-white/50',   border: 'border-white/10' },
   };
 
@@ -106,7 +113,7 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
               {/* Bottom Row: Price & Action */}
               <div className="flex justify-between items-center mt-auto z-10 relative">
                 <div className="flex items-center gap-3 text-white/90 group-hover:text-white transition-colors">
-                  {villa.status === 'available' ? (
+                {villa.status === 'available' ? (
                     <span className="font-mono text-sm sm:text-base tracking-wide">
                       {villa.price ? villa.price.toLocaleString() : 'TBD'}{' '}
                       <span className="text-[0.6rem] uppercase tracking-widest text-white/75 ms-1">{labels.card.currency}</span>

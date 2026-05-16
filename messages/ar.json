@@ -15,6 +15,7 @@
   "Stats": {
     "available": "متاحة",
     "reserved": "محجوزة",
+    "booked": "محجوزة",
     "sold": "مباعة"
   },
   "Location": {

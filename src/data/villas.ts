@@ -47,7 +47,7 @@ export function getAvailableVillas(): Villa[] {
 
 export function sortVillasByAvailability(): Villa[] {
   // Sort order: available -> reserved -> sold
-  const statusWeight: Record<VillaStatus, number> = { available: 1, reserved: 2, sold: 3 };
+  const statusWeight: Record<VillaStatus, number> = { available: 1, reserved: 2, booked: 3, sold: 4 };
   return [...VILLAS].sort((a, b) => statusWeight[a.status] - statusWeight[b.status]);
 }
 
@@ -58,6 +58,6 @@ export function getVillaStats(): VillaStats {
       stats[villa.status]++;
       return stats;
     },
-    { total: 0, available: 0, reserved: 0, sold: 0 } as VillaStats
+    { total: 0, available: 0, reserved: 0, booked: 0, sold: 0 } as VillaStats
   );
 }

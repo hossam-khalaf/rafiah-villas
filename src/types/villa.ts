@@ -1,4 +1,4 @@
-export type VillaStatus = 'available' | 'reserved' | 'sold';
+export type VillaStatus = 'available' | 'reserved' | 'booked' | 'sold';
 export type VillaType = 'corner' | 'northFacade' | 'southFacade';
 
 export interface Villa {
@@ -17,5 +17,6 @@ export interface VillaStats {
   total: number;
   available: number;
   reserved: number;
+  booked: number;
   sold: number;
 }
