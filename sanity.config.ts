@@ -2,8 +2,8 @@ import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { schemaTypes } from './src/sanity/schemaTypes';
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'dfvpizyg';
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
+const projectId = (process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'dfvpizyg').trim();
+const dataset = (process.env.NEXT_PUBLIC_SANITY_DATASET || 'production').trim();
 
 export default defineConfig({
   name: 'rafiah-villas',
