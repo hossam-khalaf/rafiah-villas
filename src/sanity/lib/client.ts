@@ -10,5 +10,5 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: true, // Use CDN for fast, cacheable responses
+  useCdn: false, // Set to false to bypass CDN caching for live ISR updates
 });

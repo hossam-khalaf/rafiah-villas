@@ -41,7 +41,7 @@ function mapSanityVilla(sanityDoc: SanityVillaRaw): Villa {
 
 export async function getAllVillas(): Promise<Villa[]> {
   try {
-    const sanityVillas = await client.fetch(allVillasQuery);
+    const sanityVillas = await client.fetch(allVillasQuery, {}, { next: { revalidate: 10 } });
     if (sanityVillas && sanityVillas.length > 0) {
       return sortByAvailability(sanityVillas.map(mapSanityVilla));
     }
@@ -53,7 +53,7 @@ export async function getAllVillas(): Promise<Villa[]> {
 
 export async function getAvailableVillasContent(): Promise<Villa[]> {
   try {
-    const sanityVillas = await client.fetch(availableVillasQuery);
+    const sanityVillas = await client.fetch(availableVillasQuery, {}, { next: { revalidate: 10 } });
     if (sanityVillas && sanityVillas.length > 0) {
       return sanityVillas.map(mapSanityVilla);
     }
@@ -65,7 +65,7 @@ export async function getAvailableVillasContent(): Promise<Villa[]> {
 
 export async function getFeaturedVillasContent(): Promise<Villa[]> {
   try {
-    const sanityVillas = await client.fetch(featuredVillasQuery);
+    const sanityVillas = await client.fetch(featuredVillasQuery, {}, { next: { revalidate: 10 } });
     if (sanityVillas && sanityVillas.length > 0) {
       return sanityVillas.map(mapSanityVilla);
     }
@@ -77,7 +77,7 @@ export async function getFeaturedVillasContent(): Promise<Villa[]> {
 
 export async function getVillaStatsContent(): Promise<VillaStats> {
   try {
-    const sanityVillas: SanityVillaRaw[] = await client.fetch(allVillasQuery);
+    const sanityVillas: SanityVillaRaw[] = await client.fetch(allVillasQuery, {}, { next: { revalidate: 10 } });
     if (sanityVillas && sanityVillas.length > 0) {
       const stats = { total: 0, available: 0, reserved: 0, booked: 0, sold: 0 } as VillaStats;
       sanityVillas.forEach((v) => {
