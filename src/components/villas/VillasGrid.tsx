@@ -46,10 +46,10 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
 
   // Status Colors Mapping
   const statusConfig: Record<VillaStatus, { bg: string, text: string, border: string }> = {
-    available: { bg: 'bg-brand-gold/15', text: 'text-brand-gold',  border: 'border-brand-gold/35' },
-    reserved:  { bg: 'bg-white/8',       text: 'text-white/75',   border: 'border-white/20' },
-    booked:    { bg: 'bg-white/8',       text: 'text-white/75',   border: 'border-white/20' },
-    sold:      { bg: 'bg-white/5',        text: 'text-white/50',   border: 'border-white/10' },
+    available: { bg: 'bg-emerald-500/10', text: 'text-emerald-400',  border: 'border-emerald-500/30' },
+    reserved:  { bg: 'bg-brand-gold/10',  text: 'text-brand-gold',   border: 'border-brand-gold/30' },
+    booked:    { bg: 'bg-brand-gold/10',  text: 'text-brand-gold',   border: 'border-brand-gold/30' },
+    sold:      { bg: 'bg-red-500/5',      text: 'text-red-400/70',   border: 'border-red-500/20' },
   };
 
   return (
