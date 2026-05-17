@@ -13,6 +13,9 @@ const FloorPlansSection = dynamic(() => import('@/components/floorPlans/FloorPla
 const WarrantiesSection = dynamic(() => import('@/components/warranties/WarrantiesSection'));
 const RegisterInterestSection = dynamic(() => import('@/components/registerInterest/RegisterInterestSection'));
 
+// Revalidate page data every 60 seconds (ISR) to automatically pull Sanity updates
+export const revalidate = 60;
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const isAr = locale === 'ar';
