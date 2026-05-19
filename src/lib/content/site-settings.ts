@@ -4,7 +4,7 @@ import { siteSettingsQuery } from '@/sanity/lib/queries';
 
 export async function getSiteSettings() {
   try {
-    const settings = await client.fetch(siteSettingsQuery);
+    const settings = await client.fetch(siteSettingsQuery, {}, { next: { tags: ['siteSettings'], revalidate: 60 } });
     if (settings && Object.keys(settings).length > 0) {
       return {
         developer: settings.developerNameEn || PROJECT_INFO.developer,

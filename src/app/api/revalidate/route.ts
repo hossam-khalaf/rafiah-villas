@@ -40,8 +40,9 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ status: 200, revalidated: false, message: 'No relevant document types changed' });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Webhook error:', err);
-    return new Response(err.message, { status: 500 });
+    const message = err instanceof Error ? err.message : 'Unknown error';
+    return new Response(message, { status: 500 });
   }
 }
