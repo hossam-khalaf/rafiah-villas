@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server';
-import { VILLAS } from '@/data/villas';
+import { getAllVillas } from '@/lib/content/villas';
 import VillasGrid from './VillasGrid';
 import { ScrollStagger, ScrollFadeIn } from '@/components/motion/ScrollMotion';
 import LuxuryBackground from '@/components/ui/LuxuryBackground';
@@ -7,6 +7,9 @@ import LuxuryBackground from '@/components/ui/LuxuryBackground';
 export default async function VillasSection() {
   const t = await getTranslations('Collection');
   const ts = await getTranslations('Stats');
+
+  // Villa inventory from Sanity (falls back to static data if Sanity is empty)
+  const villas = await getAllVillas();
 
   // We pass the required translation strings to the Client Component
   const labels = {
@@ -58,7 +61,7 @@ export default async function VillasSection() {
 
           {/* Interactive Grid */}
           <ScrollFadeIn className="w-full">
-            <VillasGrid villas={VILLAS} labels={labels} />
+            <VillasGrid villas={villas} labels={labels} />
           </ScrollFadeIn>
 
         </ScrollStagger>
