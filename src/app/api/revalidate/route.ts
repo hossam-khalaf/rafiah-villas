@@ -1,4 +1,4 @@
-import { revalidateTag } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 import { type NextRequest, NextResponse } from 'next/server';
 import { parseBody } from 'next-sanity/webhook';
 
@@ -33,8 +33,9 @@ export async function POST(req: NextRequest) {
 
     // Whenever ANY villa document changes, we revalidate the 'villa' tag cache instantly
     if (body._type === 'villa' || body._type === 'siteSettings') {
-      revalidateTag('villa');
-      revalidateTag('settings');
+      // In Next.js 16, revalidateTag has a breaking API change. 
+      // Using revalidatePath('/', 'layout') is safer and purges the entire site cache instantly.
+      revalidatePath('/', 'layout');
       return NextResponse.json({ status: 200, revalidated: true, now: Date.now(), body });
     }
 
