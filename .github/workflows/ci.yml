@@ -17,7 +17,9 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        # Must match the Node/npm that generated package-lock.json (npm 11).
+        # npm 10 (Node 20) recomputes the tree and fails `npm ci` sync check.
+        node-version: '24'
         cache: 'npm'
 
     - name: Install Dependencies
