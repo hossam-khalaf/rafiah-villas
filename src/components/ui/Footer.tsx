@@ -4,11 +4,28 @@ import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function Footer() {
+interface FooterProps {
+  /** Live values from Sanity siteSettings — fall back to translation defaults */
+  settings?: {
+    phone:          string | null;
+    whatsappNumber: string | null;
+    instagramUrl:   string | null;
+    licenseNumber:  string | null;
+  };
+}
+
+export default function Footer({ settings }: FooterProps) {
   const t = useTranslations('Footer');
   const locale = useLocale();
   const isRtl = locale === 'ar';
   const year = new Date().getFullYear();
+
+  // Resolve contact details — Sanity first, translation defaults otherwise
+  const salesNumber  = settings?.phone || t('salesNumber');
+  const phoneHref    = salesNumber.replace(/\D/g, '');
+  const waNumber     = (settings?.whatsappNumber || '966920033262').replace(/\D/g, '');
+  const instagramUrl = settings?.instagramUrl || 'https://www.instagram.com/kira_estates/';
+  const licenseNo    = settings?.licenseNumber || t('licenseNumber');
 
   return (
     <footer className="w-full bg-brand-royal-green border-t border-white/5">
@@ -39,7 +56,7 @@ export default function Footer() {
               {t('licenseTitle')}
             </p>
             <p className="font-mono text-2xl sm:text-3xl text-white tracking-[0.08em]" dir="ltr">
-              {t('licenseNumber')}
+              {licenseNo}
             </p>
             {/* REGA Badge */}
             <div className="relative w-[200px] h-[140px] sm:w-[240px] sm:h-[170px]">
@@ -60,17 +77,17 @@ export default function Footer() {
             </p>
 
             <a
-              href="tel:920033262"
+              href={`tel:${phoneHref}`}
               className="font-mono text-2xl sm:text-3xl text-brand-gold hover:text-white transition-colors duration-300 tracking-[0.08em]"
               dir="ltr"
             >
-              {t('salesNumber')}
+              {salesNumber}
             </a>
 
             <div className="flex items-center gap-3 mt-1">
               {/* Phone */}
               <a
-                href="tel:920033262"
+                href={`tel:${phoneHref}`}
                 aria-label="Call Sales"
                 className="w-11 h-11 border border-white/20 flex items-center justify-center text-white hover:text-brand-gold hover:border-brand-gold/40 transition-all duration-300"
               >
@@ -80,7 +97,7 @@ export default function Footer() {
               </a>
               {/* WhatsApp */}
               <a
-                href="https://wa.me/966920033262"
+                href={`https://wa.me/${waNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
@@ -119,7 +136,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="https://www.instagram.com/kira_estates/"
+              href={instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"

@@ -1,6 +1,8 @@
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { getVillaStatsContent } from '@/lib/content/villas';
-import { HeroStagger, HeroFadeIn, HeroImageScale, HeroButton, HeroStatSpotlight } from '@/components/hero/RafiahHeroMotion';
+import { getSiteSettings } from '@/lib/content/site-settings';
+import { HeroFadeIn, HeroImageScale, HeroButton, HeroStatSpotlight } from '@/components/hero/RafiahHeroMotion';
 import LocaleSwitcher from '@/components/ui/LocaleSwitcher';
 import Footer from '@/components/ui/Footer';
 import dynamic from 'next/dynamic';
@@ -16,30 +18,75 @@ const RegisterInterestSection = dynamic(() => import('@/components/registerInter
 // Revalidate page data every 60 seconds (ISR) to automatically pull Sanity updates
 export const revalidate = 60;
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+const SITE_URL = 'https://rafiah-villas.vercel.app';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isAr = locale === 'ar';
+  const settings = await getSiteSettings();
+
+  // SEO title/description — Sanity siteSettings first, sensible defaults otherwise
+  const title = isAr
+    ? (settings.defaultSeoTitleAr || 'فلل فاخرة للبيع في حي الرفيعة بالرياض | فلل رفيعة المرحلة الثانية')
+    : (settings.defaultSeoTitleEn || 'Luxury Villas for Sale in Al-Rafiah, Riyadh | Rafiah Villas Phase 2');
+
+  const description = isAr
+    ? (settings.defaultSeoDescriptionAr || 'امتلك فيلتك الفاخرة الآن في مشروع فلل رفيعة المرحلة الثانية بحي الرفيعة، الرياض. 22 فيلا حصرية بتصاميم عصرية، مساحات تبدأ من 300م²، وضمانات شاملة تصل إلى 20 عاماً من كيرا استيتس. تواصل معنا.')
+    : (settings.defaultSeoDescriptionEn || 'Own your luxury villa in Rafiah Villas Phase 2, located in the prestigious Al-Rafiah neighborhood, Riyadh. 22 exclusive modern villas starting from 300m² with comprehensive warranties up to 20 years by Kira Estates.');
+
+  const ogTitle = isAr ? 'فلل رفيعة — المرحلة الثانية | الرفيعة، الرياض' : 'Rafiah Villas — Phase 2 | Al-Rafiah, Riyadh';
+  const ogImage = settings.ogImageUrl || `${SITE_URL}/images/rafiah-hero-poster.jpg`;
+  const url     = `${SITE_URL}/${locale}`;
+
   return {
-    title: isAr 
-      ? 'فلل فاخرة للبيع في حي الرفيعة بالرياض | فلل رفيعة المرحلة الثانية' 
-      : 'Luxury Villas for Sale in Al-Rafiah, Riyadh | Rafiah Villas Phase 2',
-    description: isAr
-      ? 'امتلك فيلتك الفاخرة الآن في مشروع فلل رفيعة المرحلة الثانية بحي الرفيعة، الرياض. 22 فيلا حصرية بتصاميم عصرية، مساحات تبدأ من 300م²، وضمانات شاملة تصل إلى 20 عاماً من كيرا استيتس. تواصل معنا.'
-      : 'Own your luxury villa in Rafiah Villas Phase 2, located in the prestigious Al-Rafiah neighborhood, Riyadh. 22 exclusive modern villas starting from 300m² with comprehensive warranties up to 20 years by Kira Estates.',
+    title,
+    description,
+    keywords: isAr
+      ? ['فلل للبيع', 'فلل الرياض', 'فلل حي الرفيعة', 'فلل فاخرة الرياض', 'مشروع رفيعة', 'فلل رفيعة المرحلة الثانية', 'كيرا استيتس', 'عقارات الرياض', 'شراء فيلا الرياض', 'فلل للبيع على الخارطة']
+      : ['villas for sale', 'Riyadh villas', 'Al-Rafiah villas', 'luxury villas Riyadh', 'Rafiah Villas', 'Rafiah Phase 2', 'Kira Estates', 'Riyadh real estate', 'buy villa Riyadh', 'off-plan villas Saudi Arabia'],
+    authors:   [{ name: settings.developer }],
+    creator:   settings.developer,
+    publisher: settings.developer,
+    category:  'real estate',
     alternates: {
-      canonical: `https://rafiah-villas.vercel.app/${locale}`,
+      canonical: url,
       languages: {
-        'ar': 'https://rafiah-villas.vercel.app/ar',
-        'en': 'https://rafiah-villas.vercel.app/en',
+        'ar':        `${SITE_URL}/ar`,
+        'en':        `${SITE_URL}/en`,
+        'x-default': `${SITE_URL}/ar`,
+      },
+    },
+    robots: {
+      index:  true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+        'max-snippet':       -1,
+        'max-video-preview': -1,
       },
     },
     openGraph: {
-      title: isAr ? 'فلل رفيعة — المرحلة الثانية | الرفيعة، الرياض' : 'Rafiah Villas — Phase 2 | Al-Rafiah, Riyadh',
-      description: isAr
-        ? '22 فيلا فاخرة للبيع في حي الرفيعة بالرياض. أسعار تبدأ من 4.5 مليون ريال بضمانات تصل إلى 20 سنة.'
-        : '22 luxury villas for sale in Al-Rafiah, Riyadh. Starting from 4.5M SAR with 20-year warranties.',
-      locale: isAr ? 'ar_SA' : 'en_US',
-      type: 'website',
+      title:       ogTitle,
+      description,
+      url,
+      siteName:    isAr ? 'فلل رفيعة' : 'Rafiah Villas',
+      locale:      isAr ? 'ar_SA' : 'en_US',
+      alternateLocale: isAr ? 'en_US' : 'ar_SA',
+      type:        'website',
+      images: [{
+        url:    ogImage,
+        width:  1200,
+        height: 630,
+        alt:    ogTitle,
+      }],
+    },
+    twitter: {
+      card:        'summary_large_image',
+      title:       ogTitle,
+      description,
+      images:      [ogImage],
     },
   };
 }
@@ -48,30 +95,61 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const t = await getTranslations('Hero');
   const stats = await getVillaStatsContent();
+  const settings = await getSiteSettings();
   const isAr = locale === 'ar';
 
+  const url     = `${SITE_URL}/${locale}`;
+  const ogImage = settings.ogImageUrl || `${SITE_URL}/images/rafiah-hero-poster.jpg`;
+  const phone   = settings.phone || '920033262';
+  const sameAs  = [
+    settings.instagramUrl || 'https://www.instagram.com/kira_estates/',
+    'https://x.com/kaborat_kira',
+  ];
+
+  // Structured data — RealEstateListing + the developer as a RealEstateAgent
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'RealEstateListing',
-    'name': isAr ? 'فلل رفيعة - المرحلة الثانية' : 'Rafiah Villas - Phase 2',
-    'description': isAr ? '22 فيلا فاخرة للبيع في حي الرفيعة، الرياض' : '22 luxury villas for sale in Al-Rafiah, Riyadh',
-    'url': `https://rafiah-villas.vercel.app/${locale}`,
-    'address': {
-      '@type': 'PostalAddress',
-      'addressLocality': 'Riyadh',
-      'addressRegion': 'Riyadh Province',
-      'addressCountry': 'SA',
-    },
-    'offers': {
-      '@type': 'Offer',
-      'priceCurrency': 'SAR',
-      'price': '4500000',
-      'availability': 'https://schema.org/InStock',
-      'seller': {
-        '@type': 'Organization',
-        'name': 'Kira Estates',
-      }
-    }
+    '@graph': [
+      {
+        '@type': 'RealEstateListing',
+        '@id': `${url}#listing`,
+        'name': isAr ? 'فلل رفيعة - المرحلة الثانية' : 'Rafiah Villas - Phase 2',
+        'description': isAr ? '22 فيلا فاخرة للبيع في حي الرفيعة، الرياض' : '22 luxury villas for sale in Al-Rafiah, Riyadh',
+        'url': url,
+        'image': ogImage,
+        'inLanguage': isAr ? 'ar' : 'en',
+        'numberOfItems': stats.total,
+        'address': {
+          '@type': 'PostalAddress',
+          'addressLocality': 'Riyadh',
+          'addressRegion': 'Riyadh Province',
+          'addressCountry': 'SA',
+        },
+        'offers': {
+          '@type': 'Offer',
+          'priceCurrency': 'SAR',
+          'price': '4500000',
+          'availability': 'https://schema.org/InStock',
+          'seller': { '@id': `${SITE_URL}#developer` },
+        },
+      },
+      {
+        '@type': 'RealEstateAgent',
+        '@id': `${SITE_URL}#developer`,
+        'name': settings.developer,
+        'url': SITE_URL,
+        'logo': `${SITE_URL}/images/kira-logo.png`,
+        'image': `${SITE_URL}/images/kira-logo.png`,
+        'telephone': phone,
+        'areaServed': { '@type': 'City', 'name': 'Riyadh' },
+        'address': {
+          '@type': 'PostalAddress',
+          'addressLocality': 'Riyadh',
+          'addressCountry': 'SA',
+        },
+        'sameAs': sameAs,
+      },
+    ],
   };
 
   return (
@@ -239,7 +317,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <RegisterInterestSection />
 
       {/* Footer */}
-      <Footer />
+      <Footer
+        settings={{
+          phone:          settings.phone,
+          whatsappNumber: settings.whatsappNumber,
+          instagramUrl:   settings.instagramUrl,
+          licenseNumber:  settings.licenseNumber,
+        }}
+      />
     </main>
   );
 }

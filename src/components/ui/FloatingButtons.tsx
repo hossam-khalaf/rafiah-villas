@@ -3,12 +3,18 @@
 import { useLocale } from 'next-intl';
 import SpotlightButton from '@/components/ui/SpotlightButton';
 
-export default function FloatingButtons() {
+interface FloatingButtonsProps {
+  /** WhatsApp number from Sanity siteSettings — falls back to the default line */
+  whatsappNumber?: string | null;
+}
+
+export default function FloatingButtons({ whatsappNumber }: FloatingButtonsProps) {
   const locale = useLocale();
   const isRtl = locale === 'ar';
 
   const label360  = isRtl ? 'جولة افتراضية' : '360° Virtual Tour';
   const labelWA   = isRtl ? 'واتساب'        : 'WhatsApp';
+  const waNumber  = (whatsappNumber || '966920033262').replace(/\D/g, '');
 
   return (
     <div className="fixed bottom-6 end-4 sm:end-6 z-50 flex flex-col items-end gap-3">
@@ -41,7 +47,7 @@ export default function FloatingButtons() {
 
       {/* WhatsApp */}
       <a
-        href="https://wa.me/966920033262"
+        href={`https://wa.me/${waNumber}`}
         target="_blank"
         rel="noopener noreferrer"
         aria-label={labelWA}

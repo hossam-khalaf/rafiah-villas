@@ -6,6 +6,7 @@ import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
 import Preloader from '@/components/ui/Preloader';
 import FloatingButtons from '@/components/ui/FloatingButtons';
+import { getSiteSettings } from '@/lib/content/site-settings';
 import { Cormorant_Garamond, DM_Sans, DM_Mono, Noto_Naskh_Arabic } from 'next/font/google';
 import '../globals.css';
 
@@ -65,6 +66,7 @@ export default async function LocaleLayout({
   }
 
   const messages = await getMessages();
+  const settings = await getSiteSettings();
 
   return (
     <html
@@ -76,7 +78,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <Preloader />
           {children}
-          <FloatingButtons />
+          <FloatingButtons whatsappNumber={settings.whatsappNumber} />
         </NextIntlClientProvider>
       </body>
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || 'G-30FVM244TT'} />
