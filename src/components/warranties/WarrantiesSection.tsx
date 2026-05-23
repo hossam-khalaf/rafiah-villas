@@ -62,7 +62,7 @@ export default function WarrantiesSection() {
                   {item.years}
                 </p>
                 {item.yearsSuffix && (
-                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 mt-1">
+                  <p className="text-overline font-bold uppercase tracking-[0.2em] text-black/40 mt-1">
                     {item.yearsSuffix}
                   </p>
                 )}
@@ -78,7 +78,7 @@ export default function WarrantiesSection() {
 
               {/* Bonus */}
               {item.bonus && (
-                <p className="text-[11px] sm:text-xs text-brand-royal-green font-semibold mb-2 tracking-wide">
+                <p className="text-overline sm:text-xs text-brand-royal-green font-semibold mb-2 tracking-wide">
                   + {item.bonus}
                 </p>
               )}

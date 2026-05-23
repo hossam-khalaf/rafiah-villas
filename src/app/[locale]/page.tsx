@@ -8,12 +8,12 @@ import Footer from '@/components/ui/Footer';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
-const LocationSection = dynamic(() => import('@/components/location/LocationSection'));
-const VillasSection = dynamic(() => import('@/components/villas/VillasSection'));
-const GallerySection = dynamic(() => import('@/components/gallery/GallerySection'));
-const FloorPlansSection = dynamic(() => import('@/components/floorPlans/FloorPlansSection'));
-const WarrantiesSection = dynamic(() => import('@/components/warranties/WarrantiesSection'));
-const RegisterInterestSection = dynamic(() => import('@/components/registerInterest/RegisterInterestSection'));
+const LocationSection = dynamic(() => import('@/components/location/LocationSection'), { loading: () => <div className="h-96 bg-brand-black/5 animate-pulse" /> });
+const VillasSection = dynamic(() => import('@/components/villas/VillasSection'), { loading: () => <div className="h-[600px] bg-brand-black/5 animate-pulse" /> });
+const GallerySection = dynamic(() => import('@/components/gallery/GallerySection'), { loading: () => <div className="h-[500px] bg-brand-black/5 animate-pulse" /> });
+const FloorPlansSection = dynamic(() => import('@/components/floorPlans/FloorPlansSection'), { loading: () => <div className="h-[500px] bg-brand-black/5 animate-pulse" /> });
+const WarrantiesSection = dynamic(() => import('@/components/warranties/WarrantiesSection'), { loading: () => <div className="h-[400px] bg-brand-black/5 animate-pulse" /> });
+const RegisterInterestSection = dynamic(() => import('@/components/registerInterest/RegisterInterestSection'), { loading: () => <div className="h-[600px] bg-brand-black/5 animate-pulse" /> });
 
 // Revalidate page data every 60 seconds (ISR) to automatically pull Sanity updates
 export const revalidate = 60;
@@ -180,11 +180,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section className="relative w-full h-[100dvh] min-h-[750px] flex flex-col justify-center overflow-hidden pb-12">
         
         {/* Background Video with Motion Scale */}
-        <div className="absolute inset-0 z-0 bg-black">
+        <div className="absolute inset-0 z-0 bg-brand-black">
           <HeroImageScale className="w-full h-full relative">
             <Image 
               src="/images/rafiah-hero-poster.jpg"
-              alt="Rafiah Villas"
+              alt="Rafiah Villas — exterior with desert landscape at golden hour"
               fill
               priority
               sizes="100vw"
@@ -209,7 +209,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <div className="max-w-4xl flex flex-col items-center justify-center space-y-6 sm:space-y-8 w-full">
             
             {/* Subtitle Badge */}
-            <div className="animate-hero-fade-up delay-100 inline-flex items-center justify-center gap-4 text-white/80 uppercase tracking-[0.15em] text-[11px] sm:text-[13px] font-semibold">
+            <div className="animate-hero-fade-up delay-100 inline-flex items-center justify-center gap-4 text-white/80 uppercase tracking-[0.15em] text-overline sm:text-[13px] font-semibold">
               <span className="w-8 sm:w-12 h-px bg-white/40"></span>
               {t('subtitle')}
               <span className="w-8 sm:w-12 h-px bg-white/40"></span>
@@ -222,7 +222,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
             {/* Location & Subheading */}
             <div className="animate-hero-fade-up delay-400 flex flex-col items-center gap-3">
-              <p className="text-[11px] sm:text-[13px] text-white/70 uppercase tracking-[0.15em] font-semibold">
+              <p className="text-overline sm:text-[13px] text-white/70 uppercase tracking-[0.15em] font-semibold">
                 {t('location')}
               </p>
               <p className="text-sm sm:text-base lg:text-lg text-white/90 font-normal">
@@ -243,28 +243,28 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 
                 <HeroStatSpotlight className="flex flex-col items-center justify-center border-e border-white/20 px-5 sm:px-7 lg:px-10 w-1/2 sm:w-auto border-b sm:border-b-0 pb-5 sm:pb-0">
                   <p className="font-mono text-4xl lg:text-5xl font-light tracking-tighter text-white mb-2 leading-none">{stats.total}</p>
-                  <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.1em] text-white/80 text-center max-w-[100px] leading-tight">
+                  <p className="text-overline sm:text-xs font-semibold uppercase tracking-[0.1em] text-white/80 text-center max-w-[100px] leading-tight">
                     {t('exclusiveVillas')}
                   </p>
                 </HeroStatSpotlight>
 
                 <HeroStatSpotlight className="flex flex-col items-center justify-center sm:border-e border-white/20 px-5 sm:px-7 lg:px-10 w-1/2 sm:w-auto border-b sm:border-b-0 pb-5 sm:pb-0">
                   <p className="font-mono text-4xl lg:text-5xl font-light tracking-tighter text-white mb-2 leading-none">300<span className="text-xl lg:text-2xl">m²</span></p>
-                  <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.1em] text-white/80 text-center max-w-[100px] leading-tight">
+                  <p className="text-overline sm:text-xs font-semibold uppercase tracking-[0.1em] text-white/80 text-center max-w-[100px] leading-tight">
                     {t('startingArea')}
                   </p>
                 </HeroStatSpotlight>
 
                 <HeroStatSpotlight className="flex flex-col items-center justify-center border-e border-white/20 px-5 sm:px-7 lg:px-10 w-1/2 sm:w-auto pt-5 sm:pt-0">
                   <p className="font-mono text-4xl lg:text-5xl font-light tracking-tighter text-white mb-2 leading-none">4.5<span className="text-xl lg:text-2xl">M</span></p>
-                  <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.1em] text-white/80 text-center max-w-[100px] leading-tight">
+                  <p className="text-overline sm:text-xs font-semibold uppercase tracking-[0.1em] text-white/80 text-center max-w-[100px] leading-tight">
                     {t('startingPrice')}
                   </p>
                 </HeroStatSpotlight>
 
                 <HeroStatSpotlight className="flex flex-col items-center justify-center px-5 sm:px-7 lg:px-10 w-1/2 sm:w-auto pt-5 sm:pt-0">
                   <p className="font-mono text-4xl lg:text-5xl font-light tracking-tighter text-white mb-2 leading-none">100<span className="text-xl lg:text-2xl">%</span></p>
-                  <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.1em] text-white/80 text-center max-w-[100px] leading-tight">
+                  <p className="text-overline sm:text-xs font-semibold uppercase tracking-[0.1em] text-white/80 text-center max-w-[100px] leading-tight">
                     {t('phaseOneSold')}
                   </p>
                 </HeroStatSpotlight>
@@ -281,14 +281,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <div className="flex w-full overflow-hidden">
             <div className="animate-marquee whitespace-nowrap flex items-center shrink-0 min-w-full justify-around">
                {[...Array(6)].map((_, i) => (
-                 <p key={i} className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-white/90 px-8">
+                 <p key={i} className="text-overline sm:text-xs font-semibold uppercase tracking-[0.15em] text-white/90 px-8">
                     {t('ticker')}
                  </p>
                ))}
             </div>
             <div className="animate-marquee whitespace-nowrap flex items-center shrink-0 min-w-full justify-around" aria-hidden="true">
                {[...Array(6)].map((_, i) => (
-                 <p key={i} className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-white/90 px-8">
+                 <p key={i} className="text-overline sm:text-xs font-semibold uppercase tracking-[0.15em] text-white/90 px-8">
                     {t('ticker')}
                  </p>
                ))}

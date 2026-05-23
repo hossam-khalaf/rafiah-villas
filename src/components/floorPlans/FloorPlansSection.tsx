@@ -88,7 +88,7 @@ export default function FloorPlansSection() {
             
             {/* Floor Overline */}
             <div className="flex items-center gap-4 mb-8">
-              <h3 className="text-brand-gold text-[11px] font-bold uppercase tracking-[0.18em] shrink-0">
+              <h3 className="text-brand-gold text-overline font-bold uppercase tracking-[0.18em] shrink-0">
                 {t(`floors.${activeFloor}`)}
               </h3>
               <div className="h-px bg-white/10 w-full" />

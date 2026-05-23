@@ -125,6 +125,8 @@ Components are tactile and confident, employing zero border radius to maintain a
 
 ### Don't:
 - **Don't** use generic full-screen auto-playing video heroes with "Discover Luxury" overlay text.
+
+> **Note on hero video:** The current implementation uses a muted, looping atmospheric video as a background texture beneath the poster image and bold typography overlay. This diverges from the strict "no video hero" rule — the video is intentionally subtle (low contrast, muted, no audio, poster image prioritized for LCP) and the text overlay is architectural and brand-specific, not generic real-estate copy. Considered an acceptable trade-off for visual depth, but remove if it begins to feel like a generic luxury template.
 - **Don't** use "About Us" blocks or developer history sections that interrupt the primary discovery flow.
 - **Don't** use soft purple gradients or generic AI-style bubbly aesthetics.
 - **Don't** use identical, infinitely repeating card grids without structural variation.

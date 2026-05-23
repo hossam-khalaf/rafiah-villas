@@ -113,7 +113,7 @@ export default async function TermsPage() {
 
   return (
     <main
-      className="min-h-screen bg-[#FAF9F6] text-black font-sans"
+      className="min-h-screen bg-brand-offwhite text-black font-sans"
       lang={c.lang}
       dir={c.dir}
     >
@@ -121,7 +121,7 @@ export default async function TermsPage() {
       <div className="border-b border-black/10 px-6 sm:px-12 py-5 flex items-center justify-between">
         <Link
           href={backHref}
-          className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#012a17] hover:text-black transition-colors flex items-center gap-3"
+          className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-royal-green hover:text-black transition-colors flex items-center gap-3"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
             className={c.dir === 'rtl' ? 'rotate-180' : ''}>
@@ -129,7 +129,7 @@ export default async function TermsPage() {
           </svg>
           {c.back}
         </Link>
-        <p className="font-serif text-lg text-[#012a17] tracking-tight hidden sm:block">RAFIAH</p>
+        <p className="font-serif text-lg text-brand-royal-green tracking-tight hidden sm:block">RAFIAH</p>
       </div>
 
       {/* Content */}
@@ -137,8 +137,8 @@ export default async function TermsPage() {
 
         {/* Badge */}
         <div className="inline-flex items-center gap-3 mb-10">
-          <span className="w-2 h-2 bg-[#012a17] shrink-0" />
-          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#012a17]/70">
+          <span className="w-2 h-2 bg-brand-royal-green shrink-0" />
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-royal-green/70">
             {c.badge}
           </span>
         </div>
@@ -153,7 +153,7 @@ export default async function TermsPage() {
         </p>
 
         {/* Intro */}
-        <p className="text-sm sm:text-base text-black/70 leading-relaxed mb-12 sm:mb-16 border-s-2 border-[#012a17] ps-5">
+        <p className="text-sm sm:text-base text-black/70 leading-relaxed mb-12 sm:mb-16 border-s-2 border-brand-royal-green ps-5">
           {c.intro}
         </p>
 
@@ -178,7 +178,7 @@ export default async function TermsPage() {
           </p>
           <Link
             href={backHref}
-            className="text-[11px] font-bold uppercase tracking-widest text-[#012a17] hover:text-black transition-colors"
+            className="text-[11px] font-bold uppercase tracking-widest text-brand-royal-green hover:text-black transition-colors"
           >
             {c.back}
           </Link>

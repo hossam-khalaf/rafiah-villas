@@ -11,7 +11,7 @@ import { ScrollFadeIn, ScrollStagger } from '@/components/motion/ScrollMotion';
 import LuxuryBackground from '@/components/ui/LuxuryBackground';
 import { galleryImages } from '@/data/gallery';
 
-const slides = galleryImages.map((src) => ({ src }));
+const slides = galleryImages.map(({ src }) => ({ src }));
 
 export default function GallerySection() {
   const t = useTranslations('Gallery');
@@ -20,7 +20,6 @@ export default function GallerySection() {
 
   const [lightboxIndex, setLightboxIndex] = useState(-1);
 
-  // Embla handles drag vs click detection natively and supports RTL
   const [emblaRef] = useEmblaCarousel({
     direction: isRtl ? 'rtl' : 'ltr',
     loop: false,
@@ -61,9 +60,12 @@ export default function GallerySection() {
           ref={emblaRef}
           className="overflow-hidden cursor-grab active:cursor-grabbing"
           dir={isRtl ? 'rtl' : 'ltr'}
+          role="region"
+          aria-roledescription="carousel"
+          aria-label={t('carouselLabel')}
         >
           <div className="flex gap-4 sm:gap-6 px-4 sm:px-6 lg:px-8 xl:px-12">
-            {galleryImages.map((src, index) => (
+            {galleryImages.map(({ src, alt }, index) => (
               <motion.div
                 key={src}
                 className="relative shrink-0 w-[80vw] sm:w-[60vw] lg:w-[40vw] aspect-[16/10] overflow-hidden group"
@@ -76,7 +78,7 @@ export default function GallerySection() {
               >
                 <Image
                   src={src}
-                  alt={`Rafiah Villas — Image ${index + 1}`}
+                  alt={alt}
                   fill
                   draggable={false}
                   className="object-cover pointer-events-none transition-transform duration-700 group-hover:scale-[1.03]"

@@ -75,9 +75,15 @@ export default async function LocaleLayout({
       className={`${cormorant.variable} ${dmSans.variable} ${dmMono.variable} ${notoNaskhArabic.variable}`}
     >
       <body className="antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:start-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-brand-gold focus:text-brand-black focus:outline-none focus:ring-2 focus:ring-brand-gold rounded-none"
+        >
+          {locale === 'ar' ? 'تخطى إلى المحتوى' : 'Skip to content'}
+        </a>
         <NextIntlClientProvider messages={messages}>
           <Preloader />
-          {children}
+          <div id="main-content">{children}</div>
           <FloatingButtons whatsappNumber={settings.whatsappNumber} />
         </NextIntlClientProvider>
       </body>
