@@ -1,4 +1,4 @@
-import { Villa, VillaStatus, VillaType, VillaStats } from '../types/villa';
+import { Villa, VillaStatus, VillaType, VillaStats, STATUS_WEIGHT } from '../types/villa';
 
 // Temporary fallback: Default unknown status to 'available'
 const DEFAULT_STATUS: VillaStatus = 'available';
@@ -46,9 +46,7 @@ export function getAvailableVillas(): Villa[] {
 }
 
 export function sortVillasByAvailability(): Villa[] {
-  // Sort order: available -> reserved -> sold
-  const statusWeight: Record<VillaStatus, number> = { available: 1, reserved: 2, booked: 3, sold: 4 };
-  return [...VILLAS].sort((a, b) => statusWeight[a.status] - statusWeight[b.status]);
+  return [...VILLAS].sort((a, b) => STATUS_WEIGHT[a.status] - STATUS_WEIGHT[b.status]);
 }
 
 export function getVillaStats(): VillaStats {

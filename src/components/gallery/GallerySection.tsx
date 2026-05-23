@@ -9,19 +9,7 @@ import Image from 'next/image';
 import { motion } from 'motion/react';
 import { ScrollFadeIn, ScrollStagger } from '@/components/motion/ScrollMotion';
 import LuxuryBackground from '@/components/ui/LuxuryBackground';
-
-const galleryImages = [
-  '/images/gallery/1.webp',
-  '/images/gallery/2.webp',
-  '/images/gallery/3.webp',
-  '/images/gallery/4.webp',
-  '/images/gallery/5.webp',
-  '/images/gallery/6.webp',
-  '/images/gallery/7.webp',
-  '/images/gallery/8.webp',
-  '/images/gallery/9.webp',
-  '/images/gallery/10.webp',
-];
+import { galleryImages } from '@/data/gallery';
 
 const slides = galleryImages.map((src) => ({ src }));
 

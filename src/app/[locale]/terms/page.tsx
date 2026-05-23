@@ -1,9 +1,12 @@
 import { getLocale } from 'next-intl/server';
 import Link from 'next/link';
 
-export async function generateMetadata() {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   return {
-    title: 'الشروط والأحكام | Terms & Conditions — Rafiah Villas',
+    title: locale === 'ar'
+      ? 'الشروط والأحكام — فلل رفيعة'
+      : 'Terms & Conditions — Rafiah Villas',
   };
 }
 

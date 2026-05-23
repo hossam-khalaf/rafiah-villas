@@ -20,3 +20,10 @@ export interface VillaStats {
   booked: number;
   sold: number;
 }
+
+export const STATUS_WEIGHT: Record<VillaStatus, number> = {
+  available: 1,
+  reserved: 2,
+  booked: 3,
+  sold: 4,
+};

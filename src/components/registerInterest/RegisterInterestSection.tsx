@@ -164,8 +164,12 @@ export default function RegisterInterestSection({ villaId, villaTitle, interest 
         );
       }
     } catch {
-      // Network failure — don't block the user with a scary message
-      setStatus('success');
+      setStatus('error');
+      setErrMsg(
+        locale === 'ar'
+          ? 'حدث خطأ في الاتصال. سيتم إعادة المحاولة تلقائياً.'
+          : 'Network issue — we will retry automatically.',
+      );
     }
   }
 

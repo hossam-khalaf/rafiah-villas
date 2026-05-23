@@ -15,7 +15,7 @@ interface WarrantyItem {
 export default function WarrantiesSection() {
   const t = useTranslations('Warranties');
 
-  const items: WarrantyItem[] = t.raw('items') as WarrantyItem[];
+  const items = t.raw('items') as WarrantyItem[];
 
   return (
     <section className="w-full bg-brand-offwhite text-black border-t border-black/10 py-24 sm:py-32">

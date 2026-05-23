@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Villa, VillaType, VillaStatus } from '@/types/villa';
+import { Villa, VillaType, VillaStatus, STATUS_WEIGHT } from '@/types/villa';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLocale } from 'next-intl';
 import SpotlightCard from '@/components/ui/SpotlightCard';
@@ -39,10 +39,7 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
 
   const filteredVillas = villas
     .filter(v => v.type === activeTab)
-    .sort((a, b) => {
-      const weight: Record<VillaStatus, number> = { available: 1, reserved: 2, booked: 3, sold: 4 };
-      return weight[a.status] - weight[b.status];
-    });
+    .sort((a, b) => STATUS_WEIGHT[a.status] - STATUS_WEIGHT[b.status]);
 
   // Status Colors Mapping
   const statusConfig: Record<VillaStatus, { bg: string, text: string, border: string }> = {

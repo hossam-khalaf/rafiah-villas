@@ -6,6 +6,7 @@ import {
   featuredVillasQuery 
 } from '@/sanity/lib/queries';
 import type { Villa, VillaStats, VillaType, VillaStatus } from '@/types/villa';
+import { STATUS_WEIGHT } from '@/types/villa';
 
 interface SanityVillaRaw {
   villaCode?: string;
@@ -14,14 +15,6 @@ interface SanityVillaRaw {
   area?: number;
   price?: number;
 }
-
-/** Sort weight: available first, booked/sold last */
-const STATUS_WEIGHT: Record<VillaStatus, number> = {
-  available: 1,
-  reserved: 2,
-  booked: 3,
-  sold: 4,
-};
 
 function sortByAvailability(villas: Villa[]): Villa[] {
   return [...villas].sort((a, b) => STATUS_WEIGHT[a.status] - STATUS_WEIGHT[b.status]);

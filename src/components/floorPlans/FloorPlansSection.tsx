@@ -7,7 +7,6 @@ import Image from 'next/image';
 import LuxuryBackground from '@/components/ui/LuxuryBackground';
 import { ScrollFadeIn } from '@/components/motion/ScrollMotion';
 import SpotlightCard from '@/components/ui/SpotlightCard';
-import SpotlightButton from '@/components/ui/SpotlightButton';
 
 const getFloorPlanImage = (villa: VillaType, floor: FloorType) => {
   if (villa === 'facade' && floor === 'ground') return '/images/facade-ground-floor-plan.png';
@@ -32,8 +31,7 @@ export default function FloorPlansSection() {
   const [activeVilla, setActiveVilla] = useState<VillaType>('corner');
   const [activeFloor, setActiveFloor] = useState<FloorType>('ground');
 
-  // Helper to safely get the array of rooms
-  const rooms: Room[] = t.raw(`rooms.${activeVilla}.${activeFloor}`) || [];
+  const rooms = (t.raw(`rooms.${activeVilla}.${activeFloor}`) as Room[]) || [];
 
   return (
     <section className="relative w-full py-24 sm:py-32 text-white border-t border-white/10 overflow-hidden">

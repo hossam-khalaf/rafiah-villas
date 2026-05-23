@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { processLead }        from '@/lib/crm/index';
 import { normalizeSaudiPhone } from '@/lib/crm/hubspot';
+import { parseBrowser, parseDevice, sanitize } from '@/lib/utils';
 import type { LeadInput }     from '@/lib/crm/types';
 
 // ─── Request schema ───────────────────────────────────────────────────────────
@@ -31,30 +32,6 @@ const RequestSchema = z.object({
   // Anti-bot honeypot — must be absent or empty
   _hp: z.string().max(0).optional(),
 });
-
-// ─── UA helpers ───────────────────────────────────────────────────────────────
-
-function parseBrowser(ua: string): string {
-  if (/Edg\//.test(ua))                           return 'Edge';
-  if (/Chrome\//.test(ua) && /Safari\//.test(ua)) return 'Chrome';
-  if (/Firefox\//.test(ua))                       return 'Firefox';
-  if (/Safari\//.test(ua))                        return 'Safari';
-  return 'Other';
-}
-
-function parseDevice(ua: string): string {
-  if (/iPhone/.test(ua))              return 'iPhone';
-  if (/iPad/.test(ua))                return 'iPad';
-  if (/Android/.test(ua))             return 'Android';
-  if (/Windows/.test(ua))             return 'Windows';
-  if (/Macintosh|Mac OS X/.test(ua))  return 'Apple';
-  return 'Other';
-}
-
-// Strip HTML and Sheets formula-injection chars
-function sanitize(str: string): string {
-  return str.replace(/<[^>]*>/g, '').replace(/[=+\-@\t\r]/g, '').trim();
-}
 
 // ─── Route handler ────────────────────────────────────────────────────────────
 
