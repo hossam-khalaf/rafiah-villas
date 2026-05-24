@@ -8,14 +8,12 @@ export default function Preloader() {
 
   useEffect(() => {
     let isComplete = false;
-    let fallbackTimer: ReturnType<typeof setTimeout>;
 
-    const done = () => {
+    const fallbackTimer = setTimeout(() => {
       if (isComplete) return;
       isComplete = true;
-      clearTimeout(fallbackTimer);
       setTimeout(() => setIsLoading(false), 300);
-    };
+    }, 4000);
 
     const minShown = new Promise<void>((r) => setTimeout(r, 1200));
     const pageLoaded = new Promise<void>((r) => {
@@ -24,8 +22,12 @@ export default function Preloader() {
       window.addEventListener('load', onLoad, { once: true });
     });
 
-    Promise.all([minShown, pageLoaded]).then(done);
-    fallbackTimer = setTimeout(done, 4000);
+    Promise.all([minShown, pageLoaded]).then(() => {
+      if (isComplete) return;
+      isComplete = true;
+      clearTimeout(fallbackTimer);
+      setTimeout(() => setIsLoading(false), 300);
+    });
 
     return () => { isComplete = true; clearTimeout(fallbackTimer); };
   }, []);

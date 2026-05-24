@@ -1,5 +1,4 @@
 import { MetadataRoute } from 'next';
-import { routing } from '@/i18n/routing';
 
 const baseUrl = 'https://rafiah-villas.vercel.app';
 
