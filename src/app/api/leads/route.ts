@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { processLead }        from '@/lib/crm/index';
 import { normalizeSaudiPhone } from '@/lib/crm/hubspot';
-import { parseBrowser, parseDevice, sanitize } from '@/lib/utils';
+import { parseBrowser, parseDevice, stripHtmlTags } from '@/lib/utils';
 import type { LeadInput }     from '@/lib/crm/types';
 
 // ─── Request schema ───────────────────────────────────────────────────────────
@@ -33,9 +33,47 @@ const RequestSchema = z.object({
   _hp: z.string().max(0).optional(),
 });
 
+// ─── Simple in-memory rate limiter ──────────────────────────────────────────
+
+const RATE_WINDOW_MS = 60_000;
+const RATE_MAX = 10;
+
+const ipRequests = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const windowStart = now - RATE_WINDOW_MS;
+  const timestamps = (ipRequests.get(ip) ?? []).filter(t => t > windowStart);
+  timestamps.push(now);
+  ipRequests.set(ip, timestamps);
+  return timestamps.length > RATE_MAX;
+}
+
+// ─── Allowed origins for CSRF protection ─────────────────────────────────────
+
+const ALLOWED_ORIGINS = [
+  'https://rafiah-villas.vercel.app',
+  'https://rafiah.com',
+  'https://www.rafiah.com',
+  'http://localhost:3000',
+  'http://localhost:3001',
+];
+
 // ─── Route handler ────────────────────────────────────────────────────────────
 
 export async function POST(req: NextRequest) {
+  // 0a. Rate limiting — IP-based
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
+  if (isRateLimited(ip)) {
+    return NextResponse.json({ success: false, error: 'Too many requests' }, { status: 429 });
+  }
+
+  // 0b. Origin validation — CSRF protection
+  const origin = req.headers.get('origin');
+  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+    return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
+  }
+
   // 1. Parse body
   let raw: unknown;
   try {
@@ -67,18 +105,18 @@ export async function POST(req: NextRequest) {
   const device  = parseDevice(ua);
 
   // 5. Build canonical LeadInput
-  const phoneRaw = sanitize(body.phone);
+  const phoneRaw = stripHtmlTags(body.phone);
   const phone    = normalizeSaudiPhone(phoneRaw);
 
   const lead: LeadInput = {
-    name:                   sanitize(body.name),
+    name:                   stripHtmlTags(body.name),
     phone,
     phoneRaw,
     preferredContactMethod: body.preferredContactMethod,
     interest:               body.interest,
     villaId:                body.villaId,
     villaTitle:             body.villaTitle,
-    message:                body.message ? sanitize(body.message) : undefined,
+    message:                body.message ? stripHtmlTags(body.message) : undefined,
     language:               body.language,
     sourcePage:             body.sourcePage,
     utmSource:              body.utmSource,

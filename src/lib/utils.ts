@@ -15,8 +15,10 @@ export function parseDevice(ua: string): string {
   return 'Other';
 }
 
-export function sanitize(str: string): string {
-  return str.replace(/<[^>]*>/g, '').replace(/[=+\-@\t\r]/g, '').trim();
+// Strips HTML tags and trims. Does NOT escape HTML entities — only safe
+// for server-to-server data transfer (CRM, Sheets), never for browser rendering.
+export function stripHtmlTags(str: string): string {
+  return str.replace(/<[^>]*>/g, '').trim();
 }
 
 export function saudiNow(): { date: string; time: string } {

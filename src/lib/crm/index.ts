@@ -9,7 +9,7 @@ import { submitToN8n }      from './n8n';
 // as long as the payload was valid, so the user is never left stuck.
 
 export async function processLead(lead: LeadInput): Promise<LeadResult> {
-  console.info('[CRM] processing lead:', lead.name, lead.phone, `[${lead.language}]`);
+  console.info('[CRM] processing lead:', lead.language);
 
   // All three providers run concurrently
   const [hubspot, sheets, n8n] = await Promise.allSettled([

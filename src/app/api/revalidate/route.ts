@@ -19,14 +19,14 @@ export async function POST(req: NextRequest) {
 
     if (!isValidSignature) {
       return new Response(
-        JSON.stringify({ message: 'Invalid signature', isValidSignature, body }), 
+        JSON.stringify({ message: 'Invalid signature' }),
         { status: 401 }
       );
     }
 
     if (!body?._type) {
       return new Response(
-        JSON.stringify({ message: 'Bad Request, missing document type', body }), 
+        JSON.stringify({ message: 'Bad Request, missing document type' }),
         { status: 400 }
       );
     }

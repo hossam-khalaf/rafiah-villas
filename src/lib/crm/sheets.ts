@@ -2,12 +2,21 @@ import type { LeadInput, ProviderResult } from './types';
 import { saudiNow } from '@/lib/utils';
 
 const WEBHOOK_URL  = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
-const SHEETS_TOKEN = process.env.GOOGLE_SHEETS_TOKEN || 'raf_x9k2m_2026';
+const SHEETS_TOKEN = process.env.GOOGLE_SHEETS_TOKEN;
+
+if (!SHEETS_TOKEN) {
+  console.warn('[Sheets] GOOGLE_SHEETS_TOKEN not configured — skipping');
+}
 
 export async function submitToSheets(lead: LeadInput): Promise<ProviderResult> {
   if (!WEBHOOK_URL) {
     console.warn('[Sheets] GOOGLE_SHEETS_WEBHOOK_URL not configured — skipping');
     return { ok: false, error: 'not configured' };
+  }
+
+  if (!SHEETS_TOKEN) {
+    console.warn('[Sheets] GOOGLE_SHEETS_TOKEN not configured — skipping');
+    return { ok: false, error: 'token not configured' };
   }
 
   const { date, time } = saudiNow();
