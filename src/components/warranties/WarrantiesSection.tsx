@@ -24,7 +24,7 @@ export default function WarrantiesSection() {
         {/* Header */}
         <ScrollStagger className="mb-16 sm:mb-24">
           <ScrollFadeIn>
-            <div className="inline-flex items-center gap-4 text-brand-royal-green uppercase tracking-[0.2em] text-xs sm:text-sm font-bold mb-8">
+            <div className="inline-flex items-center gap-4 text-brand-royal-green uppercase tracking-[0.2em] text-xs sm:text-sm font-mono font-bold mb-8">
               <span className="w-8 sm:w-12 h-px bg-brand-royal-green"></span>
               {t('overline')}
             </div>
@@ -62,7 +62,7 @@ export default function WarrantiesSection() {
                   {item.years}
                 </p>
                 {item.yearsSuffix && (
-                  <p className="text-overline font-bold uppercase tracking-[0.2em] text-black/40 mt-1">
+                  <p className="text-overline font-mono font-bold uppercase tracking-[0.2em] text-black/40 mt-1">
                     {item.yearsSuffix}
                   </p>
                 )}

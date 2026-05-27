@@ -53,12 +53,12 @@ export default function VillasGrid({ villas, labels, activeTab, onTabChange, sel
   return (
     <div className="w-full">
       {/* Tabs */}
-      <div className="flex flex-wrap gap-0 border border-white/15 max-w-fit mb-12 sm:mb-16 sticky top-0 sm:top-24 z-30 backdrop-blur-md bg-brand-royal-green/85 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)]">
+      <div className="flex flex-wrap gap-0 border border-white/15 max-w-fit mb-12 sm:mb-16 sticky top-0 sm:top-24 z-30 bg-brand-royal-green shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)]">
         {(['northFacade', 'southFacade', 'corner'] as VillaType[]).map((tab) => (
           <button
             key={tab}
             onClick={() => onTabChange(tab)}
-            className={`px-6 py-4 text-xs sm:text-sm font-bold uppercase tracking-widest transition-colors ${
+            className={`px-6 py-4 text-xs sm:text-sm font-mono font-bold uppercase tracking-widest transition-colors ${
               activeTab === tab 
                 ? 'bg-brand-gold text-black' 
                 : 'bg-transparent text-white/75 hover:text-white hover:bg-white/5 border-s border-white/10 first:border-s-0'
@@ -90,11 +90,11 @@ export default function VillasGrid({ villas, labels, activeTab, onTabChange, sel
             >
               {/* Top Row: Title & Badge */}
               <div className="flex justify-between items-start mb-8 z-10 relative">
-                <p className="text-[0.65rem] sm:text-[0.7rem] font-bold uppercase tracking-[0.2em] text-white/80 group-hover:text-white transition-colors">
+                <p className="text-[0.65rem] sm:text-[0.7rem] font-mono font-bold uppercase tracking-[0.2em] text-white/80 group-hover:text-white transition-colors">
                   {labels.card.villa} {villa.id} <span className="mx-2 opacity-50">•</span> {labels.filters[villa.type]}
                 </p>
                 
-                <div className={`px-3 py-1 text-[0.6rem] sm:text-xs font-bold uppercase tracking-widest border absolute top-0 end-0 -mt-2 -me-2 shadow-lg backdrop-blur-sm ${statusConfig[villa.status].bg} ${statusConfig[villa.status].text} ${statusConfig[villa.status].border}`}>
+                <div className={`px-3 py-1 text-[0.6rem] sm:text-xs font-mono font-bold uppercase tracking-widest border absolute top-0 end-0 -mt-2 -me-2 shadow-lg bg-black/40 ${statusConfig[villa.status].text} ${statusConfig[villa.status].border}`}>
                   {labels.status[villa.status]}
                 </div>
               </div>
@@ -103,7 +103,7 @@ export default function VillasGrid({ villas, labels, activeTab, onTabChange, sel
               <div className="mb-10 z-10 relative">
                 <p className="font-serif text-4xl sm:text-5xl text-white tracking-tight">
                   {villa.plotSize || 'TBD'}{' '}
-                  <span className="font-sans text-xs sm:text-sm font-bold tracking-widest uppercase text-white/70 ms-2">
+                  <span className="font-mono text-xs sm:text-sm font-bold tracking-widest uppercase text-white/70 ms-2">
                     {areaSymbol}²
                   </span>
                 </p>
@@ -118,7 +118,7 @@ export default function VillasGrid({ villas, labels, activeTab, onTabChange, sel
                 {villa.status === 'available' ? (
                     <span className="font-mono text-sm sm:text-base tracking-wide">
                       {villa.price ? villa.price.toLocaleString() : 'TBD'}{' '}
-                      <span className="text-[0.6rem] uppercase tracking-widest text-white/75 ms-1">{labels.card.currency}</span>
+                      <span className="text-[0.6rem] font-mono uppercase tracking-widest text-white/75 ms-1">{labels.card.currency}</span>
                     </span>
                   ) : (
                     <span className="font-sans text-sm font-medium text-white/50 tracking-widest uppercase select-none">

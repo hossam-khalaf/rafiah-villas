@@ -41,7 +41,7 @@ export default function FloorPlansSection() {
         {/* Header */}
         <div className="max-w-3xl mb-16 sm:mb-24">
           <ScrollFadeIn>
-            <div className="inline-flex items-center gap-4 text-brand-gold uppercase tracking-[0.2em] text-xs sm:text-sm font-bold mb-8">
+            <div className="inline-flex items-center gap-4 text-brand-gold uppercase tracking-[0.2em] text-xs sm:text-sm font-mono font-bold mb-8">
               <span className="w-8 sm:w-12 h-px bg-brand-gold"></span>
               {t('overline')}
             </div>
@@ -65,7 +65,7 @@ export default function FloorPlansSection() {
             <button
               key={type}
               onClick={() => setActiveVilla(type)}
-              className={`pb-4 px-6 sm:px-8 text-[13px] sm:text-sm font-bold uppercase tracking-[0.12em] transition-colors relative ${
+              className={`pb-4 px-6 sm:px-8 text-[13px] sm:text-sm font-mono font-bold uppercase tracking-[0.12em] transition-colors relative ${
                 activeVilla === type ? 'text-brand-gold' : 'text-white/60 hover:text-white/90'
               }`}
             >
@@ -88,7 +88,7 @@ export default function FloorPlansSection() {
             
             {/* Floor Overline */}
             <div className="flex items-center gap-4 mb-8">
-              <h3 className="text-brand-gold text-overline font-bold uppercase tracking-[0.18em] shrink-0">
+              <h3 className="text-brand-gold text-overline font-mono font-bold uppercase tracking-[0.18em] shrink-0">
                 {t(`floors.${activeFloor}`)}
               </h3>
               <div className="h-px bg-white/10 w-full" />
@@ -110,7 +110,7 @@ export default function FloorPlansSection() {
                       className="flex justify-between items-center py-4 border-b border-white/5 last:border-0 group hover:border-white/20 transition-colors"
                     >
                       <div className="flex items-center gap-4">
-                        <span className="font-mono text-xs text-white/50 group-hover:text-brand-gold transition-colors w-6">
+                        <span className="font-mono text-xs text-white/50 group-hover:text-brand-gold transition-colors w-6 font-bold">
                           {String(idx + 1).padStart(2, '0')}
                         </span>
                         <span className="text-white/80 font-light text-[13px] sm:text-base group-hover:text-white transition-colors">

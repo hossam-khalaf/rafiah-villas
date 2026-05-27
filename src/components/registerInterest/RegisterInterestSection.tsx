@@ -57,7 +57,7 @@ interface FormFieldProps {
 function FormField({ id, label, placeholder, type = 'text', value, onChange, autoComplete, required, disabled }: FormFieldProps) {
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="text-overline font-bold uppercase tracking-[0.18em] text-white/85">
+      <label htmlFor={id} className="text-overline font-mono font-bold uppercase tracking-[0.18em] text-white/85">
         {label}
       </label>
       <input
@@ -96,7 +96,7 @@ function SuccessState({ title, body }: { title: string; body: string }) {
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-        className="w-16 h-16 rounded-full bg-brand-royal-green border border-brand-gold/40 flex items-center justify-center"
+        className="w-16 h-16 bg-brand-royal-green border border-brand-gold/40 flex items-center justify-center"
       >
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4B78F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="20 6 9 17 4 12" />
@@ -191,13 +191,13 @@ export default function RegisterInterestSection({ villaId, villaTitle, interest 
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-gold" />
               </span>
-              <span className="text-overline font-bold uppercase tracking-[0.2em] text-brand-gold/80 border border-brand-gold/25 px-4 py-1.5">
+              <span className="text-overline font-mono font-bold uppercase tracking-[0.2em] text-brand-gold/80 border border-brand-gold/25 px-4 py-1.5">
                 {t('urgencyBadge')}
               </span>
             </div>
 
             {/* Overline */}
-            <div className="inline-flex items-center gap-4 text-white/70 uppercase tracking-[0.2em] text-overline font-semibold mb-6">
+            <div className="inline-flex items-center gap-4 text-white/70 uppercase tracking-[0.2em] text-overline font-mono font-bold mb-6">
               <span className="w-8 h-px bg-white/40" />
               {t('overline')}
             </div>
@@ -217,7 +217,7 @@ export default function RegisterInterestSection({ villaId, villaTitle, interest 
 
             {/* Sales hotline */}
             <div className="mb-8">
-              <p className="text-overline font-bold uppercase tracking-[0.2em] text-white/75 mb-2">
+              <p className="text-overline font-mono font-bold uppercase tracking-[0.2em] text-white/75 mb-2">
                 {t('hotlineLabel')}
               </p>
               <a
@@ -230,7 +230,7 @@ export default function RegisterInterestSection({ villaId, villaTitle, interest 
             </div>
 
             {/* License */}
-            <p className="text-overline text-white/65 font-light tracking-wide">
+            <p className="text-overline font-mono text-white/65 font-bold tracking-wide">
               {t('licenseLabel')} · {t('licenseNumber')}
             </p>
           </ScrollFadeIn>
@@ -239,7 +239,7 @@ export default function RegisterInterestSection({ villaId, villaTitle, interest 
           <ScrollFadeIn>
             <SpotlightCard
               spotlightSize={400}
-              className="bg-black/20 border border-white/15 backdrop-blur-md p-8 sm:p-10"
+              className="bg-brand-royal-green/90 border border-white/15 p-8 sm:p-10"
             >
               <AnimatePresence mode="wait">
                 {isSuccess ? (
@@ -346,7 +346,7 @@ export default function RegisterInterestSection({ villaId, villaTitle, interest 
                       </SpotlightButton>
 
                       {/* Privacy note */}
-                      <p className="text-overline text-white/65 text-center leading-relaxed mt-1">
+                      <p className="text-overline font-mono text-white/65 text-center leading-relaxed mt-1">
                         {t('privacy')}{' '}
                         <Link
                           href={`/${locale}/privacy`}

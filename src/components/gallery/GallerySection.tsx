@@ -37,7 +37,7 @@ export default function GallerySection() {
         <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 mb-16 sm:mb-24">
           <ScrollStagger>
             <ScrollFadeIn>
-              <div className="inline-flex items-center gap-4 text-brand-gold uppercase tracking-[0.2em] text-xs sm:text-sm font-bold mb-8">
+              <div className="inline-flex items-center gap-4 text-brand-gold uppercase tracking-[0.2em] text-xs sm:text-sm font-mono font-bold mb-8">
                 <span className="w-8 sm:w-12 h-px bg-brand-gold"></span>
                 {t('overline')}
               </div>
@@ -86,7 +86,7 @@ export default function GallerySection() {
                 />
                 {/* Hover expand hint */}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-300 flex items-center justify-center">
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-11 h-11 border border-white/70 flex items-center justify-center backdrop-blur-sm">
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-11 h-11 border border-white/70 flex items-center justify-center bg-black/40">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
                       <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
                     </svg>
@@ -99,7 +99,7 @@ export default function GallerySection() {
 
         {/* Hint */}
         <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 mt-10 flex justify-end">
-          <div className="flex items-center gap-3 text-white/55 text-[0.6rem] sm:text-xs font-bold uppercase tracking-widest">
+          <div className="flex items-center gap-3 text-white/55 text-[0.6rem] sm:text-xs font-mono font-bold uppercase tracking-widest">
             <span>{isRtl ? 'اسحب أو اضغط للمعاينة' : 'Drag or tap to preview'}</span>
             <div className="w-10 h-px bg-white/20"></div>
           </div>

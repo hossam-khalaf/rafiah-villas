@@ -54,7 +54,7 @@ export default async function LocationSection() {
 
             {/* Floating Label Box */}
             <div className="absolute bottom-8 sm:bottom-12 start-8 sm:start-12 bg-brand-royal-green text-white px-6 py-4 shadow-xl border border-black/20">
-              <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em]">{t('mapLabel')}</p>
+              <p className="text-xs sm:text-sm font-mono font-bold uppercase tracking-[0.2em]">{t('mapLabel')}</p>
             </div>
           </ScrollScaleIn>
 
@@ -63,7 +63,7 @@ export default async function LocationSection() {
             
             {/* Header Area */}
             <div className="mb-12 sm:mb-16">
-              <ScrollFadeIn className="inline-flex items-center gap-4 text-brand-royal-green uppercase tracking-[0.2em] text-xs sm:text-sm font-bold mb-6">
+              <ScrollFadeIn className="inline-flex items-center gap-4 text-brand-royal-green uppercase tracking-[0.2em] text-xs sm:text-sm font-mono font-bold mb-6">
                 <span className="w-8 sm:w-12 h-px bg-brand-royal-green"></span>
                 {t('overline')}
               </ScrollFadeIn>
@@ -92,11 +92,11 @@ export default async function LocationSection() {
               <div className="flex flex-col border-t border-black/10">
                 {landmarks.map((landmark) => (
                   <ScrollFadeIn key={landmark.key} className="flex justify-between items-center py-4 border-b border-black/10 group hover:bg-black/5 px-2 transition-colors">
-                    <span className="text-sm sm:text-base font-bold text-black/80 group-hover:text-black">
+                    <span className="text-sm sm:text-base font-mono font-bold text-black/80 group-hover:text-black">
                       {t(`landmarks.${landmark.key}`)}
                     </span>
                     <span className="font-mono text-lg font-light text-brand-royal-green tracking-tighter flex items-center gap-2">
-                      {landmark.distance} <span className="text-[0.6rem] font-bold uppercase tracking-widest text-black/40">km</span>
+                      {landmark.distance} <span className="text-[0.6rem] font-mono font-bold uppercase tracking-widest text-black/40">km</span>
                     </span>
                   </ScrollFadeIn>
                 ))}
