@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { getAllVillas } from '@/lib/content/villas';
-import VillasGrid from './VillasGrid';
+import VillasExperience from './VillasExperience';
 import { ScrollStagger, ScrollFadeIn } from '@/components/motion/ScrollMotion';
 import LuxuryBackground from '@/components/ui/LuxuryBackground';
 
@@ -59,10 +59,10 @@ export default async function VillasSection() {
             </ScrollFadeIn>
           </div>
 
-          {/* Interactive Grid */}
-          <ScrollFadeIn className="w-full">
-            <VillasGrid villas={villas} labels={labels} />
-          </ScrollFadeIn>
+          {/* Interactive Experience (Map + Grid) */}
+          <div className="w-full">
+            <VillasExperience villas={villas} labels={labels} />
+          </div>
 
         </ScrollStagger>
 

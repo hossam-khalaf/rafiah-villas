@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { Villa, VillaType, VillaStatus, STATUS_WEIGHT } from '@/types/villa';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLocale } from 'next-intl';
@@ -9,6 +8,9 @@ import SpotlightButton from '@/components/ui/SpotlightButton';
 
 interface VillasGridProps {
   villas: Villa[];
+  activeTab: VillaType;
+  onTabChange: (tab: VillaType) => void;
+  selectedVillaId?: string | null;
   labels: {
     filters: {
       northFacade: string;
@@ -29,8 +31,7 @@ interface VillasGridProps {
   };
 }
 
-export default function VillasGrid({ villas, labels }: VillasGridProps) {
-  const [activeTab, setActiveTab] = useState<VillaType>('northFacade');
+export default function VillasGrid({ villas, labels, activeTab, onTabChange, selectedVillaId }: VillasGridProps) {
   const locale = useLocale();
   const isRtl = locale === 'ar';
   
@@ -56,7 +57,7 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
         {(['northFacade', 'southFacade', 'corner'] as VillaType[]).map((tab) => (
           <button
             key={tab}
-            onClick={() => setActiveTab(tab)}
+            onClick={() => onTabChange(tab)}
             className={`px-6 py-4 text-xs sm:text-sm font-bold uppercase tracking-widest transition-colors ${
               activeTab === tab 
                 ? 'bg-brand-gold text-black' 
@@ -71,17 +72,21 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 min-h-[600px]">
         <AnimatePresence mode="popLayout">
-          {filteredVillas.map((villa, index) => (
+          {filteredVillas.map((villa, index) => {
+            const isSelected = selectedVillaId === villa.id;
+            return (
             <motion.div
               key={villa.id}
+              id={`villa-card-${villa.id}`}
               layout
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, delay: Math.min(index * 0.06, 0.4), ease: [0.16, 1, 0.3, 1] } }}
               exit={{ opacity: 0, scale: 0.95, y: -20, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } }}
               viewport={{ once: true, amount: 0.2 }}
+              className={`transition-all duration-700 ${isSelected ? 'ring-2 ring-[#d4b78f] ring-offset-4 ring-offset-[#012a17] scale-[1.02] z-20' : 'z-10'}`}
             >
             <SpotlightCard
-              className="group relative bg-white/[0.03] border border-white/10 p-6 sm:p-8 hover:border-brand-gold/50 hover:bg-white/[0.06] transition-all duration-500 flex flex-col min-h-[300px]"
+              className={`group relative bg-white/[0.03] border p-6 sm:p-8 hover:bg-white/[0.06] transition-all duration-500 flex flex-col min-h-[300px] ${isSelected ? 'border-[#d4b78f]' : 'border-white/10 hover:border-brand-gold/50'}`}
             >
               {/* Top Row: Title & Badge */}
               <div className="flex justify-between items-start mb-8 z-10 relative">
@@ -135,7 +140,8 @@ export default function VillasGrid({ villas, labels }: VillasGridProps) {
 
             </SpotlightCard>
             </motion.div>
-          ))}
+            );
+          })}
         </AnimatePresence>
       </div>
     </div>

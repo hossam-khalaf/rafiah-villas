@@ -45,7 +45,7 @@ export default function WarrantiesSection() {
         </ScrollStagger>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px bg-black/10 border border-black/10">
+        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px bg-black/10 border border-black/10">
           {items.map((item, index) => (
             <ScrollFadeIn
               key={index}
@@ -54,11 +54,11 @@ export default function WarrantiesSection() {
             <SpotlightCard
               spotlightColor="oklch(65% 0.12 75 / 0.35)"
               spotlightSize={300}
-              className="bg-brand-offwhite hover:bg-white transition-colors duration-300 p-8 sm:p-10 flex flex-col flex-1 group"
+              className="bg-brand-offwhite hover:bg-white transition-colors duration-300 p-5 sm:p-10 flex flex-col flex-1 group"
             >
               {/* Year number */}
-              <div className="mb-6">
-                <p className="font-serif text-7xl sm:text-8xl text-brand-gold-dark leading-none tracking-tight">
+              <div className="mb-4 sm:mb-6">
+                <p className="font-serif text-5xl sm:text-8xl text-brand-gold-dark leading-none tracking-tight">
                   {item.years}
                 </p>
                 {item.yearsSuffix && (

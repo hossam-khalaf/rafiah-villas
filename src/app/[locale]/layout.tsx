@@ -8,6 +8,7 @@ import Preloader from '@/components/ui/Preloader';
 import FloatingButtons from '@/components/ui/FloatingButtons';
 import { getSiteSettings } from '@/lib/content/site-settings';
 import { Cormorant_Garamond, DM_Sans, DM_Mono, Noto_Naskh_Arabic } from 'next/font/google';
+import { WebMCPProvider } from '@/components/agent/WebMCPProvider';
 import '../globals.css';
 
 const cormorant = Cormorant_Garamond({
@@ -81,6 +82,7 @@ export default async function LocaleLayout({
         >
           {locale === 'ar' ? 'تخطى إلى المحتوى' : 'Skip to content'}
         </a>
+        <WebMCPProvider />
         <NextIntlClientProvider messages={messages}>
           <Preloader />
           <div id="main-content">{children}</div>
