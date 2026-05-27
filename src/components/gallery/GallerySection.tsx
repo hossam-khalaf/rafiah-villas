@@ -37,7 +37,7 @@ export default function GallerySection() {
         <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 mb-16 sm:mb-24">
           <ScrollStagger>
             <ScrollFadeIn>
-              <div className="inline-flex items-center gap-4 text-brand-gold uppercase tracking-[0.2em] text-xs sm:text-sm font-mono font-bold mb-8">
+              <div className="inline-flex items-center gap-4 text-brand-gold uppercase tracking-[0.2em] text-xs sm:text-sm font-bold mb-8">
                 <span className="w-8 sm:w-12 h-px bg-brand-gold"></span>
                 {t('overline')}
               </div>
@@ -99,7 +99,7 @@ export default function GallerySection() {
 
         {/* Hint */}
         <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 mt-10 flex justify-end">
-          <div className="flex items-center gap-3 text-white/55 text-[0.6rem] sm:text-xs font-mono font-bold uppercase tracking-widest">
+          <div className="flex items-center gap-3 text-white/55 text-[0.6rem] sm:text-xs font-bold uppercase tracking-widest">
             <span>{isRtl ? 'اسحب أو اضغط للمعاينة' : 'Drag or tap to preview'}</span>
             <div className="w-10 h-px bg-white/20"></div>
           </div>

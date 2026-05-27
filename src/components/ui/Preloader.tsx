@@ -57,10 +57,20 @@ export default function Preloader() {
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className="mb-12 flex flex-col items-center"
           >
-            <h1 className="font-serif text-4xl sm:text-6xl tracking-tighter text-brand-gold mb-4">
-              RAFIAH
-            </h1>
-            <div className="w-12 h-px bg-brand-gold/50"></div>
+            <div
+              className="w-[180px] sm:w-[240px] h-[108px] sm:h-[144px] bg-brand-gold"
+              style={{
+                maskImage: 'url(/Rafiah%20Villa%20Logo.png)',
+                maskSize: 'contain',
+                maskRepeat: 'no-repeat',
+                maskPosition: 'center',
+                WebkitMaskImage: 'url(/Rafiah%20Villa%20Logo.png)',
+                WebkitMaskSize: 'contain',
+                WebkitMaskRepeat: 'no-repeat',
+                WebkitMaskPosition: 'center',
+              }}
+            />
+            <div className="w-12 h-px bg-brand-gold/50 mt-6" />
           </motion.div>
         </motion.div>
       )}
